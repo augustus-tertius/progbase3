@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/august/Documents/projects/progbase3/srс/build",
+  "command": "/usr/bin/c++    -I/usr/include/SFML  -g   -o CMakeFiles/sample.dir/main.cpp.o -c /home/august/Documents/projects/progbase3/srс/main.cpp",
+  "file": "/home/august/Documents/projects/progbase3/srс/main.cpp"
+}
+]

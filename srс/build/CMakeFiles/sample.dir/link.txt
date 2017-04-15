@@ -1,0 +1,1 @@
+/usr/bin/c++   -g   CMakeFiles/sample.dir/main.cpp.o  -o sample -rdynamic -lsfml-graphics -lsfml-window -lsfml-system 
