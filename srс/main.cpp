@@ -14,6 +14,7 @@ int main(){
 	herosprite.setPosition(300, 200);
 
     Clock clock;
+    float curFrame = 0;
 
     while (window.isOpen()){
         float time = clock.getElapsedTime().asMicroseconds();
@@ -27,10 +28,36 @@ int main(){
         }
 
         if (Keyboard::isKeyPressed(Keyboard::Right)){
-            herosprite.setTextureRect(IntRect(415,0,70,96));
+            curFrame += time*0.005;
+            if(curFrame > 2){
+                curFrame = 0;
+            }
+            switch((int)curFrame){
+                case 2:
+                case 0:
+                    herosprite.setTextureRect(IntRect(415,0,70,96));
+                    break;
+                case 1:
+                    herosprite.setTextureRect(IntRect(495,0,70,96));
+                    break;
+            }
+
             herosprite.move(0.3*time, 0);
         } else if(Keyboard::isKeyPressed(Keyboard::Left)){
-            herosprite.setTextureRect(IntRect(485,0,-70,96));
+             curFrame += time*0.005;
+            if(curFrame > 2){
+                curFrame = 0;
+            }
+            switch((int)curFrame){
+                case 2:
+                case 0:
+                    herosprite.setTextureRect(IntRect(485,0,-70,96));
+                    break;
+                case 1:
+                    herosprite.setTextureRect(IntRect(565,0,-70,96));
+                    break;
+            }
+            
             herosprite.move(-0.3*time, 0);
         } else {
             herosprite.setTextureRect(IntRect(0,0,70,96));
