@@ -6,7 +6,19 @@
 
 #IncludeRegexTransform: 
 
+../include/hero.h
+iostream
+-
+jump.h
+../include/jump.h
+SFML/Graphics.hpp
+-
+
+../include/jump.h
+
 /home/august/Documents/projects/progbase3/srс/main.cpp
 SFML/Graphics.hpp
 -
+hero.h
+/home/august/Documents/projects/progbase3/srс/hero.h
 
