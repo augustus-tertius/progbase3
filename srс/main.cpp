@@ -3,7 +3,7 @@
 using namespace sf;
 
 int main(){
-	RenderWindow window(sf::VideoMode(640, 480), "putting out a pic"); 
+	RenderWindow window(sf::VideoMode(640, 480), "some sample"); 
  
 	Texture herotexture;
 	herotexture.loadFromFile("images/main hero/master_sheet.png");
@@ -18,7 +18,7 @@ int main(){
 
     while (window.isOpen()){
         float time = clock.getElapsedTime().asMicroseconds();
-        time = time/800;
+        time = time/500;
         clock.restart();
 
         sf::Event event;
@@ -42,7 +42,7 @@ int main(){
                     break;
             }
 
-            herosprite.move(0.3*time, 0);
+            herosprite.move(0.2*time, 0);
         } else if(Keyboard::isKeyPressed(Keyboard::Left)){
              curFrame += time*0.005;
             if(curFrame > 2){
@@ -58,7 +58,7 @@ int main(){
                     break;
             }
             
-            herosprite.move(-0.3*time, 0);
+            herosprite.move(-0.2*time, 0);
         } else {
             herosprite.setTextureRect(IntRect(0,0,70,96));
         }

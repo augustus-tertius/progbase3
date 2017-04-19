@@ -10,6 +10,7 @@
     ],
     "clang.executable": "clang",
     "files.associations": {
-        "type_traits": "cpp"
+        "type_traits": "cpp",
+        "iostream": "cpp"
     }
 }
