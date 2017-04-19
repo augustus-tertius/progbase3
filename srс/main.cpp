@@ -20,10 +20,14 @@ int main(){
                 window.close();
         }
 
-        if (Keyboard::isKeyPressed(Keyboard::Right)) {
-            herosprite.move(0.5, 0);
-        } else if(Keyboard::isKeyPressed(Keyboard::Left)) {
-            herosprite.move(-0.5, 0);
+        if (Keyboard::isKeyPressed(Keyboard::Right)){
+            herosprite.setTextureRect(IntRect(415,0,70,96));
+            herosprite.move(0.3, 0);
+        } else if(Keyboard::isKeyPressed(Keyboard::Left)){
+            herosprite.setTextureRect(IntRect(485,0,-70,96));
+            herosprite.move(-0.3, 0);
+        } else {
+            herosprite.setTextureRect(IntRect(0,0,70,96));
         }
 
         window.clear();
