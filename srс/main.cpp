@@ -2,27 +2,28 @@
 
 using namespace sf;
 
-int main()
-{
-	RenderWindow window(sf::VideoMode(640, 480), "putting out a pic"); //увеличили для удобства размер окна
+int main(){
+	RenderWindow window(sf::VideoMode(640, 480), "putting out a pic"); 
  
-	
+	Texture herotexture;
+	herotexture.loadFromFile("images/main hero/master_sheet.png");
  
-	Texture herotexture;//создаем объект Texture (текстура)
-	herotexture.loadFromFile("images/main hero/master_sheet.png");//загружаем картинку
- 
-	Sprite herosprite;//создаем объект Sprite(спрайт)
-	herosprite.setTexture(herotexture);//передаём в него объект Texture (текстуры)
-    herosprite.setTextureRect(IntRect(0,0,70,96));//получили нужный нам прямоугольник с котом
-	herosprite.setPosition(50, 25);//задаем начальные координаты появления спрайта
+	Sprite herosprite;
+	herosprite.setTexture(herotexture);
+    herosprite.setTextureRect(IntRect(0,0,70,96));
+	herosprite.setPosition(50, 25);
 
-    while (window.isOpen())
-    {
+    while (window.isOpen()){
         sf::Event event;
-        while (window.pollEvent(event))
-        {
+        while (window.pollEvent(event)){
             if (event.type == sf::Event::Closed)
                 window.close();
+        }
+
+        if (Keyboard::isKeyPressed(Keyboard::Right)) {
+            herosprite.move(0.5, 0);
+        } else if(Keyboard::isKeyPressed(Keyboard::Left)) {
+            herosprite.move(-0.5, 0);
         }
 
         window.clear();
