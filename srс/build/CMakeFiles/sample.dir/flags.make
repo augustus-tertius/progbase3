@@ -6,5 +6,5 @@ CXX_FLAGS = -g
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/usr/include/SFML 
+CXX_INCLUDES = -I/home/august/Documents/projects/progbase3/srс/include -I/usr/include/SFML 
 
