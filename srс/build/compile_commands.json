@@ -3,5 +3,15 @@
   "directory": "/home/august/Documents/projects/progbase3/srс/build",
   "command": "/usr/bin/c++    -I/home/august/Documents/projects/progbase3/srс/include -I/usr/include/SFML  -g   -o CMakeFiles/sample.dir/main.cpp.o -c /home/august/Documents/projects/progbase3/srс/main.cpp",
   "file": "/home/august/Documents/projects/progbase3/srс/main.cpp"
+},
+{
+  "directory": "/home/august/Documents/projects/progbase3/srс/build",
+  "command": "/usr/bin/c++    -I/home/august/Documents/projects/progbase3/srс/include -I/usr/include/SFML  -g   -o CMakeFiles/sample.dir/src/jump.cpp.o -c /home/august/Documents/projects/progbase3/srс/src/jump.cpp",
+  "file": "/home/august/Documents/projects/progbase3/srс/src/jump.cpp"
+},
+{
+  "directory": "/home/august/Documents/projects/progbase3/srс/build",
+  "command": "/usr/bin/c++    -I/home/august/Documents/projects/progbase3/srс/include -I/usr/include/SFML  -g   -o CMakeFiles/sample.dir/src/hero.cpp.o -c /home/august/Documents/projects/progbase3/srс/src/hero.cpp",
+  "file": "/home/august/Documents/projects/progbase3/srс/src/hero.cpp"
 }
 ]

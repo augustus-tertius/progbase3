@@ -6,10 +6,11 @@ class Jump {
     float timeInJump;
     float speedAtStart;
 
-    Jump();
-    void started();
-    void update(float timePassed);
-    void ended();
+    public:
+        Jump();
+        void started();
+        void update(float timePassed);
+        void ended();
 };
 
 #endif

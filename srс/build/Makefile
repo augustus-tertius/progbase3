@@ -150,6 +150,60 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/hero.o: src/hero.cpp.o
+
+.PHONY : src/hero.o
+
+# target to build an object file
+src/hero.cpp.o:
+	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/hero.cpp.o
+.PHONY : src/hero.cpp.o
+
+src/hero.i: src/hero.cpp.i
+
+.PHONY : src/hero.i
+
+# target to preprocess a source file
+src/hero.cpp.i:
+	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/hero.cpp.i
+.PHONY : src/hero.cpp.i
+
+src/hero.s: src/hero.cpp.s
+
+.PHONY : src/hero.s
+
+# target to generate assembly for a file
+src/hero.cpp.s:
+	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/hero.cpp.s
+.PHONY : src/hero.cpp.s
+
+src/jump.o: src/jump.cpp.o
+
+.PHONY : src/jump.o
+
+# target to build an object file
+src/jump.cpp.o:
+	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/jump.cpp.o
+.PHONY : src/jump.cpp.o
+
+src/jump.i: src/jump.cpp.i
+
+.PHONY : src/jump.i
+
+# target to preprocess a source file
+src/jump.cpp.i:
+	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/jump.cpp.i
+.PHONY : src/jump.cpp.i
+
+src/jump.s: src/jump.cpp.s
+
+.PHONY : src/jump.s
+
+# target to generate assembly for a file
+src/jump.cpp.s:
+	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/jump.cpp.s
+.PHONY : src/jump.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -162,6 +216,12 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... src/hero.o"
+	@echo "... src/hero.i"
+	@echo "... src/hero.s"
+	@echo "... src/jump.o"
+	@echo "... src/jump.i"
+	@echo "... src/jump.s"
 .PHONY : help
 
 

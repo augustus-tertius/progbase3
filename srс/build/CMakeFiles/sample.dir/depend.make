@@ -5,3 +5,10 @@ CMakeFiles/sample.dir/main.cpp.o: ../include/hero.h
 CMakeFiles/sample.dir/main.cpp.o: ../include/jump.h
 CMakeFiles/sample.dir/main.cpp.o: ../main.cpp
 
+CMakeFiles/sample.dir/src/hero.cpp.o: ../include/hero.h
+CMakeFiles/sample.dir/src/hero.cpp.o: ../include/jump.h
+CMakeFiles/sample.dir/src/hero.cpp.o: ../src/hero.cpp
+
+CMakeFiles/sample.dir/src/jump.cpp.o: ../include/jump.h
+CMakeFiles/sample.dir/src/jump.cpp.o: ../src/jump.cpp
+

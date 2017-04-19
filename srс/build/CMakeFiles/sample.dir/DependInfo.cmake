@@ -5,6 +5,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/august/Documents/projects/progbase3/srс/main.cpp" "/home/august/Documents/projects/progbase3/srс/build/CMakeFiles/sample.dir/main.cpp.o"
+  "/home/august/Documents/projects/progbase3/srс/src/hero.cpp" "/home/august/Documents/projects/progbase3/srс/build/CMakeFiles/sample.dir/src/hero.cpp.o"
+  "/home/august/Documents/projects/progbase3/srс/src/jump.cpp" "/home/august/Documents/projects/progbase3/srс/build/CMakeFiles/sample.dir/src/jump.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

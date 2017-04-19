@@ -19,7 +19,7 @@ class Hero {
     int curHealth;
     int maxHealth;
     std::string filePath;
-    Jump jump;
+    Jump* jump;
 
     public:
         Hero();

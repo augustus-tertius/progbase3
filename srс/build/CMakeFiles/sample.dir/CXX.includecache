@@ -20,5 +20,17 @@ SFML/Graphics.hpp
 SFML/Graphics.hpp
 -
 hero.h
-/home/august/Documents/projects/progbase3/srс/hero.h
+-
+
+/home/august/Documents/projects/progbase3/srс/src/hero.cpp
+SFML/Graphics.hpp
+-
+hero.h
+/home/august/Documents/projects/progbase3/srс/src/hero.h
+jump.h
+/home/august/Documents/projects/progbase3/srс/src/jump.h
+
+/home/august/Documents/projects/progbase3/srс/src/jump.cpp
+jump.h
+/home/august/Documents/projects/progbase3/srс/src/jump.h
 
