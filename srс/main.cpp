@@ -11,9 +11,15 @@ int main(){
 	Sprite herosprite;
 	herosprite.setTexture(herotexture);
     herosprite.setTextureRect(IntRect(0,0,70,96));
-	herosprite.setPosition(50, 25);
+	herosprite.setPosition(300, 200);
+
+    Clock clock;
 
     while (window.isOpen()){
+        float time = clock.getElapsedTime().asMicroseconds();
+        time = time/800;
+        clock.restart();
+
         sf::Event event;
         while (window.pollEvent(event)){
             if (event.type == sf::Event::Closed)
@@ -22,10 +28,10 @@ int main(){
 
         if (Keyboard::isKeyPressed(Keyboard::Right)){
             herosprite.setTextureRect(IntRect(415,0,70,96));
-            herosprite.move(0.3, 0);
+            herosprite.move(0.3*time, 0);
         } else if(Keyboard::isKeyPressed(Keyboard::Left)){
             herosprite.setTextureRect(IntRect(485,0,-70,96));
-            herosprite.move(-0.3, 0);
+            herosprite.move(-0.3*time, 0);
         } else {
             herosprite.setTextureRect(IntRect(0,0,70,96));
         }
