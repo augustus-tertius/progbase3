@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "hero.h" 
 #include "jump.h"
+#include "map.h"
 
 #define DEFAULT_MAX_HEALTH 50
 
@@ -99,24 +100,24 @@ void Hero::animation(float timePassed){
     }
 }
 
-void checkCollisionWithMap(float Dx, float Dy) { //ф ция проверки столкновений с картой{
-    for (int i = y / 32; i < (y + h) / 32; i++) {//проходимся по элементам карты
+void checkCollisionWithMap(float Dx, float Dy) { 
+    for (int i = y / 32; i < (y + h) / 32; i++) {/
 	    for (int j = x / 32; j<(x + w) / 32; j++) {
 			if (TileMap[i][j] == '0') {
 			    if (Dy > 0){ 
-                    y = i * 32 - h;  dy = 0; onGround = true; 
-                }//по Y вниз=>идем в пол(стоим на месте) или падаем. В этот момент надо вытолкнуть персонажа и поставить его на землю, при этом говорим что мы на земле тем самым снова можем прыгать
+                    y = i * 32 - h;  dy = 0; 
+                    onGround = true; 
+                }
 				if (Dy < 0){ 
                     y = i * 32 + 32;  dy = 0; 
-                }//столкновение с верхними краями карты(может и не пригодиться)
+                }
 				if (Dx > 0){ 
                     x = j * 32 - w; 
-                }//с правым краем карты
+                }
 				if (Dx < 0){ 
                     x = j * 32 + 32; 
-                }// с левым краем карты
+                }
 			}
-			   //else { onGround = false; }//надо убрать т.к мы можем находиться и на другой поверхности или платформе которую разрушит враг
 		}
     }
 }
