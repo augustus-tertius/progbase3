@@ -6,15 +6,21 @@
 
 #IncludeRegexTransform: 
 
-../include/hero.h
-iostream
--
-jump.h
-../include/jump.h
+../include/gameObj.h
 SFML/Graphics.hpp
 -
 
-../include/jump.h
+../include/hero.h
+iostream
+-
+gameObj.h
+../include/gameObj.h
+SFML/Graphics.hpp
+-
+
+../include/map.h
+iostream
+-
 
 /home/august/Documents/projects/progbase3/srс/main.cpp
 SFML/Graphics.hpp
@@ -27,10 +33,6 @@ SFML/Graphics.hpp
 -
 hero.h
 /home/august/Documents/projects/progbase3/srс/src/hero.h
-jump.h
-/home/august/Documents/projects/progbase3/srс/src/jump.h
-
-/home/august/Documents/projects/progbase3/srс/src/jump.cpp
-jump.h
-/home/august/Documents/projects/progbase3/srс/src/jump.h
+map.h
+/home/august/Documents/projects/progbase3/srс/src/map.h
 

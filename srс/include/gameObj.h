@@ -3,7 +3,7 @@
 class GameObj {
 public:
 	float dx, dy, x, y, speed, moveTimer;
-	int w, h, health, maxHealth;
+	int w, h, curHealth, maxHealth;
 	bool alive, isMoving, onGround;
     enum {left, rigth} direction;
 
@@ -12,6 +12,7 @@ public:
 	sf::Sprite sprite;
 
 	std::string name;
+    
 
 	GameObj(sf::Image &image, float X, float Y, int W, int H, std::string Name){
 		x = X; 
