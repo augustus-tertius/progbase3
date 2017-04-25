@@ -7,7 +7,7 @@
 
 using namespace sf;
 
-Hero::Hero() : GameObj(image,X,Y,W,H,Name){
+Hero::Hero() : GameObj(image, X, Y, W, H, Name){
 	sprite.setTexture(this->texture);
     sprite.setTextureRect(IntRect(0,0,70,96));
 	sprite.setPosition(300, 200);
