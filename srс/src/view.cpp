@@ -1,7 +1,9 @@
 #include <view.h>
 
-View view;
-view.reset(FloatRect(0, 0, 640, 480));
+sf::View view;
+//view.reset(FloatRect(0, 0, 640, 480));
+
+
 
 void setView(float x, float y) { 
 	float tempX = x; 

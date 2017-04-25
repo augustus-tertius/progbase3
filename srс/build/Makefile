@@ -150,6 +150,33 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/gameObj.o: src/gameObj.cpp.o
+
+.PHONY : src/gameObj.o
+
+# target to build an object file
+src/gameObj.cpp.o:
+	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/gameObj.cpp.o
+.PHONY : src/gameObj.cpp.o
+
+src/gameObj.i: src/gameObj.cpp.i
+
+.PHONY : src/gameObj.i
+
+# target to preprocess a source file
+src/gameObj.cpp.i:
+	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/gameObj.cpp.i
+.PHONY : src/gameObj.cpp.i
+
+src/gameObj.s: src/gameObj.cpp.s
+
+.PHONY : src/gameObj.s
+
+# target to generate assembly for a file
+src/gameObj.cpp.s:
+	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/gameObj.cpp.s
+.PHONY : src/gameObj.cpp.s
+
 src/hero.o: src/hero.cpp.o
 
 .PHONY : src/hero.o
@@ -177,6 +204,60 @@ src/hero.cpp.s:
 	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/hero.cpp.s
 .PHONY : src/hero.cpp.s
 
+src/map.o: src/map.cpp.o
+
+.PHONY : src/map.o
+
+# target to build an object file
+src/map.cpp.o:
+	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/map.cpp.o
+.PHONY : src/map.cpp.o
+
+src/map.i: src/map.cpp.i
+
+.PHONY : src/map.i
+
+# target to preprocess a source file
+src/map.cpp.i:
+	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/map.cpp.i
+.PHONY : src/map.cpp.i
+
+src/map.s: src/map.cpp.s
+
+.PHONY : src/map.s
+
+# target to generate assembly for a file
+src/map.cpp.s:
+	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/map.cpp.s
+.PHONY : src/map.cpp.s
+
+src/view.o: src/view.cpp.o
+
+.PHONY : src/view.o
+
+# target to build an object file
+src/view.cpp.o:
+	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/view.cpp.o
+.PHONY : src/view.cpp.o
+
+src/view.i: src/view.cpp.i
+
+.PHONY : src/view.i
+
+# target to preprocess a source file
+src/view.cpp.i:
+	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/view.cpp.i
+.PHONY : src/view.cpp.i
+
+src/view.s: src/view.cpp.s
+
+.PHONY : src/view.s
+
+# target to generate assembly for a file
+src/view.cpp.s:
+	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/view.cpp.s
+.PHONY : src/view.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -189,9 +270,18 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... src/gameObj.o"
+	@echo "... src/gameObj.i"
+	@echo "... src/gameObj.s"
 	@echo "... src/hero.o"
 	@echo "... src/hero.i"
 	@echo "... src/hero.s"
+	@echo "... src/map.o"
+	@echo "... src/map.i"
+	@echo "... src/map.s"
+	@echo "... src/view.o"
+	@echo "... src/view.i"
+	@echo "... src/view.s"
 .PHONY : help
 
 

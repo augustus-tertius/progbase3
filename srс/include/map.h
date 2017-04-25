@@ -1,32 +1,10 @@
+#ifndef MAP
+#define MAP
+
 #include <iostream>
 
-const int HEIGHT_MAP = 25;//размер карты высота
-const int WIDTH_MAP = 40;//размер карты ширина 
+char getMapSymbol(int i, int j);
+int getMapHeight();
+int getMapWidth();
 
-std::string TileMap[HEIGHT_MAP] = {
-        "0000000000000000000000000000000000000000",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                       00             0",
-        "0                    00000             0",
-        "0      000           000000            0",
-        "0000000000000000000000000000000000000000",
-    };
+#endif

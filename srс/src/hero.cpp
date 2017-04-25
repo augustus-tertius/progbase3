@@ -1,14 +1,15 @@
 #include <SFML/Graphics.hpp>
-#include "hero.h" 
+#include "gameObj.h" 
+#include <hero.h>
 #include "map.h"
-#include "gameObj.h"
+// #include "view.h"
 
 #define DEFAULT_MAX_HEALTH 50
 
 
 using namespace sf;
 
-Hero::Hero(float X, float Y, int W, int H, std::string Name) : GameObj(X, Y, W, H, Name){
+Hero::Hero(float X, float Y, int W, int H, std::string Name) :GameObj(){
 	sprite.setTexture(this->texture);
     sprite.setTextureRect(IntRect(0,0,70,96));
 	sprite.setPosition(300, 200);
@@ -22,6 +23,14 @@ Hero::Hero(float X, float Y, int W, int H, std::string Name) : GameObj(X, Y, W, 
 
 sf::Sprite Hero::getSprite(){
     return this->sprite;
+}
+
+float Hero::getX(){
+    return this->x;
+}
+
+float Hero::getY(){
+    return this->y;
 }
 
 void Hero::control (float timePassed) {
@@ -49,25 +58,48 @@ void Hero::control (float timePassed) {
 void Hero::update(float timePassed) {
 	    control(timePassed);
 
-		x += dx*time;
+		x += dx*timePassed;
 		checkCollisionWithMap(dx, 0);
-	    y += dy*time;
+	    y += dy*timePassed;
 		checkCollisionWithMap(0, dy);
 
 		sprite.setPosition(x + w / 2, y + h / 2); 
-		if (health <= 0) { 
-            life = false; 
+		if (curHealth <= 0) { 
+            alive = false; 
         }
 
 		if (!onGround) { 
-            dy = dy + 0.0015*time; 
+            dy = dy + 0.0015*timePassed; 
         }
 
-		if (life) { 
-            setPlayerCoordinateForView(x, y); 
-        }
+		// if (alive) { 
+        //     setView(x, y);
+        // }
 } 
 
+void Hero::checkCollisionWithMap(float Dx, float Dy) { 
+        for (int i = this->y / 32; i < (this->y + this->h) / 32; i++) {
+            for (int j = this->x / 32; j < (this->x + this->w) / 32; j++) {
+                if (getMapSymbol(i, j) == '0') {
+                    if (Dy > 0){ 
+                        y = i * 32 - h;  
+                        dy = 0; 
+                        onGround = true; 
+                    }
+                    if (Dy < 0){ 
+                        y = i * 32 + 32;  
+                        dy = 0; 
+                    }
+                    if (Dx > 0){ 
+                        x = j * 32 - w; 
+                    }
+                    if (Dx < 0){ 
+                        x = j * 32 + 32; 
+                    }
+                }
+            }
+        }
+}
 
 void Hero::animation(float timePassed){
     this->curFrame += timePassed*0.005;
@@ -95,29 +127,34 @@ void Hero::animation(float timePassed){
             break;
     }
 
-    if(this->derection == left) {
+    if(this->direction == left) {
         this->sprite.scale(-1, 1);
     }
 }
 
-void checkCollisionWithMap(float Dx, float Dy) { 
-    for (int i = y / 32; i < (y + h) / 32; i++) {/
-	    for (int j = x / 32; j<(x + w) / 32; j++) {
-			if (TileMap[i][j] == '0') {
-			    if (Dy > 0){ 
-                    y = i * 32 - h;  dy = 0; 
-                    onGround = true; 
-                }
-				if (Dy < 0){ 
-                    y = i * 32 + 32;  dy = 0; 
-                }
-				if (Dx > 0){ 
-                    x = j * 32 - w; 
-                }
-				if (Dx < 0){ 
-                    x = j * 32 + 32; 
-                }
-			}
-		}
-    }
-}
+// void Hero::checkCollisionWithMap(float Dx, float Dy) { 
+//         for (int i = this->y / 32; i < (this->y + this->h) / 32; i++) {
+//             for (int j = this->x / 32; j < (this->x + this->w) / 32; j++) {
+//                 if (TileMap[i][j] == '0') {
+//                     if (Dy > 0){ 
+//                         y = i * 32 - h;  
+//                         dy = 0; 
+//                         onGround = true; 
+//                     }
+//                     if (Dy < 0){ 
+//                         y = i * 32 + 32;  
+//                         dy = 0; 
+//                     }
+//                     if (Dx > 0){ 
+//                         x = j * 32 - w; 
+//                     }
+//                     if (Dx < 0){ 
+//                         x = j * 32 + 32; 
+//                     }
+//                 }
+//             }
+//         }
+// }
+
+
+

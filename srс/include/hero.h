@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "gameObj.h"
+#include "map.h"
 #include <SFML/Graphics.hpp>
 
 class Hero : public GameObj {
@@ -18,11 +19,15 @@ class Hero : public GameObj {
     public:
         // Hero(); mb add one later ?
         Hero(float X, float Y, int W, int H, std::string Name);
+        
         void control (float timePassed);
         void update(float timePassed);
         void animation(float timePassed);
+        void checkCollisionWithMap(float Dx, float Dy);
 
         sf::Sprite getSprite();
+        float getX();
+        float getY();
 };
 
 #endif

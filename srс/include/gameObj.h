@@ -1,3 +1,6 @@
+#ifndef GAME_OBJ
+#define GAME_OBJ
+
 #include <SFML/Graphics.hpp>
 
 class GameObj {
@@ -14,27 +17,8 @@ protected:
 
 	std::string name;
 
-public:
     GameObj(float X, float Y, int W, int H, std::string Name);
-    float getX();
-    float getY();
-
-	// GameObj(sf::Image &image, float X, float Y, int W, int H, std::string Name){
-	// 	x = X; 
-    //     y = Y; 
-    //     w = W; 
-    //     h = H; 
-    //     name = Name; 
-    //     moveTimer = 0;
-	// 	speed = 0; 
-    //     curHealth = 100; 
-    //     dx = 0; 
-    //     dy = 0;
-	// 	alive = true; 
-    //     onGround = false; 
-    //     isMoving = false;
-	// 	texture.loadFromImage(image);
-	// 	sprite.setTexture(texture);
-	// 	sprite.setOrigin(w / 2, h / 2);
-	// }
+    GameObj();
 };
+
+#endif

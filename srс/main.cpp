@@ -1,18 +1,20 @@
 #include <SFML/Graphics.hpp>
 #include <hero.h>
-#include <map.h>
-#include <view.h>
+//#include <map.h>
+//#include <view.h>
 
 using namespace sf;
+
+void setView(float x, float y, View view);
 
 int main() {
 	RenderWindow window(VideoMode(640, 480), "sample rendering & gravity");
 
-	// View view;
-    // view.reset(FloatRect(0, 0, 640, 480));
+	View view;
+    view.reset(FloatRect(0, 0, 640, 480));
  
 	Image map_image;
-	map_image.loadFromFile("images/map.png");
+	map_image.loadFromFile("images/planetCenter.png");
 	Texture map;
 	map.loadFromImage(map_image);
 	Sprite s_map;
@@ -36,28 +38,35 @@ int main() {
 		}		
 		p.update(time);
 
-		setView(p.getX(), p.getY());
+		setView(p.getX(), p.getY(), view);
 		window.clear();
  
-		
-			for (int i = 0; i < HEIGHT_MAP; i++) { 
-                for (int j = 0; j < WIDTH_MAP; j++) {
-                    if (TileMap[i][j] == ' ')  s_map.setTextureRect(IntRect(0, 0, 32, 32));
-                    if (TileMap[i][j] == 's')  s_map.setTextureRect(IntRect(32, 0, 32, 32));
-                    if ((TileMap[i][j] == '0')) s_map.setTextureRect(IntRect(64, 0, 32, 32));
-                    if ((TileMap[i][j] == 'f')) s_map.setTextureRect(IntRect(96, 0, 32, 32));
-                    if ((TileMap[i][j] == 'h')) s_map.setTextureRect(IntRect(128, 0, 32, 32));
-                    s_map.setPosition(j * 32, i * 32);
-                    
-                    window.draw(s_map);
-                }
-			}
+		for (int i = 0; i < getMapHeight(); i++) {
+            for (int j = 0; j < getMapWidth(); j++) {
+                if (getMapSymbol(i, j) == ' ')  s_map.setTextureRect(IntRect(0, 0, 128, 128));
+                // if ((TileMap[i][j] == '0')) s_map.setTextureRect(IntRect(64, 0, 32, 32));
+
+                s_map.setPosition(j * 32, i * 32);
+                window.draw(s_map);
+            }
+		}
 
 		window.draw(p.getSprite());
 		window.display();
 	}
 
 	return 0;
+}
+
+void setView(float x, float y, View view) { 
+	float tempX = x; 
+    float tempY = y;
+ 
+	if (x < 320) tempX = 320; //убираем из вида левую сторону
+	if (y < 240) tempY = 240; //верхнюю сторону
+	if (y > 554) tempY = 554; //нижнюю сторону	
+ 
+	view.setCenter(tempX, tempY); //следим за игроком, передавая его координаты. 
 }
 
 
