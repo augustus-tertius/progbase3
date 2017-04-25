@@ -117,7 +117,7 @@ void Hero::update(float timePassed) {
 void Hero::checkCollisionWithMap(float Dx, float Dy) { 
         for (int i = y / 64; i < (y + h) / 64; i++) {
             for (int j = x / 64; j < (x + w) /64; j++) {
-                if (getMapSymbol(i, j) == '0') {
+                if (getMapSymbol(i + 1, j - 1) == '0') {
                     if (Dy > 0){ 
                         y = (i - 1) * 64 - h;  
                         dy = 0; 

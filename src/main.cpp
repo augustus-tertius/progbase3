@@ -12,6 +12,10 @@ int main() {
 
 	View view;
     view.reset(FloatRect(0, 0, 640, 480));
+
+	sf::Texture texture;
+	texture.loadFromFile("images/corona_up.png");
+	sf::Sprite background(texture);
  
 	Image groundIm;
 	groundIm.loadFromFile("images/tileGreen_03.png");
@@ -43,6 +47,8 @@ int main() {
 		window.setView(view);
 		
 		window.clear();
+
+		window.draw(background);
  
 		for (int i = 0; i < getMapHeight(); i++) {
             for (int j = 0; j < getMapWidth(); j++) {
