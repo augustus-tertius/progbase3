@@ -1,3 +1,0 @@
-/home/august/Documents/projects/progbase3/srс/build/CMakeFiles/edit_cache.dir
-/home/august/Documents/projects/progbase3/srс/build/CMakeFiles/rebuild_cache.dir
-/home/august/Documents/projects/progbase3/srс/build/CMakeFiles/sample.dir
