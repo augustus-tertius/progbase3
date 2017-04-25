@@ -24,6 +24,7 @@ class Hero : public GameObj {
         void update(float timePassed);
         void animation(float timePassed);
         void checkCollisionWithMap(float Dx, float Dy);
+        void checkCollisionWithMap();
 
         sf::Sprite getSprite();
         float getX();

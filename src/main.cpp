@@ -8,10 +8,10 @@ using namespace sf;
 void setView(float x, float y, View view);
 
 int main() {
-	RenderWindow window(VideoMode(960, 640), "sample rendering & gravity");
+	RenderWindow window(VideoMode(640, 480), "sample rendering & gravity");
 
 	View view;
-    view.reset(FloatRect(0, 0, 960, 640));
+    view.reset(FloatRect(0, 0, 640, 480));
  
 	Image groundIm;
 	groundIm.loadFromFile("images/tileGreen_03.png");
@@ -21,7 +21,7 @@ int main() {
 	Sprite s_map;
 	// s_map.setTexture(map);
 
-	Hero p(200, 300, 40, 30, "Player"); //объект класса игрока
+	Hero p(300, 300, 96, 70, "Player"); //объект класса игрока
 	
 	Clock clock;
 	while (window.isOpen()) {
@@ -38,8 +38,10 @@ int main() {
 		}		
 		p.update(time);
 
-		setView(p.getX(), p.getY(), view);
+		// setView(p.getX(), p.getY(), view);
+		view.setCenter(p.getX(), p.getY());
 		window.setView(view);
+		
 		window.clear();
  
 		for (int i = 0; i < getMapHeight(); i++) {

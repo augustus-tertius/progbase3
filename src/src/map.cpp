@@ -17,19 +17,20 @@ std::string TileMap[HEIGHT] = {
 };
 
 char getMapSymbol(int i, int j){
-    if(i < HEIGHT && i > 0 && j < WIDTH && j > 0) {
+    if(i < HEIGHT && i >= 0 && j <= WIDTH && j >= 0) {
         return TileMap[i][j];
     } else {
+        // std::cout << i << " " << j << std::endl;
         return '-';
     }
-
+    // return TileMap[i][j];
 }
 
-int getMapHeight(){
+int getMapHeight() {
     return HEIGHT;
 }
 
-int getMapWidth(){
+int getMapWidth() {
     return WIDTH;
 }
 

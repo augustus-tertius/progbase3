@@ -12,7 +12,7 @@ using namespace sf;
 Hero::Hero(float X, float Y, int W, int H, std::string Name) :GameObj(){
 	sprite.setTexture(this->texture);
     sprite.setTextureRect(IntRect(0,0,70,96));
-	sprite.setPosition(300, 200);
+	sprite.setPosition(0, 0);
 
     x = X;
     y = Y;
@@ -42,22 +42,30 @@ float Hero::getY(){
 void Hero::control (float timePassed) {
      if (Keyboard::isKeyPressed(Keyboard::Right)){
             this->direction = right;
-            this->state = walk;
+            if(onGround) {
+                this->state = walk;
+            }
             this->dx = 0.2;
 
             this->animation(timePassed);
         } else if(Keyboard::isKeyPressed(Keyboard::Left)){
             this->direction = left;
-            this->state = walk;
+            if(onGround) {
+                this->state = walk;
+            }
             this->dx = -0.2;
 
             this->animation(timePassed);
         } else if(Keyboard::isKeyPressed(Keyboard::Space)) {
-            this->state = jump; 
+            if(onGround) {
+                this->state = jump; 
+            }
+
             this->dy = -0.6; 
             this->onGround = false;
         } else {
-            this->sprite.setTextureRect(IntRect(0,0,70,96));
+            this->state = stand;
+            this->texture.loadFromFile(this->filePath + "stand.png");
         }
 }
 
@@ -68,6 +76,9 @@ void Hero::update(float timePassed) {
 		checkCollisionWithMap(dx, 0);
 	    y += dy*timePassed;
 		checkCollisionWithMap(0, dy);
+
+
+        // checkCollisionWithMap();
 
 		sprite.setPosition(x + w / 2, y + h / 2); 
 		if (curHealth <= 0) { 
@@ -84,29 +95,49 @@ void Hero::update(float timePassed) {
         // }
 } 
 
+// void Hero::checkCollisionWithMap(){
+//     int curJ = x / 64; // ширина
+//     int curI = y / 64; // высота
+
+
+//     // проверка на столкновение с землей
+//     if(getMapSymbol(curI - h/64, curJ) == '0') {
+//         dy = 0;
+//         y = curI*64 - h;
+//         onGround = true;
+//     } else if (getMapSymbol(curI, curJ) == '-') {
+//         std::cout << "Error: Index out of bounds" << std::endl;
+//     } else if (getMapSymbol(curI, curJ) == ' ') {
+//         std::cout << "There is noting here" << std::endl;
+//     }
+
+//     std::cout << "cur i = " << curI << ";  cur j = " << curJ << ";  x = " << x << ";  y = " << y <<std::endl;
+// }
+
 void Hero::checkCollisionWithMap(float Dx, float Dy) { 
-        for (int i = y / 64; (i < (y + h)) / 64 && i < getMapHeight(); i++) {
-            for (int j = x / 64; (j < (x + w)) / 64 && j < getMapWidth(); j++) {
+        for (int i = y / 64; i < (y + h) / 64; i++) {
+            for (int j = x / 64; j < (x + w) /64; j++) {
                 if (getMapSymbol(i, j) == '0') {
                     if (Dy > 0){ 
-                        y = i * 64 - h;  
+                        y = (i - 1) * 64 - h;  
                         dy = 0; 
                         onGround = true; 
                     }
                     if (Dy < 0){ 
-                        y = i * 64 + 64;  
+                        y = i * 64;  
                         dy = 0; 
                     }
                     if (Dx > 0){ 
                         x = j * 64 - w; 
                     }
                     if (Dx < 0){ 
-                        x = j * 64 + 64; 
+                        x = j * 64; 
                     }
                 }
             }
         }
 }
+
 
 void Hero::animation(float timePassed){
     this->curFrame += timePassed*0.005;

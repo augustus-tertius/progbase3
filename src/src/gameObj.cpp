@@ -14,7 +14,7 @@ GameObj::GameObj(float X, float Y, int W, int H, std::string Name){
 	alive = true; 
     onGround = false; 
     isMoving = false;
-	sprite.setOrigin(w / 2, h / 2);
+	// sprite.setOrigin(w / 2, h / 2);
 }
 
  GameObj::GameObj(){
