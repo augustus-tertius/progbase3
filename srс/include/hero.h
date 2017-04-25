@@ -14,7 +14,8 @@ class Hero : public GameObj {
     float curFrame;
 
     public:
-        Hero();
+        // Hero(); mb add one later ?
+        Hero(float X, float Y, int W, int H, std::string Name);
         void control (void);
         void update(float timePassed);
         void animation(float timePassed);
