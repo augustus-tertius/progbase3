@@ -19,45 +19,54 @@ Hero::Hero(){
     this->texture.loadFromFile(this->filePath + "stand.png");
 }
 
+sf::Sprite Hero::getSprite(){
+    return this->sprite;
+}
 
-void Hero::update(float timePassed){
-    if (Keyboard::isKeyPressed(Keyboard::Right)){
-            curFrame += timePassed*0.005;
-            if(curFrame > 2){
-                curFrame = 0;
-            }
-            switch((int)curFrame){
-                case 2:
-                case 0:
-                    this->sprite.setTextureRect(IntRect(415,0,70,96));
-                    break;
-                case 1:
-                    this->sprite.setTextureRect(IntRect(495,0,70,96));
-                    break;
-            }
+void Hero::control (void) {
+     if (Keyboard::isKeyPressed(Keyboard::Right)){
+            this->direction = right;
+            this->state = walk;
+            this->dx = 0.2;
 
-            this->sprite.move(0.2*timePassed, 0);
+            this->animation(timePassed);
         } else if(Keyboard::isKeyPressed(Keyboard::Left)){
-             curFrame += timePassed*0.005;
-            if(curFrame > 2){
-                curFrame = 0;
-            }
-            switch((int)curFrame){
-                case 2:
-                case 0:
-                    this->sprite.setTextureRect(IntRect(485,0,-70,96));
-                    break;
-                case 1:
-                    this->sprite.setTextureRect(IntRect(565,0,-70,96));
-                    break;
-            }
-            
-            this->sprite.move(-0.2*timePassed, 0);
+            this->direction = left;
+            this->state = walk;
+            this->dx = -0.2;
+
+            this->animation(timePassed);
+        } else if(Keyboard::isKeyPressed(Keyboard::Space)) {
+            this->state = jump; 
+            this->dy = -0.6; 
+            this->onGround = false;
         } else {
             this->sprite.setTextureRect(IntRect(0,0,70,96));
         }
-
 }
+
+void Hero::update(float timePassed) {
+	    control();
+
+		x += dx*time;
+		checkCollisionWithMap(dx, 0);
+	    y += dy*time;
+		checkCollisionWithMap(0, dy);
+
+		sprite.setPosition(x + w / 2, y + h / 2); 
+		if (health <= 0) { 
+            life = false; 
+        }
+
+		if (!onGround) { 
+            dy = dy + 0.0015*time; 
+        }
+
+		if (life) { 
+            setPlayerCoordinateForView(x, y); 
+        }
+} 
+
 
 void Hero::animation(float timePassed){
     this->curFrame += timePassed*0.005;
@@ -88,10 +97,6 @@ void Hero::animation(float timePassed){
     if(this->derection == left) {
         this->sprite.scale(-1, 1);
     }
-}
-
-sf::Sprite Hero::getSprite(){
-    return this->sprite;
 }
 
 
