@@ -4,6 +4,8 @@
 CMakeFiles/sample.dir/main.cpp.o
  ../include/gameObj.h
  ../include/hero.h
+ ../include/map.h
+ ../include/view.h
  /home/august/Documents/projects/progbase3/srс/main.cpp
 CMakeFiles/sample.dir/src/hero.cpp.o
  ../include/gameObj.h

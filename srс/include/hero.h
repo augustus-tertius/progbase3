@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 
 class Hero : public GameObj {
+
     sf::Image image;
     sf::Texture texture;
     sf::Sprite sprite;
@@ -13,10 +14,11 @@ class Hero : public GameObj {
     enum {walk, jump, stand} state;
     float curFrame;
 
+
     public:
         // Hero(); mb add one later ?
         Hero(float X, float Y, int W, int H, std::string Name);
-        void control (void);
+        void control (float timePassed);
         void update(float timePassed);
         void animation(float timePassed);
 

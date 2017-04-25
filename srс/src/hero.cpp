@@ -24,7 +24,7 @@ sf::Sprite Hero::getSprite(){
     return this->sprite;
 }
 
-void Hero::control (void) {
+void Hero::control (float timePassed) {
      if (Keyboard::isKeyPressed(Keyboard::Right)){
             this->direction = right;
             this->state = walk;
@@ -47,7 +47,7 @@ void Hero::control (void) {
 }
 
 void Hero::update(float timePassed) {
-	    control();
+	    control(timePassed);
 
 		x += dx*time;
 		checkCollisionWithMap(dx, 0);

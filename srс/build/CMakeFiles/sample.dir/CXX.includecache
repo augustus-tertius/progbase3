@@ -22,10 +22,18 @@ SFML/Graphics.hpp
 iostream
 -
 
+../include/view.h
+SFML/Graphics.hpp
+-
+
 /home/august/Documents/projects/progbase3/srс/main.cpp
 SFML/Graphics.hpp
 -
 hero.h
+-
+map.h
+-
+view.h
 -
 
 /home/august/Documents/projects/progbase3/srс/src/hero.cpp
