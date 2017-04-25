@@ -14,11 +14,17 @@ Hero::Hero(float X, float Y, int W, int H, std::string Name) :GameObj(){
     sprite.setTextureRect(IntRect(0,0,70,96));
 	sprite.setPosition(300, 200);
 
+    x = X;
+    y = Y;
+    w = W;
+    h = H;
+    name = Name;
     this->curHealth = DEFAULT_MAX_HEALTH;
     this->maxHealth = DEFAULT_MAX_HEALTH;
-    this->filePath = "images/main hero/Green/Zeta";
+    this->filePath = "images/main hero/Green/Zeta/";
 
     this->texture.loadFromFile(this->filePath + "stand.png");
+    // this->texture.loadFromFile("images/main hero/master_sheet.png");
 }
 
 sf::Sprite Hero::getSprite(){
@@ -78,8 +84,8 @@ void Hero::update(float timePassed) {
 } 
 
 void Hero::checkCollisionWithMap(float Dx, float Dy) { 
-        for (int i = this->y / 32; i < (this->y + this->h) / 32; i++) {
-            for (int j = this->x / 32; j < (this->x + this->w) / 32; j++) {
+        for (int i = this->y / 32; (i < (this->y + this->h)) / 32 && i < getMapHeight(); i++) {
+            for (int j = this->x / 32; (j < (this->x + this->w)) && j < getMapWidth()/ 32; j++) {
                 if (getMapSymbol(i, j) == '0') {
                     if (Dy > 0){ 
                         y = i * 32 - h;  
@@ -126,6 +132,8 @@ void Hero::animation(float timePassed){
             this->texture.loadFromFile(this->filePath + "jump.png");
             break;
     }
+
+    sprite.setTexture(this->texture);
 
     if(this->direction == left) {
         this->sprite.scale(-1, 1);

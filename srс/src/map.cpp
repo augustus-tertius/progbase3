@@ -1,30 +1,15 @@
 #include <map.h>
 
-const int HEIGHT_MAP = 25;
-const int WIDTH_MAP = 40;
+const int HEIGHT = 10;
+const int WIDTH= 40;
 
-std::string TileMap[HEIGHT_MAP] = {
+std::string TileMap[HEIGHT] = {
         "0000000000000000000000000000000000000000",
+        "00                                     0",
         "0                                      0",
+        "00                                     0",
         "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
-        "0                                      0",
+        "00                                     0",
         "0                       00             0",
         "0                    00000             0",
         "0      000           000000            0",
@@ -32,14 +17,19 @@ std::string TileMap[HEIGHT_MAP] = {
 };
 
 char getMapSymbol(int i, int j){
-    return TileMap[i][j];
+    if(i < HEIGHT && i > 0 && j < WIDTH && j > 0) {
+        return TileMap[i][j];
+    } else {
+        return '-';
+    }
+
 }
 
 int getMapHeight(){
-    return HEIGHT_MAP;
+    return HEIGHT;
 }
 
 int getMapWidth(){
-    return WIDTH_MAP;
+    return WIDTH;
 }
 

@@ -13,12 +13,13 @@ int main() {
 	View view;
     view.reset(FloatRect(0, 0, 640, 480));
  
-	Image map_image;
-	map_image.loadFromFile("images/planetCenter.png");
-	Texture map;
-	map.loadFromImage(map_image);
+	Image groundIm;
+	groundIm.loadFromFile("images/tileGreen_03.png");
+	Texture ground;
+	ground.loadFromImage(groundIm);
+
 	Sprite s_map;
-	s_map.setTexture(map);
+	// s_map.setTexture(map);
 
 	Hero p(750, 500, 40, 30, "Player"); //объект класса игрока
 	
@@ -39,14 +40,18 @@ int main() {
 		p.update(time);
 
 		setView(p.getX(), p.getY(), view);
+		window.setView(view);
 		window.clear();
  
 		for (int i = 0; i < getMapHeight(); i++) {
             for (int j = 0; j < getMapWidth(); j++) {
-                if (getMapSymbol(i, j) == ' ')  s_map.setTextureRect(IntRect(0, 0, 128, 128));
-                // if ((TileMap[i][j] == '0')) s_map.setTextureRect(IntRect(64, 0, 32, 32));
+                if (getMapSymbol(i, j) == ' ') {
+                    break;
+				} else if (getMapSymbol(i, j) == '0'){
+					s_map.setTexture(ground);
+				} 
 
-                s_map.setPosition(j * 32, i * 32);
+                s_map.setPosition(j * 64, i * 64);
                 window.draw(s_map);
             }
 		}
@@ -71,8 +76,8 @@ void setView(float x, float y, View view) {
 
 
 // int main(){
-// 	RenderWindow window(sf::VideoMode(640, 480), "some sample"); 
-     
+// 	RenderWindow window(sf::VideoMode(640, 480), "some sample");
+
 //     Hero* mainHero = new Hero();
 
 //     Clock clock;
