@@ -5,11 +5,12 @@ public:
 	float dx, dy, x, y, speed, moveTimer;
 	int w, h, health, maxHealth;
 	bool alive, isMoving, onGround;
-
     enum {left, rigth} direction;
-    
+
+    std::string filePath;
 	sf::Texture texture;
 	sf::Sprite sprite;
+
 	std::string name;
 
 	GameObj(sf::Image &image, float X, float Y, int W, int H, std::string Name){
