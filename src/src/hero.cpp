@@ -86,8 +86,8 @@ void Hero::update(float timePassed) {
         }
 
 		if (!onGround) { 
-            // dy = dy + 0.0015*timePassed; 
-            dy = 0.0015*timePassed;
+            dy = dy + 0.0015*timePassed; 
+            // dy = 0.0015*timePassed;
         }
 
 		// if (alive) { 
@@ -119,19 +119,19 @@ void Hero::checkCollisionWithMap(float Dx, float Dy) {
             for (int j = x / 64; j < (x + w) /64; j++) {
                 if (getMapSymbol(i + 1, j - 1) == '0') {
                     if (Dy > 0){ 
-                        y = (i - 1) * 64 - h;  
+                        y = i * 64 - h;  
                         dy = 0; 
                         onGround = true; 
                     }
                     if (Dy < 0){ 
-                        y = i * 64;  
+                        y = i * 64 + h;  
                         dy = 0; 
                     }
                     if (Dx > 0){ 
                         x = j * 64 - w; 
                     }
                     if (Dx < 0){ 
-                        x = j * 64; 
+                        x = j * 64 + w; 
                     }
                 }
             }

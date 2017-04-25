@@ -16,7 +16,8 @@ int main() {
 	sf::Texture texture;
 	texture.loadFromFile("images/corona_up.png");
 	sf::Sprite background(texture);
- 
+	// background.setOrigin(background.getGlobalBounds()/2);
+
 	Image groundIm;
 	groundIm.loadFromFile("images/tileGreen_03.png");
 	Texture ground;
@@ -48,7 +49,10 @@ int main() {
 		
 		window.clear();
 
-		window.draw(background);
+		background.move(p.getX(), p.getY());
+		window.draw(background); 
+		// todo движение фона вместе с персонажем
+		// todo пофиксить анимацию & работу с картой 
  
 		for (int i = 0; i < getMapHeight(); i++) {
             for (int j = 0; j < getMapWidth(); j++) {
