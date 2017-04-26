@@ -24,6 +24,7 @@ Hero::Hero(float X, float Y, int W, int H, std::string Name) :GameObj(){
     this->filePath = "images/main hero/Green/Zeta/";
 
     this->texture.loadFromFile(this->filePath + "stand.png");
+    this->sprite.scale(-1, 1);
     // this->texture.loadFromFile("images/main hero/master_sheet.png");
 }
 
@@ -40,14 +41,24 @@ float Hero::getY(){
 }
 
 void Hero::control (float timePassed) {
-     if (Keyboard::isKeyPressed(Keyboard::Right)){
+
+    bool prevState = false;
+    if(this->direction == right){
+         prevState = true;
+    }
+ 
+
+        if (Keyboard::isKeyPressed(Keyboard::Right)){
             this->direction = right;
             if(onGround) {
                 this->state = walk;
             }
             this->dx = 0.2;
 
-            this->animation(timePassed);
+            if(onGround){
+                this->animation(timePassed, prevState!= this->direction);
+            }
+            
         } else if(Keyboard::isKeyPressed(Keyboard::Left)){
             this->direction = left;
             if(onGround) {
@@ -55,18 +66,29 @@ void Hero::control (float timePassed) {
             }
             this->dx = -0.2;
 
-            this->animation(timePassed);
-        } else if(Keyboard::isKeyPressed(Keyboard::Space)) {
-            if(onGround) {
-                this->state = jump; 
+            if(onGround){ 
+                this->animation(timePassed, prevState!= this->direction);
             }
-
-            this->dy = -0.6; 
-            this->onGround = false;
         } else {
+            this->dx = 0;
             this->state = stand;
             this->texture.loadFromFile(this->filePath + "stand.png");
+        }  
+        
+        if(Keyboard::isKeyPressed(Keyboard::Space)) {
+            if(onGround) {
+                this->state = jump; 
+                this->dy = -0.6; 
+                this->onGround = false;
+                this->animation(timePassed, prevState!= this->direction);     
+            } 
         }
+
+        if(!onGround){
+            this->state = jump;  
+            this->animation(timePassed, prevState!= this->direction);
+        }
+
 }
 
 void Hero::update(float timePassed) {
@@ -139,7 +161,7 @@ void Hero::checkCollisionWithMap(float Dx, float Dy) {
 }
 
 
-void Hero::animation(float timePassed){
+void Hero::animation(float timePassed, bool dirChanged){
     this->curFrame += timePassed*0.005;
     if(curFrame > 2){
         curFrame = 0;
@@ -156,20 +178,24 @@ void Hero::animation(float timePassed){
                 this->texture.loadFromFile(this->filePath + "walk_1.png");
                 break;
             case 1:
-                this->texture.loadFromFile(this->filePath + "walk_1.png");
+                this->texture.loadFromFile(this->filePath + "walk_2.png");
                 break;
             }
             break;
-        case jump:
-            this->texture.loadFromFile(this->filePath + "jump.png");
-            break;
+    }
+
+    if(!onGround){
+        this->texture.loadFromFile(this->filePath + "jump.png");
     }
 
     sprite.setTexture(this->texture);
 
-    if(this->direction == left) {
+    // if(this->direction == left && dirChanged) {
+    //     this->sprite.scale(-1, 1);
+    // } 
+    if(dirChanged) {
         this->sprite.scale(-1, 1);
-    }
+    } 
 }
 
 
