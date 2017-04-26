@@ -26,7 +26,7 @@ int main() {
 	Sprite s_map;
 	// s_map.setTexture(map);
 
-	Hero p(300, 300, 96, 70, "Player"); //объект класса игрока
+	Hero p(400, 400, 96, 70, "Player"); //объект класса игрока
 	
 	Clock clock;
 	while (window.isOpen()) {
@@ -56,14 +56,13 @@ int main() {
  
 		for (int i = 0; i < getMapHeight(); i++) {
             for (int j = 0; j < getMapWidth(); j++) {
-                if (getMapSymbol(i, j) == ' ') {
-                    break;
-				} else if (getMapSymbol(i, j) == '0'){
-					s_map.setTexture(ground);
+                if (getMapSymbol(i, j) != ' ') {
+     				if (getMapSymbol(i, j) == '0'){
+						s_map.setTexture(ground);
+					}
+					s_map.setPosition(j * 64, i * 64);
+					window.draw(s_map);
 				} 
-
-                s_map.setPosition(j * 64, i * 64);
-                window.draw(s_map);
             }
 		}
 
