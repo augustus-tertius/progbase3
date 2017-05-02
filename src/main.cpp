@@ -26,8 +26,12 @@ int main() {
 	Sprite s_map;
 	// s_map.setTexture(map);
 
-	Hero p(400, 400, 96, 70, "Player"); //объект класса игрока
+	Hero p(400, 400, 66, 93, "Player"); //объект класса игрока
 	
+	sf::CircleShape shape(1.f);  // точка, которая указывает текущие координаты персонажа
+	shape.setFillColor(sf::Color::Red); 
+
+
 	Clock clock;
 	while (window.isOpen()) {
  
@@ -53,7 +57,8 @@ int main() {
 		window.draw(background); 
 		// todo движение фона вместе с персонажем
 		// todo пофиксить анимацию & работу с картой 
- 
+		
+
 		for (int i = 0; i < getMapHeight(); i++) {
             for (int j = 0; j < getMapWidth(); j++) {
                 if (getMapSymbol(i, j) != ' ') {
@@ -65,8 +70,10 @@ int main() {
 				} 
             }
 		}
+		shape.setPosition(p.getX(), p.getY());
 
 		window.draw(p.getSprite());
+		window.draw(shape);
 		window.display();
 	}
 

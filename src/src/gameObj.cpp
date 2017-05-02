@@ -12,9 +12,9 @@ GameObj::GameObj(float X, float Y, int W, int H, std::string Name){
     dx = 0; 
     dy = 0;
 	alive = true; 
-    onGround = false; 
+    onGround = true; 
     isMoving = false;
-    direction = left;
+    direction = right;
 	sprite.setOrigin(w / 2, h / 2);
 }
 
