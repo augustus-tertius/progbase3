@@ -3,6 +3,8 @@
 //#include <map.h>
 //#include <view.h>
 
+// THIS VERSION WORKS PERFERCTLY 
+
 using namespace sf;
 
 void setView(float x, float y, View view);
@@ -56,7 +58,7 @@ int main() {
 		// background.move(p.getX(), p.getY());
 		// window.draw(background); 
 
-		
+
 		// todo движение фона вместе с персонажем
 		// todo пофиксить анимацию & работу с картой 
 		
