@@ -13,9 +13,9 @@ int main() {
 	View view;
     view.reset(FloatRect(0, 0, 640, 480));
 
-	sf::Texture texture;
-	texture.loadFromFile("images/corona_up.png");
-	sf::Sprite background(texture);
+	// sf::Texture texture;
+	// texture.loadFromFile("images/corona_up.png");
+	// sf::Sprite background(texture);
 	// background.setOrigin(background.getGlobalBounds()/2);
 
 	Image groundIm;
@@ -53,8 +53,10 @@ int main() {
 		
 		window.clear();
 
-		background.move(p.getX(), p.getY());
-		window.draw(background); 
+		// background.move(p.getX(), p.getY());
+		// window.draw(background); 
+
+		
 		// todo движение фона вместе с персонажем
 		// todo пофиксить анимацию & работу с картой 
 		
@@ -80,43 +82,13 @@ int main() {
 	return 0;
 }
 
-void setView(float x, float y, View view) { 
-	float tempX = x; 
-    float tempY = y;
+// void setView(float x, float y, View view) { 
+// 	float tempX = x; 
+//     float tempY = y;
  
-	if (x < 320) tempX = 320; //убираем из вида левую сторону
-	if (y < 240) tempY = 240; //верхнюю сторону
-	if (y > 554) tempY = 554; //нижнюю сторону	
+// 	if (x < 320) tempX = 320; //убираем из вида левую сторону
+// 	if (y < 240) tempY = 240; //верхнюю сторону
+// 	if (y > 554) tempY = 554; //нижнюю сторону	
  
-	view.setCenter(tempX, tempY); //следим за игроком, передавая его координаты. 
-}
-
-
-// int main(){
-// 	RenderWindow window(sf::VideoMode(640, 480), "some sample");
-
-//     Hero* mainHero = new Hero();
-
-//     Clock clock;
-//     float curFrame = 0;
-
-//     while (window.isOpen()){
-//         float time = clock.getElapsedTime().asMicroseconds();
-//         time = time/500;
-//         clock.restart();
-
-//         sf::Event event;
-//         while (window.pollEvent(event)){
-//             if (event.type == sf::Event::Closed)
-//                 window.close();
-//         }
-
-//         window.clear();
-//         mainHero->update(time);
-
-//         window.draw(mainHero->getSprite());
-//         window.display();
-//     }
-
-//     return 0;
+// 	view.setCenter(tempX, tempY); //следим за игроком, передавая его координаты. 
 // }

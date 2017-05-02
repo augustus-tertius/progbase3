@@ -22,7 +22,7 @@ class Hero : public GameObj {
         
         void control (float timePassed);
         void update(float timePassed);
-        void animation(float timePassed, bool dirChanged);
+        void animation(float timePassed);
         void checkCollisionWithMap(float Dx, float Dy);
         void checkCollisionWithMap();
 
