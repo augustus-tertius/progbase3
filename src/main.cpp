@@ -3,8 +3,6 @@
 //#include <map.h>
 //#include <view.h>
 
-// THIS VERSION WORKS PERFERCTLY 
-
 using namespace sf;
 
 void setView(float x, float y, View view);

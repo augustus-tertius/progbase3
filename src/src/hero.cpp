@@ -71,15 +71,12 @@ void Hero::control (float timePassed) {
 
 void Hero::update(float timePassed) {
 	    control(timePassed);
-        std::cout << onGround << " ";
 
         x += dx*timePassed;
 		checkCollisionWithMap(dx, 0);
-        std::cout << onGround << " ";
 
 	    y += dy*timePassed;
 		checkCollisionWithMap(0, dy);
-        std::cout << onGround << std::endl;
 
         sprite.setPosition(x - w / 2, y - h / 2);
 
