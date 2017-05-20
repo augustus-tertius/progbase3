@@ -1,6 +1,6 @@
 #include <map.h>
 
-const int HEIGHT = 10;
+const int HEIGHT = 10; // 18
 const int WIDTH = 41;
 
 char TileMap[HEIGHT][WIDTH] = {

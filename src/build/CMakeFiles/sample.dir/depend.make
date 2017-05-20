@@ -4,6 +4,7 @@
 CMakeFiles/sample.dir/main.cpp.o: ../include/gameObj.h
 CMakeFiles/sample.dir/main.cpp.o: ../include/hero.h
 CMakeFiles/sample.dir/main.cpp.o: ../include/map.h
+CMakeFiles/sample.dir/main.cpp.o: ../include/world.h
 CMakeFiles/sample.dir/main.cpp.o: ../main.cpp
 
 CMakeFiles/sample.dir/src/gameObj.cpp.o: ../include/gameObj.h
@@ -19,4 +20,10 @@ CMakeFiles/sample.dir/src/map.cpp.o: ../src/map.cpp
 
 CMakeFiles/sample.dir/src/view.cpp.o: ../include/view.h
 CMakeFiles/sample.dir/src/view.cpp.o: ../src/view.cpp
+
+CMakeFiles/sample.dir/src/world.cpp.o: ../include/gameObj.h
+CMakeFiles/sample.dir/src/world.cpp.o: ../include/hero.h
+CMakeFiles/sample.dir/src/world.cpp.o: ../include/map.h
+CMakeFiles/sample.dir/src/world.cpp.o: ../include/world.h
+CMakeFiles/sample.dir/src/world.cpp.o: ../src/world.cpp
 

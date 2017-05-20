@@ -5,6 +5,7 @@ CMakeFiles/sample.dir/main.cpp.o
  ../include/gameObj.h
  ../include/hero.h
  ../include/map.h
+ ../include/world.h
  /home/august/Documents/projects/progbase3/src/main.cpp
 CMakeFiles/sample.dir/src/gameObj.cpp.o
  ../include/gameObj.h
@@ -20,3 +21,9 @@ CMakeFiles/sample.dir/src/map.cpp.o
 CMakeFiles/sample.dir/src/view.cpp.o
  ../include/view.h
  /home/august/Documents/projects/progbase3/src/src/view.cpp
+CMakeFiles/sample.dir/src/world.cpp.o
+ ../include/gameObj.h
+ ../include/hero.h
+ ../include/map.h
+ ../include/world.h
+ /home/august/Documents/projects/progbase3/src/src/world.cpp

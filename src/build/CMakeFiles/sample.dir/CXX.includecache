@@ -28,10 +28,22 @@ iostream
 SFML/Graphics.hpp
 -
 
+../include/world.h
+iostream
+-
+map.h
+../include/map.h
+hero.h
+../include/hero.h
+SFML/Graphics.hpp
+-
+
 /home/august/Documents/projects/progbase3/src/main.cpp
 SFML/Graphics.hpp
 -
 hero.h
+-
+world.h
 -
 
 /home/august/Documents/projects/progbase3/src/src/gameObj.cpp
@@ -55,4 +67,8 @@ map.h
 /home/august/Documents/projects/progbase3/src/src/view.cpp
 view.h
 -
+
+/home/august/Documents/projects/progbase3/src/src/world.cpp
+world.h
+/home/august/Documents/projects/progbase3/src/src/world.h
 
