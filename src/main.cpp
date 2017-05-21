@@ -44,7 +44,7 @@ int main() {
 
 	// std::list <Enemy*>  enemies;
 	// enemies.push_back(new frog(200, 300));
-	frog* e = new frog(600, 400);
+	frog* e = new frog(2000, 400);
 
 	Clock clock;
 	while (window.isOpen()) {
