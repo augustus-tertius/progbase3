@@ -7,10 +7,10 @@
 #include <SFML/Graphics.hpp>
 
 class World { 
-    sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(640, 480), "sample rendering & gravity");
+    // sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(640, 480), "sample rendering & gravity");
     sf::View view;
     sf::Clock clock;
-    Hero hero = Hero(400, 400, 66, 93, "Player");
+    Hero* hero;
 
     // перенести в класс текстуры
     sf::Image groundIm;
@@ -23,7 +23,7 @@ class World {
     public:
         World();
         ~World();
-        int update();
+        int update(sf::RenderWindow& window);
 };
 
 #endif

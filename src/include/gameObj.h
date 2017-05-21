@@ -18,6 +18,7 @@ protected:
 	std::string name;
 
     GameObj(float X, float Y, int W, int H, std::string Name);
+	GameObj(float X, float Y, int W, int H, int heal, std::string Name);
     GameObj();
 };
 
