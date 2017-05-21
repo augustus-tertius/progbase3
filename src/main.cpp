@@ -25,6 +25,8 @@ using namespace sf;
 // 	return 0;
 // }
 
+void checkCollisionWithEnemies(Hero& hero, std::list <Enemy*>  enemies);
+void generateEnemies();
 
 int main() {
 	RenderWindow window(VideoMode(640, 480), "sample rendering & gravity");
@@ -37,14 +39,15 @@ int main() {
 	Texture ground;
 	ground.loadFromImage(groundIm);
 
-	Hero p(400, 400, 66, 93, "Player"); //объект класса игрока
+	Hero h(400, 400, 66, 93, "Player"); //объект класса игрока
 	
 	sf::CircleShape shape(1.f);  // точка, которая указывает текущие координаты персонажа
 	shape.setFillColor(sf::Color::Red); 
 
-	// std::list <Enemy*>  enemies;
-	// enemies.push_back(new frog(200, 300));
-	frog* e = new frog(2000, 400);
+	std::list <Enemy*>  enemies;
+	enemies.push_back(new frog(2000, 300));
+	enemies.push_back(new frog(1000, 300));
+	// frog* e = new frog(2000, 400);
 
 	Clock clock;
 	while (window.isOpen()) {
@@ -59,15 +62,16 @@ int main() {
 			if (event.type == sf::Event::Closed)
 				window.close();	
 		}		
-		p.update(time);
+		h.update(time);
 
 		// setView(p.getX(), p.getY(), view);
-		view.setCenter(p.getX(), p.getY());
+		view.setCenter(h.getX(), h.getY());
 		window.setView(view);
 		
 		window.clear();
 		
 		Sprite s_map;
+
 		for (int i = 0; i < getMapHeight(); i++) {
             for (int j = 0; j < getMapWidth(); j++) {
                 if (getMapSymbol(i, j) != ' ') {
@@ -80,25 +84,40 @@ int main() {
             }
 		}
 
-		// for (auto it = enemies.begin(); it != enemies.end(); it++){
-		// 	window.draw((*it)->getSprite()); 
-		// }
-		shape.setPosition(p.getX(), p.getY());
- 		window.draw(shape);
+		for (auto it = enemies.begin(); it != enemies.end(); it++){
+			(*it)->update(time);
+			window.draw((*it)->getSprite()); 
+		}
+
+		checkCollisionWithEnemies(h, enemies);
+
 		 
-		e->update(time);
-		window.draw(e->getSprite());
+		// e->update(time);
+		// window.draw(e->getSprite());
 
 
-		shape.setPosition(e->x, e->y);
+		// shape.setPosition(e->x, e->y);
 
-		window.draw(p.getSprite());
+		window.draw(h.getSprite());
 		window.draw(shape);
 		window.display();
 	}
 
-	delete e;
+	// delete e;
 	return 0;
+}
+
+void checkCollisionWithEnemies(Hero& hero, std::list <Enemy*>  enemies){
+	FloatRect heroR = hero.getSprite().getGlobalBounds();
+
+	for (auto it = enemies.begin(); it != enemies.end(); it++){
+		FloatRect enR = (*it)->getSprite().getGlobalBounds();
+		if(heroR.intersects(enR)){
+			(*it)->convertVectors();
+			int damage = (*it)->getDamage();
+			hero.reduceHealth(damage);
+		} 
+	}
 }
 
 // void setView(float x, float y, View view) { 

@@ -5,8 +5,8 @@
 
 class GameObj {
 
-// protected:
-public:
+protected:
+// public:
 	float dx, dy, x, y, speed, moveTimer;
 	int w, h, curHealth, maxHealth;
 	bool alive, isMoving, onGround;
@@ -21,6 +21,9 @@ public:
     GameObj(float X, float Y, int W, int H, std::string Name);
 	GameObj(float X, float Y, int W, int H, int heal, std::string Name);
     GameObj();
+
+public:
+	void reduceHealth(int damage);
 };
 
 #endif

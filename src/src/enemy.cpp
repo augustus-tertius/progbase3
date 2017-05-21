@@ -2,16 +2,27 @@
 
 using namespace sf;
 
-Enemy::Enemy(std::string Name, float X, float Y, int W, int H, int hel): GameObj( X, Y, W, H, hel, Name){
+Enemy::Enemy(std::string Name, float X, float Y, int W, int H, int hel, int dam): GameObj( X, Y, W, H, hel, Name){
 		// if (name == "EasyEnemy"){
 		// 	sprite.setTextureRect(IntRect(0, 0, w, h));
 		// 	dx = 0.1;
 		// }
+    damage = dam;
 }
 
 sf::Sprite Enemy::getSprite(){
     return sprite;
 }
+
+int Enemy::getDamage(){
+    return damage;
+}
+
+void Enemy::convertVectors(){
+    dy = -dy;
+    dx = -dx;
+}
+
 
 // void Enemy::checkCollisionWithMap(float Dx, float Dy) {
 // 	// for (int i = y / 32; i < (y + h) / 32; i++){ 

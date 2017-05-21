@@ -5,12 +5,15 @@
 #include "map.h"
 
 class Enemy :public GameObj{
+    int damage;
+    
 public:
-	Enemy(std::string Name, float X, float Y, int W, int H, int hel);
+	Enemy(std::string Name, float X, float Y, int W, int H, int hel, int dam);
  
     sf::Sprite getSprite();
+    int getDamage();
     virtual void update(float time) = 0;
-    
+    void convertVectors();
 };
 
 #endif

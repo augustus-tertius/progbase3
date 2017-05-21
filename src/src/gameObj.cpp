@@ -48,3 +48,7 @@ GameObj::GameObj(float X, float Y, int W, int H, int heal, std::string Name){
     onGround = false; 
     isMoving = false;
 }
+
+void GameObj::reduceHealth(int damage){
+    curHealth -= damage;
+}

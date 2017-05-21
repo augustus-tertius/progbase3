@@ -2,7 +2,7 @@
 
 using namespace sf;
 
-frog::frog(float x, float y): Enemy( "frog", x, y, 128, 128, 20){
+frog::frog(float x, float y): Enemy( "frog", x, y, 128, 128, 20, 4){
     this->texture.loadFromFile("images/enemies/frog.png");
     state = stand;
 }
