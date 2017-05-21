@@ -8,6 +8,6 @@ class frog :public Enemy {
 
     frog(float x, float y);
     void update (float time);
-    
+    void checkCollisionWithMap(float Dx, float Dy);    
 };
 

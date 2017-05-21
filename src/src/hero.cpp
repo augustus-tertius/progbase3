@@ -10,6 +10,7 @@
 using namespace sf;
 
 Hero::Hero(float X, float Y, int W, int H, std::string Name) :GameObj(){
+    // sprite.setOrigin(w / 2, h / 2);
 	sprite.setTexture(this->texture);
 	// sprite.setPosition(0, 0);
 
@@ -24,6 +25,7 @@ Hero::Hero(float X, float Y, int W, int H, std::string Name) :GameObj(){
     this->filePath = "images/main hero/Green/Zeta/";
 
     this->texture.loadFromFile(this->filePath + "stand.png");
+
 }
 
 sf::Sprite Hero::getSprite(){

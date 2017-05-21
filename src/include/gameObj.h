@@ -5,7 +5,8 @@
 
 class GameObj {
 
-protected:
+// protected:
+public:
 	float dx, dy, x, y, speed, moveTimer;
 	int w, h, curHealth, maxHealth;
 	bool alive, isMoving, onGround;
