@@ -5,6 +5,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/august/Documents/projects/progbase3/src/main.cpp" "/home/august/Documents/projects/progbase3/src/build/CMakeFiles/sample.dir/main.cpp.o"
+  "/home/august/Documents/projects/progbase3/src/src/enemies.cpp" "/home/august/Documents/projects/progbase3/src/build/CMakeFiles/sample.dir/src/enemies.cpp.o"
+  "/home/august/Documents/projects/progbase3/src/src/enemy.cpp" "/home/august/Documents/projects/progbase3/src/build/CMakeFiles/sample.dir/src/enemy.cpp.o"
   "/home/august/Documents/projects/progbase3/src/src/gameObj.cpp" "/home/august/Documents/projects/progbase3/src/build/CMakeFiles/sample.dir/src/gameObj.cpp.o"
   "/home/august/Documents/projects/progbase3/src/src/hero.cpp" "/home/august/Documents/projects/progbase3/src/build/CMakeFiles/sample.dir/src/hero.cpp.o"
   "/home/august/Documents/projects/progbase3/src/src/map.cpp" "/home/august/Documents/projects/progbase3/src/build/CMakeFiles/sample.dir/src/map.cpp.o"

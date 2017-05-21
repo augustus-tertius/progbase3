@@ -1,8 +1,11 @@
 #include <SFML/Graphics.hpp>
 #include <hero.h>
-#include <enemy.h>
+// #include <enemy.h>
+#include <enemies.h>
 #include <world.h>
-//#include <map.h>
+#include <list>
+
+#include <map.h>
 //#include <view.h>
 
 // void setView(float x, float y, View view);
@@ -29,24 +32,19 @@ int main() {
 	View view;
     view.reset(FloatRect(0, 0, 640, 480));
 
-	// sf::Texture texture;
-	// texture.loadFromFile("images/corona_up.png");
-	// sf::Sprite background(texture);
-	// background.setOrigin(background.getGlobalBounds()/2);
-
 	Image groundIm;
 	groundIm.loadFromFile("images/tileGreen_03.png");
 	Texture ground;
 	ground.loadFromImage(groundIm);
-
-	Sprite s_map;
-	// s_map.setTexture(map);
 
 	Hero p(400, 400, 66, 93, "Player"); //объект класса игрока
 	
 	sf::CircleShape shape(1.f);  // точка, которая указывает текущие координаты персонажа
 	shape.setFillColor(sf::Color::Red); 
 
+	// std::list <Enemy*>  enemies;
+	// enemies.push_back(new frog(200, 300));
+	frog* e = new frog(200, 300);
 
 	Clock clock;
 	while (window.isOpen()) {
@@ -68,15 +66,8 @@ int main() {
 		window.setView(view);
 		
 		window.clear();
-
-		// background.move(p.getX(), p.getY());
-		// window.draw(background); 
-
-
-		// todo движение фона вместе с персонажем
-		// todo пофиксить анимацию & работу с картой 
 		
-
+		Sprite s_map;
 		for (int i = 0; i < getMapHeight(); i++) {
             for (int j = 0; j < getMapWidth(); j++) {
                 if (getMapSymbol(i, j) != ' ') {
@@ -88,6 +79,17 @@ int main() {
 				} 
             }
 		}
+
+		// for (auto it = enemies.begin(); it != enemies.end(); it++){
+		// 	window.draw((*it)->getSprite()); 
+		// }
+		shape.setPosition(p.getX(), p.getY());
+ 		window.draw(shape);
+		 
+		e->update(time);
+		window.draw(e->getSprite());
+
+
 		shape.setPosition(p.getX(), p.getY());
 
 		window.draw(p.getSprite());
@@ -95,6 +97,7 @@ int main() {
 		window.display();
 	}
 
+	delete e;
 	return 0;
 }
 

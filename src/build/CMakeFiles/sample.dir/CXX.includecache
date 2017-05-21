@@ -6,6 +6,16 @@
 
 #IncludeRegexTransform: 
 
+../include/enemies.h
+enemy.h
+../include/enemy.h
+
+../include/enemy.h
+gameObj.h
+../include/gameObj.h
+map.h
+../include/map.h
+
 ../include/gameObj.h
 SFML/Graphics.hpp
 -
@@ -38,12 +48,44 @@ hero.h
 SFML/Graphics.hpp
 -
 
+/home/august/Documents/projects/progbase3/src/include/enemies.h
+enemy.h
+/home/august/Documents/projects/progbase3/src/include/enemy.h
+
+/home/august/Documents/projects/progbase3/src/include/enemy.h
+gameObj.h
+/home/august/Documents/projects/progbase3/src/include/gameObj.h
+map.h
+/home/august/Documents/projects/progbase3/src/include/map.h
+
+/home/august/Documents/projects/progbase3/src/include/gameObj.h
+SFML/Graphics.hpp
+-
+
+/home/august/Documents/projects/progbase3/src/include/map.h
+iostream
+-
+
 /home/august/Documents/projects/progbase3/src/main.cpp
 SFML/Graphics.hpp
 -
 hero.h
 -
+enemies.h
+-
 world.h
+-
+list
+-
+map.h
+-
+
+/home/august/Documents/projects/progbase3/src/src/enemies.cpp
+../include/enemies.h
+/home/august/Documents/projects/progbase3/src/include/enemies.h
+
+/home/august/Documents/projects/progbase3/src/src/enemy.cpp
+enemy.h
 -
 
 /home/august/Documents/projects/progbase3/src/src/gameObj.cpp
@@ -57,8 +99,6 @@ gameObj.h
 /home/august/Documents/projects/progbase3/src/src/gameObj.h
 hero.h
 -
-map.h
-/home/august/Documents/projects/progbase3/src/src/map.h
 
 /home/august/Documents/projects/progbase3/src/src/map.cpp
 map.h

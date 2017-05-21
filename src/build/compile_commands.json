@@ -6,6 +6,11 @@
 },
 {
   "directory": "/home/august/Documents/projects/progbase3/src/build",
+  "command": "/usr/bin/c++    -I/home/august/Documents/projects/progbase3/src/include -I/usr/include/SFML  -g   -std=c++11 -o CMakeFiles/sample.dir/src/enemy.cpp.o -c /home/august/Documents/projects/progbase3/src/src/enemy.cpp",
+  "file": "/home/august/Documents/projects/progbase3/src/src/enemy.cpp"
+},
+{
+  "directory": "/home/august/Documents/projects/progbase3/src/build",
   "command": "/usr/bin/c++    -I/home/august/Documents/projects/progbase3/src/include -I/usr/include/SFML  -g   -std=c++11 -o CMakeFiles/sample.dir/src/gameObj.cpp.o -c /home/august/Documents/projects/progbase3/src/src/gameObj.cpp",
   "file": "/home/august/Documents/projects/progbase3/src/src/gameObj.cpp"
 },
@@ -23,6 +28,11 @@
   "directory": "/home/august/Documents/projects/progbase3/src/build",
   "command": "/usr/bin/c++    -I/home/august/Documents/projects/progbase3/src/include -I/usr/include/SFML  -g   -std=c++11 -o CMakeFiles/sample.dir/src/hero.cpp.o -c /home/august/Documents/projects/progbase3/src/src/hero.cpp",
   "file": "/home/august/Documents/projects/progbase3/src/src/hero.cpp"
+},
+{
+  "directory": "/home/august/Documents/projects/progbase3/src/build",
+  "command": "/usr/bin/c++    -I/home/august/Documents/projects/progbase3/src/include -I/usr/include/SFML  -g   -std=c++11 -o CMakeFiles/sample.dir/src/enemies.cpp.o -c /home/august/Documents/projects/progbase3/src/src/enemies.cpp",
+  "file": "/home/august/Documents/projects/progbase3/src/src/enemies.cpp"
 },
 {
   "directory": "/home/august/Documents/projects/progbase3/src/build",

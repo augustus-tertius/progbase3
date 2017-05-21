@@ -150,6 +150,60 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/enemies.o: src/enemies.cpp.o
+
+.PHONY : src/enemies.o
+
+# target to build an object file
+src/enemies.cpp.o:
+	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/enemies.cpp.o
+.PHONY : src/enemies.cpp.o
+
+src/enemies.i: src/enemies.cpp.i
+
+.PHONY : src/enemies.i
+
+# target to preprocess a source file
+src/enemies.cpp.i:
+	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/enemies.cpp.i
+.PHONY : src/enemies.cpp.i
+
+src/enemies.s: src/enemies.cpp.s
+
+.PHONY : src/enemies.s
+
+# target to generate assembly for a file
+src/enemies.cpp.s:
+	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/enemies.cpp.s
+.PHONY : src/enemies.cpp.s
+
+src/enemy.o: src/enemy.cpp.o
+
+.PHONY : src/enemy.o
+
+# target to build an object file
+src/enemy.cpp.o:
+	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/enemy.cpp.o
+.PHONY : src/enemy.cpp.o
+
+src/enemy.i: src/enemy.cpp.i
+
+.PHONY : src/enemy.i
+
+# target to preprocess a source file
+src/enemy.cpp.i:
+	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/enemy.cpp.i
+.PHONY : src/enemy.cpp.i
+
+src/enemy.s: src/enemy.cpp.s
+
+.PHONY : src/enemy.s
+
+# target to generate assembly for a file
+src/enemy.cpp.s:
+	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/enemy.cpp.s
+.PHONY : src/enemy.cpp.s
+
 src/gameObj.o: src/gameObj.cpp.o
 
 .PHONY : src/gameObj.o
@@ -297,6 +351,12 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... src/enemies.o"
+	@echo "... src/enemies.i"
+	@echo "... src/enemies.s"
+	@echo "... src/enemy.o"
+	@echo "... src/enemy.i"
+	@echo "... src/enemy.s"
 	@echo "... src/gameObj.o"
 	@echo "... src/gameObj.i"
 	@echo "... src/gameObj.s"

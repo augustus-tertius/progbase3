@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "gameObj.h" 
 #include <hero.h>
-#include "map.h"
+// #include "map.h"
 // #include "view.h"
 
 #define DEFAULT_MAX_HEALTH 50
