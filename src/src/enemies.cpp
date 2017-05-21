@@ -53,6 +53,7 @@ void frog::update (float timePassed) {
     }
 
     sprite.setTexture(this->texture);
+    // sprite.setScale();
 }
 
 void frog::checkCollisionWithMap(float Dx, float Dy) {

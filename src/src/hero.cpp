@@ -72,6 +72,7 @@ void Hero::control (float timePassed) {
 }
 
 void Hero::update(float timePassed) {
+        
 	    control(timePassed);
 
         x += dx*timePassed;

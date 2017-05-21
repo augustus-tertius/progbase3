@@ -23,6 +23,7 @@ class Hero : public GameObj {
         void control (float timePassed);
         void update(float timePassed);
         void animation(float timePassed);
+        void updateHealth();
         void checkCollisionWithMap(float Dx, float Dy);
         void checkCollisionWithMap();
         void checkCollisionWithEnemies();

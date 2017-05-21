@@ -29,10 +29,10 @@ void checkCollisionWithEnemies(Hero& hero, std::list <Enemy*>  enemies);
 void generateEnemies();
 
 int main() {
-	RenderWindow window(VideoMode(640, 480), "sample rendering & gravity");
+	RenderWindow window(VideoMode(1200, 900), "sample rendering & gravity");
 
 	View view;
-    view.reset(FloatRect(0, 0, 640, 480));
+    view.reset(FloatRect(0, 0, 1500, 900));
 
 	Image groundIm;
 	groundIm.loadFromFile("images/tileGreen_03.png");

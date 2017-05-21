@@ -19,7 +19,7 @@ int Enemy::getDamage(){
 }
 
 void Enemy::convertVectors(){
-    dy = -dy;
+    // dy = -dy;
     dx = -dx;
 }
 
