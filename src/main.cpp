@@ -51,59 +51,54 @@ int main() {
 
 	Clock clock;
 	while (window.isOpen()) {
+		while(h.getAlive()){
+			float time = clock.getElapsedTime().asMicroseconds();
  
-		float time = clock.getElapsedTime().asMicroseconds();
- 
-		clock.restart();
-		time = time / 800;
-		
-		Event event;
-		while (window.pollEvent(event)) {
-			if (event.type == sf::Event::Closed)
-				window.close();	
-		}		
-		h.update(time);
+			clock.restart();
+			time = time / 800;
+			
+			Event event;
+			while (window.pollEvent(event)) {
+				if (event.type == sf::Event::Closed)
+					window.close();	
+			}		
+			h.update(time);
 
-		// setView(p.getX(), p.getY(), view);
-		view.setCenter(h.getX(), h.getY());
-		window.setView(view);
-		
-		window.clear();
-		
-		Sprite s_map;
+			// setView(p.getX(), p.getY(), view);
+			view.setCenter(h.getX(), h.getY());
+			window.setView(view);
+			
+			window.clear();
+			
+			Sprite s_map;
 
-		for (int i = 0; i < getMapHeight(); i++) {
-            for (int j = 0; j < getMapWidth(); j++) {
-                if (getMapSymbol(i, j) != ' ') {
-     				if (getMapSymbol(i, j) == '0'){
-						s_map.setTexture(ground);
-					}
-					s_map.setPosition(j * 64, i * 64);
-					window.draw(s_map);
-				} 
-            }
+			for (int i = 0; i < getMapHeight(); i++) {
+				for (int j = 0; j < getMapWidth(); j++) {
+					if (getMapSymbol(i, j) != ' ') {
+						if (getMapSymbol(i, j) == '0'){
+							s_map.setTexture(ground);
+						}
+						s_map.setPosition(j * 64, i * 64);
+						window.draw(s_map);
+					} 
+				}
+			}
+
+			for (auto it = enemies.begin(); it != enemies.end(); it++){
+				(*it)->update(time);
+				window.draw((*it)->getSprite()); 
+			}
+
+			checkCollisionWithEnemies(h, enemies);
+
+			window.draw(h.getSprite());
+			window.draw(shape);
+			window.display();
 		}
-
-		for (auto it = enemies.begin(); it != enemies.end(); it++){
-			(*it)->update(time);
-			window.draw((*it)->getSprite()); 
-		}
-
-		checkCollisionWithEnemies(h, enemies);
-
-		 
-		// e->update(time);
-		// window.draw(e->getSprite());
-
-
-		// shape.setPosition(e->x, e->y);
-
-		window.draw(h.getSprite());
-		window.draw(shape);
-		window.display();
+	
+		h.reset(400, 400);
 	}
 
-	// delete e;
 	return 0;
 }
 
@@ -116,6 +111,7 @@ void checkCollisionWithEnemies(Hero& hero, std::list <Enemy*>  enemies){
 			(*it)->convertVectors();
 			int damage = (*it)->getDamage();
 			hero.reduceHealth(damage);
+			std::cout << hero.curHealth << " / " << hero.maxHealth << std::endl;
 		} 
 	}
 }

@@ -25,7 +25,7 @@ Hero::Hero(float X, float Y, int W, int H, std::string Name) :GameObj(){
     this->filePath = "images/main hero/Green/Zeta/";
 
     this->texture.loadFromFile(this->filePath + "stand.png");
-
+    healTimer = 0;
 }
 
 sf::Sprite Hero::getSprite(){
@@ -39,6 +39,18 @@ float Hero::getX(){
 float Hero::getY(){
     return this->y;
 }
+
+bool Hero::getAlive(){
+    return alive;
+}
+
+void Hero::reset(float X, float Y){
+    alive = true;
+    curHealth = maxHealth;
+    x = X;
+    y = Y;
+}
+
 
 void Hero::control (float timePassed) {
         if (Keyboard::isKeyPressed(Keyboard::Right)){
@@ -69,6 +81,17 @@ void Hero::control (float timePassed) {
         
 
         this->animation(timePassed);
+}
+
+void Hero::updateHealth(float timePassed){
+    healTimer += timePassed;
+    if(healTimer > 1){
+        healTimer = 0;
+        if(curHealth < maxHealth){
+            curHealth++;
+            // curHealth += regenerationSpeed; ???
+        }
+    }
 }
 
 void Hero::update(float timePassed) {
@@ -180,6 +203,8 @@ void Hero::animation(float timePassed){
 
     sprite.setTexture(this->texture);
 }
+
+
 
 
 

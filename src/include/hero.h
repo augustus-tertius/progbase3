@@ -14,23 +14,28 @@ class Hero : public GameObj {
 
     enum {walk, jump, stand} state;
     float curFrame;
+    float healTimer;
+    bool shield;
 
 
     public:
         // Hero(); mb add one later ?
         Hero(float X, float Y, int W, int H, std::string Name);
-        
         void control (float timePassed);
         void update(float timePassed);
         void animation(float timePassed);
-        void updateHealth();
+        void updateHealth(float timePassed);
         void checkCollisionWithMap(float Dx, float Dy);
         void checkCollisionWithMap();
         void checkCollisionWithEnemies();
 
-        sf::Sprite getSprite();
+        void reset(float X, float Y);
+
+        sf::Sprite getSprite();        
         float getX();
         float getY();
+        bool getAlive();
+
 };
 
 #endif
