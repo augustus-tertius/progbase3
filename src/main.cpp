@@ -114,14 +114,27 @@ void checkCollisionWithEnemies(Hero& hero, std::list <Enemy*>  enemies){
 
 	for (auto it = enemies.begin(); it != enemies.end(); it++){
 		FloatRect enR = (*it)->getSprite().getGlobalBounds();
-		if(heroR.intersects(enR) && !hero.getShield()){
-			(*it)->convertVectors();
+		// if(heroR.intersects(enR) && !hero.getShield()){
+		// 	(*it)->convertVectors();
+		// 	int damage = (*it)->getDamage();
+		// 	hero.reduceHealth(damage);
+		// 	hero.setShield(1.5);
+		// 	std::cout << hero.curHealth << " / " << hero.maxHealth << std::endl;
+		// } else {
+		// 	std::cout << "shield is on" << std::endl;
+		// }
+
+
+		if(heroR.intersects(enR)){
+			if(!hero.getShield()){
+				(*it)->convertVectors();
 			int damage = (*it)->getDamage();
 			hero.reduceHealth(damage);
-			hero.setShield(1.5);
+			hero.setShield(1000);
 			std::cout << hero.curHealth << " / " << hero.maxHealth << std::endl;
-		} else {
-			std::cout << "shield is on" << std::endl;
+			} else {
+				std::cout << "shield is on" << std::endl;
+			}
 		}
 	}
 }

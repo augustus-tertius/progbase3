@@ -97,7 +97,7 @@ void Hero::control (float timePassed) {
 
 void Hero::updateHealth(float timePassed){
     healTimer += timePassed;
-    if(healTimer > 1){
+    if(healTimer > 1000){
         healTimer = 0;
         if(curHealth < maxHealth){
             curHealth++;
@@ -113,6 +113,7 @@ void Hero::updateShield(float timePassed){
             if(shieldTimer < 0){
                 shield = false;
                 shieldTimer = 0;
+                std::cout << "shield is disabled" << std::endl;
             }
     }
 }
