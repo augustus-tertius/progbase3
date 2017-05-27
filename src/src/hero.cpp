@@ -25,7 +25,9 @@ Hero::Hero(float X, float Y, int W, int H, std::string Name) :GameObj(){
     this->filePath = "images/main hero/Green/Zeta/";
 
     this->texture.loadFromFile(this->filePath + "stand.png");
+
     healTimer = 0;
+    shield = false;
 }
 
 sf::Sprite Hero::getSprite(){
@@ -44,6 +46,10 @@ bool Hero::getAlive(){
     return alive;
 }
 
+bool Hero::getShield(){
+    return shield;
+}
+
 void Hero::reset(float X, float Y){
     alive = true;
     curHealth = maxHealth;
@@ -51,6 +57,12 @@ void Hero::reset(float X, float Y){
     y = Y;
 }
 
+void Hero::setShield(float duration){
+    if(duration > 0){
+        shield = true;
+        shieldTimer = duration;
+    }
+}
 
 void Hero::control (float timePassed) {
         if (Keyboard::isKeyPressed(Keyboard::Right)){
@@ -90,7 +102,18 @@ void Hero::updateHealth(float timePassed){
         if(curHealth < maxHealth){
             curHealth++;
             // curHealth += regenerationSpeed; ???
+            std::cout << "Now health is " << curHealth << std::endl;
         }
+    }
+}
+
+void Hero::updateShield(float timePassed){
+    if(shield){
+            shieldTimer -= timePassed;
+            if(shieldTimer < 0){
+                shield = false;
+                shieldTimer = 0;
+            }
     }
 }
 
@@ -105,6 +128,9 @@ void Hero::update(float timePassed) {
 		checkCollisionWithMap(0, dy);
 
         sprite.setPosition(x - w / 2, y - h / 2);
+
+        updateHealth(timePassed);
+        updateShield(timePassed);
 
 		if (curHealth <= 0) { 
             alive = false; 

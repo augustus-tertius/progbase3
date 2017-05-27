@@ -94,6 +94,13 @@ int main() {
 			window.draw(h.getSprite());
 			window.draw(shape);
 			window.display();
+
+			if(!window.isOpen()){
+				for (auto it = enemies.begin(); it != enemies.end(); it++){
+					delete (*it);
+				}
+				break;
+			}
 		}
 	
 		h.reset(400, 400);
@@ -107,12 +114,15 @@ void checkCollisionWithEnemies(Hero& hero, std::list <Enemy*>  enemies){
 
 	for (auto it = enemies.begin(); it != enemies.end(); it++){
 		FloatRect enR = (*it)->getSprite().getGlobalBounds();
-		if(heroR.intersects(enR)){
+		if(heroR.intersects(enR) && !hero.getShield()){
 			(*it)->convertVectors();
 			int damage = (*it)->getDamage();
 			hero.reduceHealth(damage);
+			hero.setShield(1.5);
 			std::cout << hero.curHealth << " / " << hero.maxHealth << std::endl;
-		} 
+		} else {
+			std::cout << "shield is on" << std::endl;
+		}
 	}
 }
 
