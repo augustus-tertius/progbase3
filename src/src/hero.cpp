@@ -102,7 +102,6 @@ void Hero::updateHealth(float timePassed){
         if(curHealth < maxHealth){
             curHealth++;
             // curHealth += regenerationSpeed; ???
-            std::cout << "Now health is " << curHealth << std::endl;
         }
     }
 }
@@ -113,7 +112,6 @@ void Hero::updateShield(float timePassed){
             if(shieldTimer < 0){
                 shield = false;
                 shieldTimer = 0;
-                std::cout << "shield is disabled" << std::endl;
             }
     }
 }
