@@ -3,19 +3,25 @@
 
 #include <iostream>
 
-// class Map {
-//     int height;
-//     int width;
-//     char map[][];
+class Map {
+    int tileSize;
+    std::string filePath;
 
-//     Map(int h, int w);
-//     char getMapSymbol(int i, int j);
-//     int getMapHeight();
-//     int getMapWidth();
-// };
+    int height;
+    int width;
+    char* map;
 
-char getMapSymbol(int i, int j);
-int getMapHeight();
-int getMapWidth();
+
+    Map(int h, int w);
+    ~Map();
+    void saveToFile();
+    char getMapSymbol(int i, int j);
+    int getMapHeight();
+    int getMapWidth();
+};
+
+// char getMapSymbol(int i, int j);
+// int getMapHeight();
+// int getMapWidth();
 
 #endif
