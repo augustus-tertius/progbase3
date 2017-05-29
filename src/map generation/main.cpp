@@ -4,7 +4,7 @@ using namespace std;
 
 // for diamond square alg
 void generateMap(string fileName, int partsQuan, int height, int width);
-void diamondSquare(int w, int h);
+void diamondSquare(int w, int h, char** map);
 void changeCenterHeight (int heights [], int r, int l, int bounds, int seed);
 void recountSegment(int heights [], int r, int l);
 
@@ -14,15 +14,23 @@ typedef struct vector {
     float x;
     float y;
 } Vector;
+
 void gridOfRandomVectors(Vector** grid, int w, int h);
 float Noise(float fx, float fy, Vector** grid);
 void generateNoize(float** matrix, int w, int h);
 
 
-int main() {
-//    diamondSquare(80, 20);
-    int h = 20;
+int main(void){
+
+    int h = 30;
     int w = 100;
+
+    char** map = new char*[h];
+
+    for(int i = 0; i < h; i++){
+        map[i] = new char[w];
+    }
+    diamondSquare(w, h, map);
 
     float** matrix = new float*[h];
 
@@ -36,7 +44,55 @@ int main() {
         }
     }
 
-    generateNoize(matrix, w, h);
+    generateNoize(matrix, w, h/2);
+
+
+    for(int i = h - 1; i > h/2; i--) {
+        for (int j = 0; j < w; j++) {
+            if(map[i - 1][j] != ' '){
+                if(matrix[i - h/2][j] < -0.4) {
+                    map[i - 1][j] = 'i';
+                } else if(matrix[i - h/2][j] < -0.2){
+                    map[i - 1][j] = 'z';
+                } else if(matrix[i - h/2][j] < 0){
+                    map[i - 1][j] = 's';
+                } else if(matrix[i - h/2][j] < 0.1){
+                    map[i - 1][j] = 'g';
+                } else if(matrix[i - h/2][j] < 0.2){
+                    map[i - 1][j] = 's';
+                } else if(matrix[i - h/2][j] < 0.3){
+                    map[i - 1][j] = 'g';
+                } else if(matrix[i - h/2][j] < 0.4){
+                    map[i - 1][j] = 'm';
+                } else if(matrix[i - h/2][j] < 0.6){
+                    map[i - 1][j] = 'z';
+                } else {
+                    map[i - 1][j] = 'g';
+                }
+            }
+        }
+    }
+
+    for(int i = h/2 - 1; i > 1; i--){
+        for(int j = 0; j < w; j++){
+            if(map[i][j] == 'o'){
+                map[i][j] = 'g';
+            }
+        }
+        std::cout << std::endl;
+    }
+
+    for(int i = 0; i < h; i++){
+        for(int j = 0; j < w; j++){
+            std::cout << map[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    for(int i = 0; i < h; i++){
+        delete map[i];
+    }
+    delete map;
 
     for(int i = 0; i < h; i++){
         delete matrix[i];
@@ -52,7 +108,7 @@ int main() {
 //
 //}
 
-void diamondSquare(int w, int h) {
+void diamondSquare(int w, int h, char** map) {
     // w / h is optimal in somewhere around 2/5 !!!
 
     int heigths [w];
@@ -73,16 +129,10 @@ void diamondSquare(int w, int h) {
         }
     }
 
-    for(int i = 0; i < w; i++){
-        std::cout << heigths[i] << " ";
-    }
-    std::cout << std::endl << std::endl << std::endl;
-
-    char map [h][w];
 
     for(int i = 0; i < h; i++){
         for(int j = 0; j < w; j++){
-            map [i][j] = ' ';
+            map [i][j] = '~';
         }
     }
 
@@ -91,13 +141,6 @@ void diamondSquare(int w, int h) {
         for(int i = h - 1; i >= hi; i--){
             map[i][j] = 'o';
         }
-    }
-
-    for(int i = 0; i < h; i++){
-        for(int j = 0; j < w; j++){
-            std::cout << map[i][j] << " ";
-        }
-        std::cout << std::endl;
     }
 }
 
@@ -145,49 +188,12 @@ void generateNoize(float** matrix, int w, int h){
         }
     }
 
-    for(int i = 0; i < h; i++){
-        for(int j = 0; j < w; j++){
-            if(matrix[i][j] == 0) break;
-                if(matrix[i][j] < -0.4) {
-                    std::cout << ' ' << " ";
-                } else if(matrix[i][j] < -0.2){
-                    std::cout << '~' << " ";
-                } else if(matrix[i][j] < 0){
-                    std::cout << 's' << " ";
-                } else if(matrix[i][j] < 0.2){
-                    std::cout << 'g' << " ";
-                } else if(matrix[i][j] < 0.27){
-                    std::cout << 'i' << " ";
-                }else if(matrix[i][j] < 0.4){
-                    std::cout << 'w' << " ";
-                }else if(matrix[i][j] < 0.6){
-                    std::cout << 'o' << " ";
-                }else {
-                    std::cout << '*' << " ";
-                }
-
-//            std::cout << matrix[i][j] << "\t";
-        }
-        std::cout << std::endl;
-    }
 
     for(int i = 0; i < h/frequency + 1; i++){
         delete grid[i];
     }
     delete grid;
 }
-
-//Vector GetPseudoRandomGradientVector(int x, int y, char permutationTable []) {
-//    int v = (int)(((x * 1836311903) ^ (y * 2971215073) + 4807526976) & 1023);
-//    v = permutationTable[v]&3;
-//
-//    switch (v) {
-//        case 0:  return (Vector){  1, 0 };
-//        case 1:  return (Vector){ -1, 0 };
-//        case 2:  return (Vector){  0, 1 };
-//        default: return (Vector){  0,-1 };
-//    }
-//}
 
 void gridOfRandomVectors(Vector** grid, int w, int h){
     srand(time(NULL));
