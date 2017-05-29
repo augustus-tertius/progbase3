@@ -21,7 +21,7 @@ void generateNoize(float** matrix, int w, int h);
 
 int main() {
 //    diamondSquare(80, 20);
-    int h = 100;
+    int h = 20;
     int w = 100;
 
     float** matrix = new float*[h];
@@ -128,11 +128,11 @@ void recountSegment(int heights [], int l, int r){
 }
 
 void generateNoize(float** matrix, int w, int h){
-    // попробуем ограничить каждый квадрат сетки 10х10 и разместить в углах узлов случайные векторы
-    int frequency = 5;
+    // попробуем ограничить каждый квадрат сетки c заданой частотой и разместить в углах узлов случайные векторы
+    int frequency = h;
 
     Vector** grid = new Vector*[h/frequency + 1];
-    for(int i = 0; i < w/frequency + 1; i++){
+    for(int i = 0; i < h/frequency + 1; i++){
         grid[i] = new Vector[w/frequency + 1];
     }
 
@@ -147,20 +147,31 @@ void generateNoize(float** matrix, int w, int h){
 
     for(int i = 0; i < h; i++){
         for(int j = 0; j < w; j++){
-//            if(matrix[i][j] != 0){
-//                if(matrix[i][j] < 0.015 && matrix[i][j] > -0.015) {
-//                    std::cout << 's' << " ";
-//                } else {
-//                    std::cout << '*' << " ";
-//                }
-//            }
+            if(matrix[i][j] == 0) break;
+                if(matrix[i][j] < -0.4) {
+                    std::cout << ' ' << " ";
+                } else if(matrix[i][j] < -0.2){
+                    std::cout << '~' << " ";
+                } else if(matrix[i][j] < 0){
+                    std::cout << 's' << " ";
+                } else if(matrix[i][j] < 0.2){
+                    std::cout << 'g' << " ";
+                } else if(matrix[i][j] < 0.27){
+                    std::cout << 'i' << " ";
+                }else if(matrix[i][j] < 0.4){
+                    std::cout << 'w' << " ";
+                }else if(matrix[i][j] < 0.6){
+                    std::cout << 'o' << " ";
+                }else {
+                    std::cout << '*' << " ";
+                }
 
-            std::cout << matrix[i][j] << "\t";
+//            std::cout << matrix[i][j] << "\t";
         }
         std::cout << std::endl;
     }
 
-    for(int i = 0; i < w/frequency + 1; i++){
+    for(int i = 0; i < h/frequency + 1; i++){
         delete grid[i];
     }
     delete grid;
@@ -183,8 +194,8 @@ void gridOfRandomVectors(Vector** grid, int w, int h){
 
     for(int i = 0; i < h; i++){
         for(int j = 0; j < w; j++){
-            grid[i][j].x = (rand() % 100)/(100 * 1.0);
-            grid[i][j].y = (rand() % 100)/(100 * 1.0);
+            grid[i][j].x = (rand() % 10)/(10 * 1.0);
+            grid[i][j].y = (rand() % 10)/(10 * 1.0);
         }
     }
 }
@@ -214,14 +225,14 @@ float Noise(float fx, float fy, Vector** grid) {
     Vector bottomLeftGradient  = grid[left][top + 1];
     Vector bottomRightGradient = grid[left + 1][top + 1];
 
-    Vector distanceToTopLeft{ pointInQuadX,   pointInQuadY   };
+    Vector distanceToTopLeft{ pointInQuadX,   pointInQuadY  };
     Vector distanceToTopRight { pointInQuadX-1, pointInQuadY   };
     Vector distanceToBottomLeft { pointInQuadX,   pointInQuadY-1 };
     Vector distanceToBottomRight { pointInQuadX-1, pointInQuadY-1 };
 
-    float tx1 = Dot(distanceToTopLeft,     topLeftGradient);
-    float tx2 = Dot(distanceToTopRight,    topRightGradient);
-    float bx1 = Dot(distanceToBottomLeft,  bottomLeftGradient);
+    float tx1 = Dot(distanceToTopLeft, topLeftGradient);
+    float tx2 = Dot(distanceToTopRight, topRightGradient);
+    float bx1 = Dot(distanceToBottomLeft, bottomLeftGradient);
     float bx2 = Dot(distanceToBottomRight, bottomRightGradient);
 
     pointInQuadX = QunticCurve(pointInQuadX);
