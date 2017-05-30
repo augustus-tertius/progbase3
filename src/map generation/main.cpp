@@ -21,16 +21,25 @@ void generateNoize(float** matrix, int w, int h);
 
 
 int main(void){
-
-    int h = 30;
-    int w = 100;
+    // !!! pre-condition: h и w должны делиться на 10 без остатка; h должно делиться ещё и на 3
+    int h = 60;
+    int w = 200;
 
     char** map = new char*[h];
 
     for(int i = 0; i < h; i++){
         map[i] = new char[w];
     }
+
     diamondSquare(w, h, map);
+    for(int i = 0; i < h; i++){
+        for(int j = 0; j < w; j++){
+            std::cout << map[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
+
+
 
     float** matrix = new float*[h];
 
@@ -44,27 +53,27 @@ int main(void){
         }
     }
 
-    generateNoize(matrix, w, h/2);
+    generateNoize(matrix, w, h*2/3);
 
 
-    for(int i = h - 1; i > h/2; i--) {
+    for(int i = h - 1; i > h/3; i--) {
         for (int j = 0; j < w; j++) {
-            if(map[i - 1][j] != ' '){
-                if(matrix[i - h/2][j] < -0.4) {
+            if(map[i - 1][j] != '~'){
+                if(matrix[i - h/3][j] < -0.4) {
                     map[i - 1][j] = 'i';
-                } else if(matrix[i - h/2][j] < -0.2){
+                } else if(matrix[i - h/3][j] < -0.2){
                     map[i - 1][j] = 'z';
-                } else if(matrix[i - h/2][j] < 0){
+                } else if(matrix[i - h/3][j] < 0){
                     map[i - 1][j] = 's';
-                } else if(matrix[i - h/2][j] < 0.1){
+                } else if(matrix[i - h/3][j] < 0.1){
                     map[i - 1][j] = 'g';
-                } else if(matrix[i - h/2][j] < 0.2){
-                    map[i - 1][j] = 's';
-                } else if(matrix[i - h/2][j] < 0.3){
-                    map[i - 1][j] = 'g';
-                } else if(matrix[i - h/2][j] < 0.4){
+                } else if(matrix[i - h/3][j] < 0.2){
+                    map[i - 1][j] = 'r';
+                } else if(matrix[i - h/3][j] < 0.3){
+                    map[i - 1][j] = 'u';
+                } else if(matrix[i - h/3][j] < 0.4){
                     map[i - 1][j] = 'm';
-                } else if(matrix[i - h/2][j] < 0.6){
+                } else if(matrix[i - h/3][j] < 0.6){
                     map[i - 1][j] = 'z';
                 } else {
                     map[i - 1][j] = 'g';
@@ -73,7 +82,7 @@ int main(void){
         }
     }
 
-    for(int i = h/2 - 1; i > 1; i--){
+    for(int i = h/3 - 1; i > 1; i--){
         for(int j = 0; j < w; j++){
             if(map[i][j] == 'o'){
                 map[i][j] = 'g';
@@ -172,7 +181,8 @@ void recountSegment(int heights [], int l, int r){
 
 void generateNoize(float** matrix, int w, int h){
     // попробуем ограничить каждый квадрат сетки c заданой частотой и разместить в углах узлов случайные векторы
-    int frequency = h;
+//    int frequency = h/2;
+    int frequency = 10;
 
     Vector** grid = new Vector*[h/frequency + 1];
     for(int i = 0; i < h/frequency + 1; i++){
@@ -207,7 +217,7 @@ void gridOfRandomVectors(Vector** grid, int w, int h){
 }
 
 float QunticCurve(float t) {
-    return t * t * t * (t * (t * 6 - 15) + 10);
+    return t * t * t * (t * (t * 6 - 15) + 10) + 0.05;
 }
 
 float Lerp(float a, float b, float t) {
@@ -220,6 +230,7 @@ float Dot(Vector a, Vector b) {
 }
 
 float Noise(float fx, float fy, Vector** grid) {
+    std::cout << fx << " " << fy << std::endl;
 
     int left = (int)fx;
     int top  = (int)fy;
@@ -246,6 +257,7 @@ float Noise(float fx, float fy, Vector** grid) {
 
     float tx = Lerp(tx1, tx2, pointInQuadX);
     float bx = Lerp(bx1, bx2, pointInQuadX);
+
     float tb = Lerp(tx, bx, pointInQuadY);
 
     return tb;
