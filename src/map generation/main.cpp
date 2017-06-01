@@ -32,14 +32,6 @@ int main(void){
     }
 
     diamondSquare(w, h, map);
-    for(int i = 0; i < h; i++){
-        for(int j = 0; j < w; j++){
-            std::cout << map[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }
-
-
 
     float** matrix = new float*[h];
 
@@ -230,8 +222,6 @@ float Dot(Vector a, Vector b) {
 }
 
 float Noise(float fx, float fy, Vector** grid) {
-    std::cout << fx << " " << fy << std::endl;
-
     int left = (int)fx;
     int top  = (int)fy;
     float pointInQuadX = fx - left;
