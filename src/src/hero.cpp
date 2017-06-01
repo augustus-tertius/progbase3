@@ -116,15 +116,15 @@ void Hero::updateShield(float timePassed){
     }
 }
 
-void Hero::update(float timePassed) {
+void Hero::update(float timePassed, Map map) {
         
 	    control(timePassed);
 
         x += dx*timePassed;
-		checkCollisionWithMap(dx, 0);
+		checkCollisionWithMap(dx, 0, map);
 
 	    y += dy*timePassed;
-		checkCollisionWithMap(0, dy);
+		checkCollisionWithMap(0, dy, map);
 
         sprite.setPosition(x - w / 2, y - h / 2);
 
@@ -140,33 +140,33 @@ void Hero::update(float timePassed) {
         }
 } 
 
-void Hero::checkCollisionWithMap(float Dx, float Dy) {
+void Hero::checkCollisionWithMap(float Dx, float Dy, Map map) {
     bool colision = false;  
 
     if(Dx >= 0 && Dy >= 0) {
-         for (int i = y / 64; i < (y + h/2) / 64; i++) {
-            for (int j = x/ 64; j < (x + w/2) /64; j++) {
-                if (getMapSymbol(i, j) == '0') {
+         for (int i = y / map.tileSize; i < (y + h/2) / map.tileSize; i++) {
+            for (int j = x / map.tileSize; j < (x + w/2) / map.tileSize; j++) {
+                if (map.getMapSymbol(i, j) != '~') {
                     if (Dy > 0) { 
-                        y = i * 64 - h/2;  
+                        y = i * map.tileSize - h/2;  
                         dy = 0; 
                         onGround = true;
                         colision = true;
                     } else if (Dx > 0){ 
-                        x = j * 64 - w/2; 
+                        x = j * map.tileSize - w/2; 
                     }
                 }
             }
          }
     } else {
-         for (int i = (y - h/2) / 64; i < y / 64; i++) {
-            for (int j = (x - w/2) / 64; j < x / 64; j++) {
-                if (getMapSymbol(i, j) == '0') {
+         for (int i = (y - h/2) / map.tileSize; i < y / map.tileSize; i++) {
+            for (int j = (x - w/2) / map.tileSize; j < x / map.tileSize; j++) {
+                if (map.getMapSymbol(i, j) != '~') {
                     if (Dy < 0){ 
-                        y = i * 64 + 64 + h/2;  
+                        y = i * map.tileSize + map.tileSize + h/2;  
                         dy = 0; 
                     } else if (Dx < 0){ 
-                        x = j * 64 + 64 + w/2; 
+                        x = j * map.tileSize + map.tileSize + w/2; 
                     }
                 }
             }

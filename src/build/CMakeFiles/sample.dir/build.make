@@ -153,33 +153,9 @@ CMakeFiles/sample.dir/src/world.cpp.o.provides: CMakeFiles/sample.dir/src/world.
 CMakeFiles/sample.dir/src/world.cpp.o.provides.build: CMakeFiles/sample.dir/src/world.cpp.o
 
 
-CMakeFiles/sample.dir/src/view.cpp.o: CMakeFiles/sample.dir/flags.make
-CMakeFiles/sample.dir/src/view.cpp.o: ../src/view.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/august/Documents/projects/progbase3/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/sample.dir/src/view.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/sample.dir/src/view.cpp.o -c /home/august/Documents/projects/progbase3/src/src/view.cpp
-
-CMakeFiles/sample.dir/src/view.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/sample.dir/src/view.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/august/Documents/projects/progbase3/src/src/view.cpp > CMakeFiles/sample.dir/src/view.cpp.i
-
-CMakeFiles/sample.dir/src/view.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sample.dir/src/view.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/august/Documents/projects/progbase3/src/src/view.cpp -o CMakeFiles/sample.dir/src/view.cpp.s
-
-CMakeFiles/sample.dir/src/view.cpp.o.requires:
-
-.PHONY : CMakeFiles/sample.dir/src/view.cpp.o.requires
-
-CMakeFiles/sample.dir/src/view.cpp.o.provides: CMakeFiles/sample.dir/src/view.cpp.o.requires
-	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/view.cpp.o.provides.build
-.PHONY : CMakeFiles/sample.dir/src/view.cpp.o.provides
-
-CMakeFiles/sample.dir/src/view.cpp.o.provides.build: CMakeFiles/sample.dir/src/view.cpp.o
-
-
 CMakeFiles/sample.dir/src/hero.cpp.o: CMakeFiles/sample.dir/flags.make
 CMakeFiles/sample.dir/src/hero.cpp.o: ../src/hero.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/august/Documents/projects/progbase3/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/sample.dir/src/hero.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/august/Documents/projects/progbase3/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/sample.dir/src/hero.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/sample.dir/src/hero.cpp.o -c /home/august/Documents/projects/progbase3/src/src/hero.cpp
 
 CMakeFiles/sample.dir/src/hero.cpp.i: cmake_force
@@ -203,7 +179,7 @@ CMakeFiles/sample.dir/src/hero.cpp.o.provides.build: CMakeFiles/sample.dir/src/h
 
 CMakeFiles/sample.dir/src/enemies.cpp.o: CMakeFiles/sample.dir/flags.make
 CMakeFiles/sample.dir/src/enemies.cpp.o: ../src/enemies.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/august/Documents/projects/progbase3/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/sample.dir/src/enemies.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/august/Documents/projects/progbase3/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/sample.dir/src/enemies.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/sample.dir/src/enemies.cpp.o -c /home/august/Documents/projects/progbase3/src/src/enemies.cpp
 
 CMakeFiles/sample.dir/src/enemies.cpp.i: cmake_force
@@ -227,7 +203,7 @@ CMakeFiles/sample.dir/src/enemies.cpp.o.provides.build: CMakeFiles/sample.dir/sr
 
 CMakeFiles/sample.dir/src/map.cpp.o: CMakeFiles/sample.dir/flags.make
 CMakeFiles/sample.dir/src/map.cpp.o: ../src/map.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/august/Documents/projects/progbase3/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/sample.dir/src/map.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/august/Documents/projects/progbase3/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/sample.dir/src/map.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/sample.dir/src/map.cpp.o -c /home/august/Documents/projects/progbase3/src/src/map.cpp
 
 CMakeFiles/sample.dir/src/map.cpp.i: cmake_force
@@ -255,7 +231,6 @@ sample_OBJECTS = \
 "CMakeFiles/sample.dir/src/enemy.cpp.o" \
 "CMakeFiles/sample.dir/src/gameObj.cpp.o" \
 "CMakeFiles/sample.dir/src/world.cpp.o" \
-"CMakeFiles/sample.dir/src/view.cpp.o" \
 "CMakeFiles/sample.dir/src/hero.cpp.o" \
 "CMakeFiles/sample.dir/src/enemies.cpp.o" \
 "CMakeFiles/sample.dir/src/map.cpp.o"
@@ -267,13 +242,12 @@ sample: CMakeFiles/sample.dir/main.cpp.o
 sample: CMakeFiles/sample.dir/src/enemy.cpp.o
 sample: CMakeFiles/sample.dir/src/gameObj.cpp.o
 sample: CMakeFiles/sample.dir/src/world.cpp.o
-sample: CMakeFiles/sample.dir/src/view.cpp.o
 sample: CMakeFiles/sample.dir/src/hero.cpp.o
 sample: CMakeFiles/sample.dir/src/enemies.cpp.o
 sample: CMakeFiles/sample.dir/src/map.cpp.o
 sample: CMakeFiles/sample.dir/build.make
 sample: CMakeFiles/sample.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/august/Documents/projects/progbase3/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable sample"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/august/Documents/projects/progbase3/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable sample"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/sample.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -285,7 +259,6 @@ CMakeFiles/sample.dir/requires: CMakeFiles/sample.dir/main.cpp.o.requires
 CMakeFiles/sample.dir/requires: CMakeFiles/sample.dir/src/enemy.cpp.o.requires
 CMakeFiles/sample.dir/requires: CMakeFiles/sample.dir/src/gameObj.cpp.o.requires
 CMakeFiles/sample.dir/requires: CMakeFiles/sample.dir/src/world.cpp.o.requires
-CMakeFiles/sample.dir/requires: CMakeFiles/sample.dir/src/view.cpp.o.requires
 CMakeFiles/sample.dir/requires: CMakeFiles/sample.dir/src/hero.cpp.o.requires
 CMakeFiles/sample.dir/requires: CMakeFiles/sample.dir/src/enemies.cpp.o.requires
 CMakeFiles/sample.dir/requires: CMakeFiles/sample.dir/src/map.cpp.o.requires

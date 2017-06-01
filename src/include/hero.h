@@ -24,13 +24,13 @@ class Hero : public GameObj {
         // Hero(); mb add one later ?
         Hero(float X, float Y, int W, int H, std::string Name);
         void control (float timePassed);
-        void update(float timePassed);
+        void update(float timePassed, Map map);
 
         void updateHealth(float timePassed);
         void updateShield(float timePassed);
 
         void animation(float timePassed);
-        void checkCollisionWithMap(float Dx, float Dy);
+        void checkCollisionWithMap(float Dx, float Dy, Map map);
         void checkCollisionWithMap();
         void checkCollisionWithEnemies();
 

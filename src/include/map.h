@@ -4,15 +4,17 @@
 #include <iostream>
 
 class Map {
-    int tileSize;
     std::string filePath;
 
     int height;
     int width;
-    char* map;
+    char map;
 
+public:
+    int tileSize;
 
     Map(int h, int w);
+    Map(std::string filePath);
     ~Map();
     void saveToFile();
     char getMapSymbol(int i, int j);

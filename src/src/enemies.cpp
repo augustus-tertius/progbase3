@@ -7,7 +7,7 @@ frog::frog(float x, float y): Enemy( "frog", x, y, 128, 128, 20, 4){
     state = stand;
 }
 
-void frog::update (float timePassed) {
+void frog::update (float timePassed, Map map) {
     if(onGround){
         if(moveTimer > 2000){
             moveTimer = 0;
@@ -27,10 +27,10 @@ void frog::update (float timePassed) {
         this->texture.loadFromFile(this->filePath + "frog.png");
     } else {
         x += dx*timePassed;
-		checkCollisionWithMap(dx, 0);
+		checkCollisionWithMap(dx, 0, map);
 
 	    y += dy*timePassed;
-		checkCollisionWithMap(0, dy);
+		checkCollisionWithMap(0, dy, map);
 
         sprite.setPosition(x, y);
 
@@ -56,18 +56,18 @@ void frog::update (float timePassed) {
     // sprite.setScale();
 }
 
-void frog::checkCollisionWithMap(float Dx, float Dy) {
+void frog::checkCollisionWithMap(float Dx, float Dy, Map map) {
 
     if(Dx >= 0 && Dy >= 0) {
-         for (int i = y / 64; i < (y + h/2) / 64; i++) {
-            for (int j = x/ 64; j < (x + w/2) /64; j++) {
-                if (getMapSymbol(i, j) == '0') {
+         for (int i = y / map.tileSize; i < (y + h/2) / map.tileSize; i++) {
+            for (int j = x / map.tileSize; j < (x + w/2) / map.tileSize; j++) {
+                if (map.getMapSymbol(i, j) != '~') {
                     if (Dy > 0) { 
-                        y = i * 64 - h/2;  
+                        y = i * map.tileSize - h/2;  
                         dy = 0; 
                         onGround = true;
                     } else if (Dx > 0){ 
-                        x = j * 64 - w/2; 
+                        x = j * map.tileSize - w/2; 
                         direction = right;
 
                     }
@@ -75,15 +75,15 @@ void frog::checkCollisionWithMap(float Dx, float Dy) {
             }
          }
     } else {
-         for (int i = (y - h/2) / 64; i < y / 64; i++) {
-            for (int j = (x - w/2) / 64; j < x / 64; j++) {
-                if (getMapSymbol(i, j) == '0') {
+         for (int i = (y - h/2) / map.tileSize; i < y / map.tileSize; i++) {
+            for (int j = (x - w/2) / map.tileSize; j < x / map.tileSize; j++) {
+                if (map.getMapSymbol(i, j) != '~') {
                     if (Dy < 0){ 
-                        y = i * 64 + 64 + h/2;  
+                        y = i * map.tileSize + map.tileSize + h/2;  
                         dy = 0; 
                     } else if (Dx < 0){ 
                         direction = left;
-                        x = j * 64 + 64 + w/2; 
+                        x = j * map.tileSize + map.tileSize + w/2; 
                     }
                 }
             }

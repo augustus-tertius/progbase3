@@ -10,7 +10,6 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/august/Documents/projects/progbase3/src/src/gameObj.cpp" "/home/august/Documents/projects/progbase3/src/build/CMakeFiles/sample.dir/src/gameObj.cpp.o"
   "/home/august/Documents/projects/progbase3/src/src/hero.cpp" "/home/august/Documents/projects/progbase3/src/build/CMakeFiles/sample.dir/src/hero.cpp.o"
   "/home/august/Documents/projects/progbase3/src/src/map.cpp" "/home/august/Documents/projects/progbase3/src/build/CMakeFiles/sample.dir/src/map.cpp.o"
-  "/home/august/Documents/projects/progbase3/src/src/view.cpp" "/home/august/Documents/projects/progbase3/src/build/CMakeFiles/sample.dir/src/view.cpp.o"
   "/home/august/Documents/projects/progbase3/src/src/world.cpp" "/home/august/Documents/projects/progbase3/src/build/CMakeFiles/sample.dir/src/world.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

@@ -12,7 +12,7 @@ public:
  
     sf::Sprite getSprite();
     int getDamage();
-    virtual void update(float time) = 0;
+    virtual void update(float time, Map map) = 0;
     void convertVectors();
 };
 

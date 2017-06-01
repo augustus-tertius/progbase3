@@ -7,7 +7,7 @@ class frog :public Enemy {
     public:
 
     frog(float x, float y);
-    void update (float time);
-    void checkCollisionWithMap(float Dx, float Dy);    
+    void update (float time, Map map);
+    void checkCollisionWithMap(float Dx, float Dy, Map map);    
 };
 

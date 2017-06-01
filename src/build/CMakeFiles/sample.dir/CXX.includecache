@@ -34,10 +34,6 @@ SFML/Graphics.hpp
 iostream
 -
 
-../include/view.h
-SFML/Graphics.hpp
--
-
 ../include/world.h
 iostream
 -
@@ -104,11 +100,5 @@ hero.h
 map.h
 -
 
-/home/august/Documents/projects/progbase3/src/src/view.cpp
-view.h
--
-
 /home/august/Documents/projects/progbase3/src/src/world.cpp
-world.h
-/home/august/Documents/projects/progbase3/src/src/world.h
 

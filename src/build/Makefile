@@ -285,33 +285,6 @@ src/map.cpp.s:
 	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/map.cpp.s
 .PHONY : src/map.cpp.s
 
-src/view.o: src/view.cpp.o
-
-.PHONY : src/view.o
-
-# target to build an object file
-src/view.cpp.o:
-	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/view.cpp.o
-.PHONY : src/view.cpp.o
-
-src/view.i: src/view.cpp.i
-
-.PHONY : src/view.i
-
-# target to preprocess a source file
-src/view.cpp.i:
-	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/view.cpp.i
-.PHONY : src/view.cpp.i
-
-src/view.s: src/view.cpp.s
-
-.PHONY : src/view.s
-
-# target to generate assembly for a file
-src/view.cpp.s:
-	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/view.cpp.s
-.PHONY : src/view.cpp.s
-
 src/world.o: src/world.cpp.o
 
 .PHONY : src/world.o
@@ -366,9 +339,6 @@ help:
 	@echo "... src/map.o"
 	@echo "... src/map.i"
 	@echo "... src/map.s"
-	@echo "... src/view.o"
-	@echo "... src/view.i"
-	@echo "... src/view.s"
 	@echo "... src/world.o"
 	@echo "... src/world.i"
 	@echo "... src/world.s"

@@ -26,19 +26,20 @@ using namespace sf;
 // }
 
 void checkCollisionWithEnemies(Hero& hero, std::list <Enemy*>  enemies);
-int generateEnemies(std::list <Enemy*>  &enemies, int prev);
+int generateEnemies(Map map, std::list <Enemy*>  &enemies, int prev);
 
 int main() {
 	RenderWindow window(VideoMode(1200, 900), "sample rendering & gravity");
 
 	View view;
-    view.reset(FloatRect(0, 0, 1500, 900));
+    view.reset(FloatRect(0, 0, 1200, 900));
 
 	Image groundIm;
 	groundIm.loadFromFile("images/tileGreen_03.png");
 	Texture ground;
 	ground.loadFromImage(groundIm);
 
+	Map map(30, 100);
 	Hero h(2000, 400, 66, 93, "Player"); //объект класса игрока
 	
 	sf::CircleShape shape(1.f);  // точка, которая указывает текущие координаты персонажа
@@ -63,7 +64,7 @@ int main() {
 				if (event.type == sf::Event::Closed)
 					window.close();	
 			}		
-			h.update(time);
+			h.update(time, map);
 
 			// setView(p.getX(), p.getY(), view);
 			view.setCenter(h.getX(), h.getY());
@@ -73,21 +74,22 @@ int main() {
 			
 			Sprite s_map;
 
-			for (int i = 0; i < getMapHeight(); i++) {
-				for (int j = 0; j < getMapWidth(); j++) {
-					if (getMapSymbol(i, j) != ' ') {
-						if (getMapSymbol(i, j) == '0'){
+			for (int i = 0; i < map.getMapHeight(); i++) {
+				for (int j = 0; j < map.getMapWidth(); j++) {
+					if (map.getMapSymbol(i, j) != '~') {
+						if (map.getMapSymbol(i, j) == '0'){
 							s_map.setTexture(ground);
 						}
-						s_map.setPosition(j * 64, i * 64);
+						s_map.setPosition(j * map.tileSize, i * map.tileSize);
 						window.draw(s_map);
 					} 
 				}
 			}
 
-			generated = generateEnemies(enemies, generated);
+			generated = generateEnemies(map, enemies, generated);
+
 			for (auto it = enemies.begin(); it != enemies.end(); it++){
-				(*it)->update(time);
+				(*it)->update(time, map);
 				// delete enemy if it`s far away ?
 				window.draw((*it)->getSprite()); 
 			}
@@ -128,7 +130,7 @@ void checkCollisionWithEnemies(Hero& hero, std::list <Enemy*>  enemies) {
 	}
 }
 
-int generateEnemies(std::list <Enemy*>  &enemies, int prev){
+int generateEnemies(Map map, std::list <Enemy*>  &enemies, int prev){
 	srand(time(NULL));
 	int probability = rand()%500;
 
@@ -136,13 +138,11 @@ int generateEnemies(std::list <Enemy*>  &enemies, int prev){
 		if(probability >= 5 && enemies.size() < 10){
 			// then gererate random enemy
 
-			int x = rand() % getMapWidth();
-			int y = rand() % getMapHeight();
-			std::cout << " generated position: " << x << " " << y << std::endl; 
+			int x = rand() % map.getMapWidth();
+			int y = rand() % map.getMapHeight();
 
-			if(getMapSymbol(x, y) == ' '){
-				enemies.push_back(new frog(x*64, y*64));
-				std::cout << " enemy generated "  << x*64 << " " << y*64 << std::endl; 
+			if(map.getMapSymbol(x, y) == '~'){
+				enemies.push_back(new frog(x*map.tileSize, y*map.tileSize));
 			}
 		}
 	}

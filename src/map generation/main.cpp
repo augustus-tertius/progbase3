@@ -22,8 +22,8 @@ void generateNoize(float** matrix, int w, int h);
 
 int main(void){
     // !!! pre-condition: h и w должны делиться на 10 без остатка; h должно делиться ещё и на 3
-    int h = 60;
-    int w = 200;
+    int h = 30;
+    int w = 100;
 
     char** map = new char*[h];
 
