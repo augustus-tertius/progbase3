@@ -1,13 +1,14 @@
 #include <SFML/Graphics.hpp>
 #include "gameObj.h" 
 #include <hero.h>
-// #include "map.h"
+#include "map.h"
 // #include "view.h"
 
 #define DEFAULT_MAX_HEALTH 50
 
 
 using namespace sf;
+using namespace std;
 
 Hero::Hero(float X, float Y, int W, int H, std::string Name) :GameObj(){
     // sprite.setOrigin(w / 2, h / 2);
@@ -116,7 +117,7 @@ void Hero::updateShield(float timePassed){
     }
 }
 
-void Hero::update(float timePassed, Map map) {
+void Hero::update(float timePassed, Map &map) {
         
 	    control(timePassed);
 
@@ -125,6 +126,7 @@ void Hero::update(float timePassed, Map map) {
 
 	    y += dy*timePassed;
 		checkCollisionWithMap(0, dy, map);
+
 
         sprite.setPosition(x - w / 2, y - h / 2);
 
@@ -140,37 +142,51 @@ void Hero::update(float timePassed, Map map) {
         }
 } 
 
-void Hero::checkCollisionWithMap(float Dx, float Dy, Map map) {
+void Hero::checkCollisionWithMap(float Dx, float Dy, Map &map) {
     bool colision = false;  
 
-    if(Dx >= 0 && Dy >= 0) {
-         for (int i = y / map.tileSize; i < (y + h/2) / map.tileSize; i++) {
-            for (int j = x / map.tileSize; j < (x + w/2) / map.tileSize; j++) {
-                if (map.getMapSymbol(i, j) != '~') {
-                    if (Dy > 0) { 
+    if(Dx == 0){
+         if(Dy > 0) {
+            for (int i = y / map.tileSize; i < (y + h/2) / map.tileSize; i++) {
+                for (int j = (x - w/2) / map.tileSize; j < (x + w/2) / map.tileSize; j++) {
+                    if (map.getMapSymbol(i, j) != '~') {
                         y = i * map.tileSize - h/2;  
                         dy = 0; 
                         onGround = true;
                         colision = true;
-                    } else if (Dx > 0){ 
-                        x = j * map.tileSize - w/2; 
                     }
                 }
             }
-         }
+        } else {
+            for (int i = (y - h/2) / map.tileSize; i < y / map.tileSize; i++) {
+                    for (int j = (x - w/2) / map.tileSize; j < (x + w/2) / map.tileSize; j++) {
+                        if (map.getMapSymbol(i, j) != '~') {
+                            y = i * map.tileSize + map.tileSize + h/2;  
+                            dy = 0; 
+                        }
+                    }
+                }
+        }
     } else {
-         for (int i = (y - h/2) / map.tileSize; i < y / map.tileSize; i++) {
-            for (int j = (x - w/2) / map.tileSize; j < x / map.tileSize; j++) {
-                if (map.getMapSymbol(i, j) != '~') {
-                    if (Dy < 0){ 
-                        y = i * map.tileSize + map.tileSize + h/2;  
-                        dy = 0; 
-                    } else if (Dx < 0){ 
-                        x = j * map.tileSize + map.tileSize + w/2; 
+         if(Dx > 0) {
+            for (int i = (y - h/2) / map.tileSize; i < (y + h/2) / map.tileSize; i++) {
+                for (int j = x / map.tileSize; j < (x + w/2) / map.tileSize; j++) {
+                    if (map.getMapSymbol(i, j) != '~') {
+                         x = j * map.tileSize - w/2; 
+                         dx = 0;
                     }
                 }
             }
-         }
+        } else {
+            for (int i = (y - h/2) / map.tileSize; i < (y + h/2) / map.tileSize; i++) {
+                for (int j = (x - w/2) / map.tileSize; j < x / map.tileSize; j++) {
+                    if (map.getMapSymbol(i, j) != '~') {
+                        x = j * map.tileSize + map.tileSize + w/2;  
+                        dx = 0;
+                    }
+                }
+            }
+        }
     }
 
     onGround = colision;

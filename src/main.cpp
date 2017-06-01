@@ -40,7 +40,8 @@ int main() {
 	ground.loadFromImage(groundIm);
 
 	Map map(30, 100);
-	Hero h(2000, 400, 66, 93, "Player"); //объект класса игрока
+	// count spawn coordinates
+	Hero h(200, 200, 66, 93, "Player"); //объект класса игрока
 	
 	sf::CircleShape shape(1.f);  // точка, которая указывает текущие координаты персонажа
 	shape.setFillColor(sf::Color::Red); 
@@ -64,7 +65,9 @@ int main() {
 				if (event.type == sf::Event::Closed)
 					window.close();	
 			}		
+
 			h.update(time, map);
+			// std::cout << "x = " << h.getX() << " y = " << h.getY() << std::endl;
 
 			// setView(p.getX(), p.getY(), view);
 			view.setCenter(h.getX(), h.getY());
@@ -77,23 +80,33 @@ int main() {
 			for (int i = 0; i < map.getMapHeight(); i++) {
 				for (int j = 0; j < map.getMapWidth(); j++) {
 					if (map.getMapSymbol(i, j) != '~') {
-						if (map.getMapSymbol(i, j) == '0'){
-							s_map.setTexture(ground);
-						}
+						if (map.getMapSymbol(i, j) == 'g'){
+							s_map.setTexture(map.tiles.groundTex);
+						} else if(map.getMapSymbol(i, j) == 's'){
+							s_map.setTexture(map.tiles.stoneTex);
+						} else if(map.getMapSymbol(i, j) == 'm') {
+							s_map.setTexture(map.tiles.cakeTex);
+						} else if(map.getMapSymbol(i, j) == 'z') {
+							s_map.setTexture(map.tiles.sandTex);
+						} else if(map.getMapSymbol(i, j) != '0'){
+							s_map.setTexture(map.tiles.snowTex);
+						} 
+
 						s_map.setPosition(j * map.tileSize, i * map.tileSize);
 						window.draw(s_map);
 					} 
 				}
 			}
 
-			generated = generateEnemies(map, enemies, generated);
+			//generated = generateEnemies(map, enemies, generated);
 
 			for (auto it = enemies.begin(); it != enemies.end(); it++){
 				(*it)->update(time, map);
 				// delete enemy if it`s far away ?
 				window.draw((*it)->getSprite()); 
 			}
-			std::cout << enemies.size() << std::endl;
+			
+			shape.setPosition(h.getX(), h.getY());
 
 			checkCollisionWithEnemies(h, enemies);
 
@@ -125,7 +138,7 @@ void checkCollisionWithEnemies(Hero& hero, std::list <Enemy*>  enemies) {
 			int damage = (*it)->getDamage();
 			hero.reduceHealth(damage);
 			hero.setShield(1500);
-			std::cout << hero.curHealth << " / " << hero.maxHealth << std::endl;
+			// std::cout << hero.curHealth << " / " << hero.maxHealth << std::endl;
 		}
 	}
 }

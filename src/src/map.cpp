@@ -21,6 +21,27 @@ void gridOfRandomVectors(Vector** grid, int w, int h);
 float Noise(float fx, float fy, Vector** grid);
 void generateNoize(float** matrix, int w, int h);
 
+mapTiles::mapTiles(){
+    sf::Image cur;
+    cur.loadFromFile("images/tiles/grassCenter.png");
+    groundTex.loadFromImage(cur);
+
+    cur.loadFromFile("images/tiles/stoneCenter.png");
+    stoneTex.loadFromImage(cur);
+
+    cur.loadFromFile("images/tiles/snowCenter.png");
+    snowTex.loadFromImage(cur);
+
+    cur.loadFromFile("images/tiles/chocoCenter.png");
+    chocoTex.loadFromImage(cur);
+
+    cur.loadFromFile("images/tiles/sandCenter.png");
+    sandTex.loadFromImage(cur);
+
+    cur.loadFromFile("images/tiles/cakeCenter.png");
+    cakeTex.loadFromImage(cur);
+}
+
 
 Map::Map(int h, int w){
     map = new char* [h];
@@ -33,11 +54,13 @@ Map::Map(int h, int w){
     width = w;
 
     generateMap(h, w, map);
+    tiles = mapTiles();
 
     tileSize = 64;
 }
 
 Map::~Map(){
+
     for(int i = 0; i < height; i++){
         delete map[i];
     }
@@ -45,6 +68,8 @@ Map::~Map(){
 }
 
 char Map::getMapSymbol(int i, int j){
+    // std::cout << "requested symbol in position " << i << " " << j << std::endl;
+    
     if(i < height && i >= 0 && j < width && j >= 0) {
         return map[i][j];
     } else {
@@ -114,6 +139,16 @@ void generateMap(int h, int w, char** map){
                 map[i][j] = 'g';
             }
         }
+    }
+
+    for(int j = 0; j < w; j++){
+        map[0][j] = '0';
+        map[h-1][0] = '0';
+    }
+
+    for(int i = 0; i < h; i++){
+        map[i][0] = '0';
+        map[i][w - 1] = '0';
     }
 
     for(int i = 0; i < h; i++){

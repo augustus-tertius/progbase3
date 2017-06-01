@@ -2,15 +2,29 @@
 #define MAP
 
 #include <iostream>
+#include <SFML/Graphics.hpp>
+
+class mapTiles{
+public:
+    sf::Texture groundTex;
+    sf::Texture stoneTex;
+    sf::Texture snowTex;
+    sf::Texture chocoTex;
+    sf::Texture sandTex;
+    sf::Texture cakeTex;
+
+    mapTiles();
+};
 
 class Map {
     std::string filePath;
 
     int height;
     int width;
-    char map;
+    char** map;
 
 public:
+    mapTiles tiles;
     int tileSize;
 
     Map(int h, int w);
