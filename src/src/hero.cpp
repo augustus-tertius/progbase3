@@ -211,7 +211,7 @@ void Hero::animation(float timePassed){
             break;
         case walk:
             onGround = true; // полностью убирает мигания персонажа при ходьбе из-за проверки падения 
-            switch((int)curFrame){
+            switch((int)curFrame) {
             case 2:
             case 0:
                 this->texture.loadFromFile(this->filePath + "walk_1.png");

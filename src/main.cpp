@@ -39,9 +39,10 @@ int main() {
 	Texture ground;
 	ground.loadFromImage(groundIm);
 
-	Map map(30, 100);
+	Map map(120, 500);
 	// count spawn coordinates
-	Hero h(200, 200, 66, 93, "Player"); //объект класса игрока
+
+	Hero h(map.height/2 * tileSize, 200, 66, 93, "Player"); //объект класса игрока
 	
 	sf::CircleShape shape(1.f);  // точка, которая указывает текущие координаты персонажа
 	shape.setFillColor(sf::Color::Red); 
@@ -80,17 +81,20 @@ int main() {
 			for (int i = 0; i < map.getMapHeight(); i++) {
 				for (int j = 0; j < map.getMapWidth(); j++) {
 					if (map.getMapSymbol(i, j) != '~') {
-						if (map.getMapSymbol(i, j) == 'g'){
-							s_map.setTexture(map.tiles.groundTex);
+						if (map.getMapSymbol(i, j) == 'm'){
+							s_map.setTexture(map.tiles.snowTex);
 						} else if(map.getMapSymbol(i, j) == 's'){
 							s_map.setTexture(map.tiles.stoneTex);
-						} else if(map.getMapSymbol(i, j) == 'm') {
+						} else if(map.getMapSymbol(i, j) == 'c') {
 							s_map.setTexture(map.tiles.cakeTex);
 						} else if(map.getMapSymbol(i, j) == 'z') {
 							s_map.setTexture(map.tiles.sandTex);
 						} else if(map.getMapSymbol(i, j) != '0'){
-							s_map.setTexture(map.tiles.snowTex);
+							s_map.setTexture(map.tiles.groundTex);
 						} 
+						
+						float scale = (float)map.tileSize / (float)s_map.getTextureRect().width;
+						s_map.setScale(scale, scale);
 
 						s_map.setPosition(j * map.tileSize, i * map.tileSize);
 						window.draw(s_map);

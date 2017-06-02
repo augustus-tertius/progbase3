@@ -111,19 +111,17 @@ void generateMap(int h, int w, char** map){
         for (int j = 0; j < w; j++) {
             if(map[i - 1][j] != '~'){
                 if(matrix[i - h/3][j] < -0.4) {
-                    map[i - 1][j] = 'i';
+                    map[i - 1][j] = 's';
                 } else if(matrix[i - h/3][j] < -0.2){
                     map[i - 1][j] = 'z';
-                } else if(matrix[i - h/3][j] < 0){
-                    map[i - 1][j] = 's';
-                } else if(matrix[i - h/3][j] < 0.1){
-                    map[i - 1][j] = 'g';
+                } else if(matrix[i - h/3][j] < -0.1){
+                    map[i - 1][j] = 'i';
                 } else if(matrix[i - h/3][j] < 0.2){
-                    map[i - 1][j] = 'r';
+                    map[i - 1][j] = 'm';
                 } else if(matrix[i - h/3][j] < 0.3){
                     map[i - 1][j] = 'u';
                 } else if(matrix[i - h/3][j] < 0.4){
-                    map[i - 1][j] = 'm';
+                    map[i - 1][j] = 'e';
                 } else if(matrix[i - h/3][j] < 0.6){
                     map[i - 1][j] = 'z';
                 } else {
@@ -139,6 +137,13 @@ void generateMap(int h, int w, char** map){
                 map[i][j] = 'g';
             }
         }
+    }
+
+    for(int i = 0; i < h; i++){
+        for(int j = 0; j < w; j++){
+            cout << map[i][j];
+        }
+        cout << endl;
     }
 
     for(int j = 0; j < w; j++){
