@@ -56,7 +56,7 @@ Map::Map(int h, int w){
     generateMap(h, w, map);
     tiles = mapTiles();
 
-    tileSize = 64;
+    tileSize = 32;
 }
 
 Map::~Map(){

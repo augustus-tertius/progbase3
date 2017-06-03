@@ -25,8 +25,9 @@ using namespace sf;
 // 	return 0;
 // }
 
+void renderMap(sf::RenderWindow &window, View &view ,Map &map);
 void checkCollisionWithEnemies(Hero& hero, std::list <Enemy*>  enemies);
-int generateEnemies(Map map, std::list <Enemy*>  &enemies, int prev);
+int generateEnemies(Map &map, std::list <Enemy*>  &enemies, int prev);
 
 int main() {
 	RenderWindow window(VideoMode(1200, 900), "sample rendering & gravity");
@@ -39,17 +40,17 @@ int main() {
 	Texture ground;
 	ground.loadFromImage(groundIm);
 
-	Map map(120, 500);
+	Map map(30, 100);
 	// count spawn coordinates
 
-	Hero h(map.height/2 * tileSize, 200, 66, 93, "Player"); //объект класса игрока
+	Hero h(200, 200, 66, 93, "Player", "images/main hero/Green/Zeta/"); //объект класса игрока
 	
 	sf::CircleShape shape(1.f);  // точка, которая указывает текущие координаты персонажа
 	shape.setFillColor(sf::Color::Red); 
 
 	std::list <Enemy*>  enemies;
-	// enemies.push_back(new frog(2000, 300));
-	// enemies.push_back(new frog(1000, 300));
+	// enemies.push_back(new frog(800, 200));
+	// enemies.push_back(new frog(100, 200));
 	// frog* e = new frog(2000, 400);
 	int generated = 0;
 
@@ -76,31 +77,32 @@ int main() {
 			
 			window.clear();
 			
-			Sprite s_map;
+			renderMap(window, view, map);
+			// Sprite s_map;
 
-			for (int i = 0; i < map.getMapHeight(); i++) {
-				for (int j = 0; j < map.getMapWidth(); j++) {
-					if (map.getMapSymbol(i, j) != '~') {
-						if (map.getMapSymbol(i, j) == 'm'){
-							s_map.setTexture(map.tiles.snowTex);
-						} else if(map.getMapSymbol(i, j) == 's'){
-							s_map.setTexture(map.tiles.stoneTex);
-						} else if(map.getMapSymbol(i, j) == 'c') {
-							s_map.setTexture(map.tiles.cakeTex);
-						} else if(map.getMapSymbol(i, j) == 'z') {
-							s_map.setTexture(map.tiles.sandTex);
-						} else if(map.getMapSymbol(i, j) != '0'){
-							s_map.setTexture(map.tiles.groundTex);
-						} 
+			// for (int i = view.getCenter.x - view.getSize.x - 5*map.tileSize; i < view.getCenter.x + view.getSize.x + 5*map.tileSize && i < map.width; i++) {
+			// 	for (int j = 0; j < map.getMapWidth(); j++) {
+			// 		if (map.getMapSymbol(i, j) != '~') {
+			// 			if (map.getMapSymbol(i, j) == 'm'){
+			// 				s_map.setTexture(map.tiles.snowTex);
+			// 			} else if(map.getMapSymbol(i, j) == 's'){
+			// 				s_map.setTexture(map.tiles.stoneTex);
+			// 			} else if(map.getMapSymbol(i, j) == 'c') {
+			// 				s_map.setTexture(map.tiles.cakeTex);
+			// 			} else if(map.getMapSymbol(i, j) == 'z') {
+			// 				s_map.setTexture(map.tiles.sandTex);
+			// 			} else if(map.getMapSymbol(i, j) != '0'){
+			// 				s_map.setTexture(map.tiles.groundTex);
+			// 			} 
 						
-						float scale = (float)map.tileSize / (float)s_map.getTextureRect().width;
-						s_map.setScale(scale, scale);
+			// 			float scale = (float)map.tileSize / (float)s_map.getTextureRect().width;
+			// 			s_map.setScale(scale, scale);
 
-						s_map.setPosition(j * map.tileSize, i * map.tileSize);
-						window.draw(s_map);
-					} 
-				}
-			}
+			// 			s_map.setPosition(j * map.tileSize, i * map.tileSize);
+			// 			window.draw(s_map);
+			// 		} 
+			// 	}
+			// }
 
 			//generated = generateEnemies(map, enemies, generated);
 
@@ -126,10 +128,66 @@ int main() {
 			}
 		}
 	
-		h.reset(2000, 400);
+		h.reset(400, 200);
 	}
 
 	return 0;
+}
+
+void renderMap(sf::RenderWindow &window,View &view, Map &map){
+			Sprite s_map;
+			// int xStart = view.getCenter().x - view.getSize().x;
+			// int xEnd = view.getCenter().x + view.getSize().x;
+			// int yStart = view.getCenter().y - view.getSize().y;
+			// int yEnd = view.getCenter().y + view.getSize().y; 
+			int shift = 3;
+
+			int xStart = (view.getCenter().x - view.getSize().x/2)/map.tileSize - shift;
+			int xEnd = (view.getCenter().x + view.getSize().x/2)/map.tileSize + shift; 
+			int yStart = (view.getCenter().y - view.getSize().y/2)/map.tileSize - shift;
+			int yEnd = (view.getCenter().y + view.getSize().y/2)/map.tileSize + shift;
+
+			if(xStart < 0){
+				xStart = 0;
+			}
+
+			if(yStart < 0){
+				yStart = 0;
+			}
+
+			if(xEnd > map.getMapWidth()){
+				xEnd = map.getMapWidth();
+			}
+			
+			if(yEnd > map.getMapHeight()){
+				yEnd = map.getMapHeight();
+			}
+
+
+			for (int i = yStart; i < yEnd; i++) {
+				for (int j = xStart; j < xEnd; j++) {
+					if (map.getMapSymbol(i, j) != '~') {
+						if (map.getMapSymbol(i, j) == 'm'){
+							s_map.setTexture(map.tiles.snowTex);
+						} else if(map.getMapSymbol(i, j) == 's'){
+							s_map.setTexture(map.tiles.stoneTex);
+						} else if(map.getMapSymbol(i, j) == 'c') {
+							s_map.setTexture(map.tiles.cakeTex);
+						} else if(map.getMapSymbol(i, j) == 'z') {
+							s_map.setTexture(map.tiles.sandTex);
+						} else if(map.getMapSymbol(i, j) != '0'){
+							s_map.setTexture(map.tiles.groundTex);
+						} 
+						
+						float scale = (float)map.tileSize / (float)s_map.getTextureRect().width;
+						s_map.setScale(scale, scale);
+
+						s_map.setPosition(j * map.tileSize, i * map.tileSize);
+						window.draw(s_map);
+					} 
+				}
+			}
+				
 }
 
 void checkCollisionWithEnemies(Hero& hero, std::list <Enemy*>  enemies) {
@@ -147,7 +205,7 @@ void checkCollisionWithEnemies(Hero& hero, std::list <Enemy*>  enemies) {
 	}
 }
 
-int generateEnemies(Map map, std::list <Enemy*>  &enemies, int prev){
+int generateEnemies(Map &map, std::list <Enemy*>  &enemies, int prev){
 	srand(time(NULL));
 	int probability = rand()%500;
 

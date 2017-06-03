@@ -6,6 +6,18 @@
 #include "map.h"
 #include <SFML/Graphics.hpp>
 
+
+class heroTextures {
+public:
+    sf::Texture stand;
+    sf::Texture walk_1;
+    sf::Texture walk_2;
+    sf::Texture jump;
+
+    heroTextures();
+    heroTextures(std::string filePath);
+};
+
 class Hero : public GameObj {
 
     sf::Image image;
@@ -16,13 +28,13 @@ class Hero : public GameObj {
     float curFrame;
     float healTimer;
     float shieldTimer;
-
+    heroTextures ht;
     bool shield;
 
 
     public:
         // Hero(); mb add one later ?
-        Hero(float X, float Y, int W, int H, std::string Name);
+        Hero(float X, float Y, int W, int H, std::string Name, std::string filePath);
         void control (float timePassed);
         void update(float timePassed, Map &map);
 
