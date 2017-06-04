@@ -285,33 +285,6 @@ src/map.cpp.s:
 	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/map.cpp.s
 .PHONY : src/map.cpp.s
 
-src/world.o: src/world.cpp.o
-
-.PHONY : src/world.o
-
-# target to build an object file
-src/world.cpp.o:
-	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/world.cpp.o
-.PHONY : src/world.cpp.o
-
-src/world.i: src/world.cpp.i
-
-.PHONY : src/world.i
-
-# target to preprocess a source file
-src/world.cpp.i:
-	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/world.cpp.i
-.PHONY : src/world.cpp.i
-
-src/world.s: src/world.cpp.s
-
-.PHONY : src/world.s
-
-# target to generate assembly for a file
-src/world.cpp.s:
-	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/world.cpp.s
-.PHONY : src/world.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -339,9 +312,6 @@ help:
 	@echo "... src/map.o"
 	@echo "... src/map.i"
 	@echo "... src/map.s"
-	@echo "... src/world.o"
-	@echo "... src/world.i"
-	@echo "... src/world.s"
 .PHONY : help
 
 

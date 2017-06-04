@@ -61,7 +61,6 @@ int main() {
 				checkCollisionWithEnemies(h, enemies);
 
 				window.draw(h.getSprite());
-				window.draw(shape);
 				window.display();
 
 				if(!window.isOpen()){
@@ -158,8 +157,18 @@ int generateEnemies(View &view, Map &map, std::list <Enemy*>  &enemies, int prev
 			int y = rand() % map.getMapHeight();
 
 			if(map.getMapSymbol(y, x) == '~'){
-				cout << " new enemy in position " << x*map.tileSize << " " << y*map.tileSize << endl;
-				enemies.push_back(new frog(x*map.tileSize, y*map.tileSize));
+				int shift = 3;
+
+				int xStart = (view.getCenter().x - view.getSize().x/2)/map.tileSize - shift;
+				int xEnd = (view.getCenter().x + view.getSize().x/2)/map.tileSize + shift; 
+				int yStart = (view.getCenter().y - view.getSize().y/2)/map.tileSize - shift;
+				int yEnd = (view.getCenter().y + view.getSize().y/2)/map.tileSize + shift;
+
+				if(!(x > xStart && x < xEnd)){
+					// we don`t generate enemies in the visible zone
+					cout << " new enemy in position " << x*map.tileSize << " " << y*map.tileSize << endl;
+					enemies.push_back(new frog(x*map.tileSize, y*map.tileSize));
+				}
 			}
 		}
 	}

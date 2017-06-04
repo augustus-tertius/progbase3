@@ -16,11 +16,6 @@
 },
 {
   "directory": "/home/august/Documents/projects/progbase3/src/build",
-  "command": "/usr/bin/c++    -I/home/august/Documents/projects/progbase3/src/include -I/usr/include/SFML  -g   -std=c++11 -o CMakeFiles/sample.dir/src/world.cpp.o -c /home/august/Documents/projects/progbase3/src/src/world.cpp",
-  "file": "/home/august/Documents/projects/progbase3/src/src/world.cpp"
-},
-{
-  "directory": "/home/august/Documents/projects/progbase3/src/build",
   "command": "/usr/bin/c++    -I/home/august/Documents/projects/progbase3/src/include -I/usr/include/SFML  -g   -std=c++11 -o CMakeFiles/sample.dir/src/hero.cpp.o -c /home/august/Documents/projects/progbase3/src/src/hero.cpp",
   "file": "/home/august/Documents/projects/progbase3/src/src/hero.cpp"
 },

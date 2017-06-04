@@ -7,7 +7,6 @@ CMakeFiles/sample.dir/main.cpp.o
  ../include/gameObj.h
  ../include/hero.h
  ../include/map.h
- ../include/world.h
  /home/august/Documents/projects/progbase3/src/main.cpp
 CMakeFiles/sample.dir/src/enemies.cpp.o
  /home/august/Documents/projects/progbase3/src/include/enemies.h
@@ -31,5 +30,3 @@ CMakeFiles/sample.dir/src/hero.cpp.o
 CMakeFiles/sample.dir/src/map.cpp.o
  ../include/map.h
  /home/august/Documents/projects/progbase3/src/src/map.cpp
-CMakeFiles/sample.dir/src/world.cpp.o
- /home/august/Documents/projects/progbase3/src/src/world.cpp
