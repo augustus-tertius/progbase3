@@ -27,7 +27,8 @@ using namespace std;
 
 void renderMap(sf::RenderWindow &window, View &view ,Map &map);
 void checkCollisionWithEnemies(Hero& hero, std::list <Enemy*>  enemies);
-int generateEnemies(Map &map, std::list <Enemy*>  &enemies, int prev);
+int generateEnemies(View &view, Map &map, std::list <Enemy*>  &enemies, int prev);
+void drawEnemies(RenderWindow &window, View &view, Map &map, std::list <Enemy*>  &enemies, float time);
 
 int main() {
 	RenderWindow window(VideoMode(1200, 900), "sample rendering & gravity");
@@ -72,27 +73,26 @@ int main() {
 			
 			renderMap(window, view, map);
 
-			generated = generateEnemies(map, enemies, generated);
+			generated = generateEnemies(view, map, enemies, generated);
+			
+			drawEnemies(window, view, map, enemies, time);
+			// for (auto it = enemies.begin(); it != enemies.end(); it++){
+			// 	(*it)->update(time, map);
+			// 	// delete enemy if it`s far away ?
+			// 	Sprite curS = (*it)->getSprite();
 
-			for (auto it = enemies.begin(); it != enemies.end(); it++){
-				(*it)->update(time, map);
-				// delete enemy if it`s far away ?
-				Sprite curS = (*it)->getSprite();
+			// 	// // checking, if enemy is currently visible 
+			// 	int shift = 3;
 
-				// // checking, if enemy is currently visible 
-				int shift = 3;
+			// 	int xStart = (view.getCenter().x - view.getSize().x/2)/map.tileSize - shift;
+			// 	int xEnd = (view.getCenter().x + view.getSize().x/2)/map.tileSize + shift; 
+			// 	int yStart = (view.getCenter().y - view.getSize().y/2)/map.tileSize - shift;
+			// 	int yEnd = (view.getCenter().y + view.getSize().y/2)/map.tileSize + shift;
 
-				int xStart = (view.getCenter().x - view.getSize().x/2)/map.tileSize - shift;
-				int xEnd = (view.getCenter().x + view.getSize().x/2)/map.tileSize + shift; 
-				int yStart = (view.getCenter().y - view.getSize().y/2)/map.tileSize - shift;
-				int yEnd = (view.getCenter().y + view.getSize().y/2)/map.tileSize + shift;
-
-				// cout << xStart << " < " << curS.getPosition().x/ << " < " << xEnd << "    " << yStart << " < " << curS.getPosition().y << " < " << yEnd << endl;
-				if(curS.getPosition().x/map.tileSize > xStart && curS.getPosition().x/map.tileSize  < xEnd && curS.getPosition().y/map.tileSize  > yStart && curS.getPosition().y/map.tileSize  < yEnd){
-					window.draw(curS); 
-				}
-				// window.draw(curS);
-			}
+			// 	if(curS.getPosition().x/map.tileSize > xStart && curS.getPosition().x/map.tileSize  < xEnd && curS.getPosition().y/map.tileSize  > yStart && curS.getPosition().y/map.tileSize  < yEnd){
+			// 		window.draw(curS); 
+			// 	}
+			// }
 			
 			shape.setPosition(h.getX(), h.getY());
 
@@ -183,7 +183,7 @@ void checkCollisionWithEnemies(Hero& hero, std::list <Enemy*>  enemies) {
 	}
 }
 
-int generateEnemies(Map &map, std::list <Enemy*>  &enemies, int prev){
+int generateEnemies(View &view, Map &map, std::list <Enemy*>  &enemies, int prev){
 	srand(time(NULL));
 	int probability = rand()%500;
 
@@ -202,6 +202,26 @@ int generateEnemies(Map &map, std::list <Enemy*>  &enemies, int prev){
 	}
 
 	return probability;
+}
+
+void drawEnemies(RenderWindow &window, View &view, Map &map, std::list <Enemy*>  &enemies, float time){
+	for (auto it = enemies.begin(); it != enemies.end(); it++){
+		(*it)->update(time, map);
+				// delete enemy if it`s far away ?
+		Sprite curS = (*it)->getSprite();
+
+				// // checking, if enemy is currently visible 
+		int shift = 3;
+
+		int xStart = (view.getCenter().x - view.getSize().x/2)/map.tileSize - shift;
+		int xEnd = (view.getCenter().x + view.getSize().x/2)/map.tileSize + shift; 
+		int yStart = (view.getCenter().y - view.getSize().y/2)/map.tileSize - shift;
+		int yEnd = (view.getCenter().y + view.getSize().y/2)/map.tileSize + shift;
+
+		if(curS.getPosition().x/map.tileSize > xStart && curS.getPosition().x/map.tileSize  < xEnd && curS.getPosition().y/map.tileSize  > yStart && curS.getPosition().y/map.tileSize  < yEnd){
+			window.draw(curS); 
+		}
+	}
 }
 
 // void setView(float x, float y, View view) { 

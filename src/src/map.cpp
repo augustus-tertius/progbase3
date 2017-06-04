@@ -111,9 +111,9 @@ void generateMap(int h, int w, char** map){
         for (int j = 0; j < w; j++) {
             if(map[i - 1][j] != '~'){
                 if(matrix[i - h/3][j] < -0.4) {
-                    map[i - 1][j] = 's';
-                } else if(matrix[i - h/3][j] < -0.2){
                     map[i - 1][j] = 'z';
+                } else if(matrix[i - h/3][j] < -0.2){
+                    map[i - 1][j] = 's';
                 } else if(matrix[i - h/3][j] < -0.1){
                     map[i - 1][j] = 'i';
                 } else if(matrix[i - h/3][j] < 0.2){
