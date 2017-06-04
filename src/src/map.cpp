@@ -148,7 +148,7 @@ void generateMap(int h, int w, char** map){
 
     for(int j = 0; j < w; j++){
         map[0][j] = '0';
-        map[h-1][0] = '0';
+        map[h - 1][j] = '0';
     }
 
     for(int i = 0; i < h; i++){

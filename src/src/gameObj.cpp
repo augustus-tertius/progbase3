@@ -15,7 +15,7 @@ GameObj::GameObj(float X, float Y, int W, int H, std::string Name){
     onGround = true; 
     isMoving = false;
     direction = right;
-	sprite.setOrigin(w / 2, h / 2);
+	// sprite.setOrigin(w / 2, h / 2);
 }
 
 GameObj::GameObj(float X, float Y, int W, int H, int heal, std::string Name){
@@ -35,7 +35,7 @@ GameObj::GameObj(float X, float Y, int W, int H, int heal, std::string Name){
     onGround = true; 
     isMoving = false;
     direction = right;
-	sprite.setOrigin(w / 2, h / 2);
+	// sprite.setOrigin(w / 2, h / 2);
 }
 
  GameObj::GameObj(){

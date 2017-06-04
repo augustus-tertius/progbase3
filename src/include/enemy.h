@@ -4,7 +4,7 @@
 #include "gameObj.h"
 #include "map.h"
 
-class Enemy :public GameObj{
+class Enemy :public GameObj {
     int damage;
     
 public:
@@ -12,7 +12,7 @@ public:
  
     sf::Sprite getSprite();
     int getDamage();
-    virtual void update(float time, Map map) = 0;
+    virtual void update(float time, Map &map) = 0;
     void convertVectors();
 };
 
