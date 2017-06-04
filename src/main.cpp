@@ -2,28 +2,12 @@
 #include <hero.h>
 // #include <enemy.h>
 #include <enemies.h>
-#include <world.h>
 #include <list>
-
 #include <map.h>
-//#include <view.h>
 
-// void setView(float x, float y, View view);
 using namespace sf;
 using namespace std; 
 
-// int main(){
-// 	World w;
-// 	RenderWindow window(VideoMode(640, 480), "sample rendering & gravity");
-
-// 	int opened = 1;
-
-// 	while(opened){
-// 		opened = w.update(window);
-// 	}
-
-// 	return 0;
-// }
 
 void renderMap(sf::RenderWindow &window, View &view ,Map &map);
 void checkCollisionWithEnemies(Hero& hero, std::list <Enemy*>  enemies);
@@ -39,12 +23,8 @@ int main() {
 	// calling for menu
 
 	Map map(120, 500);
-	// count spawn coordinates
-
 	Hero h(200, 200, 66, 93, "Player", "images/main hero/Green/Zeta/"); //объект класса игрока
-	
-	sf::CircleShape shape(1.f);  // точка, которая указывает текущие координаты персонажа
-	shape.setFillColor(sf::Color::Red); 
+
 
 	std::list <Enemy*>  enemies;
 
@@ -52,65 +32,48 @@ int main() {
 
 	Clock clock;
 	while (window.isOpen()) {
-		while(h.getAlive()){
-			float time = clock.getElapsedTime().asMicroseconds();
- 
-			clock.restart();
-			time = time / 800;
-			
-			Event event;
-			while (window.pollEvent(event)) {
-				if (event.type == sf::Event::Closed)
-					window.close();	
-			}		
 
-			h.update(time, map);
+		bool backToMenu = false;
 
-			view.setCenter(h.getX(), h.getY());
-			window.setView(view);
-			
-			window.clear();
-			
-			renderMap(window, view, map);
-
-			generated = generateEnemies(view, map, enemies, generated);
-			
-			drawEnemies(window, view, map, enemies, time);
-			// for (auto it = enemies.begin(); it != enemies.end(); it++){
-			// 	(*it)->update(time, map);
-			// 	// delete enemy if it`s far away ?
-			// 	Sprite curS = (*it)->getSprite();
-
-			// 	// // checking, if enemy is currently visible 
-			// 	int shift = 3;
-
-			// 	int xStart = (view.getCenter().x - view.getSize().x/2)/map.tileSize - shift;
-			// 	int xEnd = (view.getCenter().x + view.getSize().x/2)/map.tileSize + shift; 
-			// 	int yStart = (view.getCenter().y - view.getSize().y/2)/map.tileSize - shift;
-			// 	int yEnd = (view.getCenter().y + view.getSize().y/2)/map.tileSize + shift;
-
-			// 	if(curS.getPosition().x/map.tileSize > xStart && curS.getPosition().x/map.tileSize  < xEnd && curS.getPosition().y/map.tileSize  > yStart && curS.getPosition().y/map.tileSize  < yEnd){
-			// 		window.draw(curS); 
-			// 	}
-			// }
-			
-			shape.setPosition(h.getX(), h.getY());
-
-			checkCollisionWithEnemies(h, enemies);
-
-			window.draw(h.getSprite());
-			window.draw(shape);
-			window.display();
-
-			if(!window.isOpen()){
-				for (auto it = enemies.begin(); it != enemies.end(); it++){
-					delete (*it);
-				}
-				break;
-			}
-		}
+		while(!backToMenu){
+			while(h.getAlive()) {
+				float time = clock.getElapsedTime().asMicroseconds();
 	
-		h.reset(400, 200);
+				clock.restart();
+				time = time / 800;
+				
+				Event event;
+				while (window.pollEvent(event)) {
+					if (event.type == sf::Event::Closed)
+						window.close();	
+				}		
+
+				h.update(time, map);
+
+				view.setCenter(h.getX(), h.getY());
+				window.setView(view);
+				
+				window.clear();
+				renderMap(window, view, map);
+
+				generated = generateEnemies(view, map, enemies, generated);
+				drawEnemies(window, view, map, enemies, time);
+				checkCollisionWithEnemies(h, enemies);
+
+				window.draw(h.getSprite());
+				window.draw(shape);
+				window.display();
+
+				if(!window.isOpen()){
+					for (auto it = enemies.begin(); it != enemies.end(); it++){
+						delete (*it);
+					}
+					break;
+				}
+			}
+		
+			h.reset(400, 200);
+		}
 	}
 
 	return 0;
