@@ -80,17 +80,18 @@ int main() {
 				Sprite curS = (*it)->getSprite();
 
 				// // checking, if enemy is currently visible 
-				// int shift = 3;
+				int shift = 3;
 
-				// int xStart = (view.getCenter().x - view.getSize().x/2)/map.tileSize - shift;
-				// int xEnd = (view.getCenter().x + view.getSize().x/2)/map.tileSize + shift; 
-				// int yStart = (view.getCenter().y - view.getSize().y/2)/map.tileSize - shift;
-				// int yEnd = (view.getCenter().y + view.getSize().y/2)/map.tileSize + shift;
+				int xStart = (view.getCenter().x - view.getSize().x/2)/map.tileSize - shift;
+				int xEnd = (view.getCenter().x + view.getSize().x/2)/map.tileSize + shift; 
+				int yStart = (view.getCenter().y - view.getSize().y/2)/map.tileSize - shift;
+				int yEnd = (view.getCenter().y + view.getSize().y/2)/map.tileSize + shift;
 
-				// if(curS.getPosition().x > xStart && curS.getPosition().x < xEnd && curS.getPosition().y > yStart && curS.getPosition().y < yEnd){
-				// 	window.draw(curS); 
-				// }
-				window.draw(curS);
+				// cout << xStart << " < " << curS.getPosition().x/ << " < " << xEnd << "    " << yStart << " < " << curS.getPosition().y << " < " << yEnd << endl;
+				if(curS.getPosition().x/map.tileSize > xStart && curS.getPosition().x/map.tileSize  < xEnd && curS.getPosition().y/map.tileSize  > yStart && curS.getPosition().y/map.tileSize  < yEnd){
+					window.draw(curS); 
+				}
+				// window.draw(curS);
 			}
 			
 			shape.setPosition(h.getX(), h.getY());
