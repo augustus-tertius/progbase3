@@ -55,6 +55,7 @@ class Hero : public GameObj {
         bool getAlive();
         bool getShield();
 
+        void setAlive(bool a);
 };
 
 #endif

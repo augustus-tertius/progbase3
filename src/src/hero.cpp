@@ -43,6 +43,13 @@ Hero::Hero(float X, float Y, int W, int H, std::string Name, std::string filePat
     shield = false;
 }
 
+void Hero::setAlive(bool a){
+    if(!a){
+        curHealth = 0;
+    }
+    alive = a;
+}
+
 sf::Sprite Hero::getSprite(){
     return this->sprite;
 }

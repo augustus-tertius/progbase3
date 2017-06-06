@@ -13,46 +13,51 @@ void renderMap(sf::RenderWindow &window, View &view ,Map &map);
 void checkCollisionWithEnemies(Hero& hero, std::list <Enemy*>  enemies);
 int generateEnemies(View &view, Map &map, std::list <Enemy*>  &enemies, int prev);
 void drawEnemies(RenderWindow &window, View &view, Map &map, std::list <Enemy*>  &enemies, float time);
+bool menu(sf::RenderWindow &window, string &hero, string &name);
+
 
 int main() {
-	RenderWindow window(VideoMode(1200, 900), "sample rendering & gravity");
+	RenderWindow window(VideoMode(1300, 1000), "sample rendering & gravity");
 
 	View view;
-    view.reset(FloatRect(0, 0, 1200, 900));
+    view.reset(FloatRect(0, 0, 1300, 1000));
 
-	// calling for menu
+	string hero, name;
+	// menu(window, hero, name);
 
 	Map map(120, 500);
 	Hero h(200, 200, 66, 93, "Player", "images/main hero/Green/Zeta/"); //объект класса игрока
-
-
 	std::list <Enemy*>  enemies;
 
 	int generated = 0;
+	bool backToMenu = true;
 
 	Clock clock;
+
 	while (window.isOpen()) {
+		// calling for menu
+		// creating menu and hero using info from menu launching
+		bool play = menu(window, hero, name);
 
-		bool backToMenu = false;
+		if(false == play) {
+			// window.close();
+			backToMenu = true;
+		} else {
+			backToMenu = false;
+		}
 
-		while(!backToMenu){
+		while (!backToMenu) {
 			while(h.getAlive()) {
 				float time = clock.getElapsedTime().asMicroseconds();
-	
+			
 				clock.restart();
 				time = time / 800;
-				
-				Event event;
-				while (window.pollEvent(event)) {
-					if (event.type == sf::Event::Closed)
-						window.close();	
-				}		
 
 				h.update(time, map);
 
 				view.setCenter(h.getX(), h.getY());
 				window.setView(view);
-				
+						
 				window.clear();
 				renderMap(window, view, map);
 
@@ -63,19 +68,121 @@ int main() {
 				window.draw(h.getSprite());
 				window.display();
 
-				if(!window.isOpen()){
+				if (Keyboard::isKeyPressed(Keyboard::M)){
 					for (auto it = enemies.begin(); it != enemies.end(); it++){
+						enemies.remove(*it);
 						delete (*it);
 					}
+					h.setAlive(false);
+					backToMenu = true;
 					break;
 				}
+				
+				Event event;
+				while (window.pollEvent(event)) {
+					if (event.type == sf::Event::Closed) {
+						for (auto it = enemies.begin(); it != enemies.end(); it++){
+							enemies.remove(*it);
+							delete (*it);
+						}
+						h.setAlive(false);
+						backToMenu = true;
+						break;
+					}						
+				}
 			}
-		
-			h.reset(400, 200);
-		}
+
+			if(!backToMenu) {
+				h.reset(400, 200);
+			}
+		}	
 	}
 
+
 	return 0;
+}
+
+bool menu(sf::RenderWindow &window, string &hero, string &name){
+	bool menuOpened = true;
+	string path = "images/menu/";
+
+
+	Texture bgT, voidVoicesT, newGameT, contT, quitT;
+	bgT.loadFromFile(path + "bg.jpg");
+	voidVoicesT.loadFromFile(path + "voidVoices.png");
+	contT.loadFromFile(path + "continue.png");
+	newGameT.loadFromFile(path + "newGame.png");
+	quitT.loadFromFile(path + "endGame.png");
+
+	std::list <Sprite> items;
+
+	Sprite bg(bgT);
+	Sprite voidVoices(voidVoicesT);
+	Sprite newGame(newGameT);
+	Sprite cont(contT);
+	Sprite quit(quitT);
+
+	voidVoices.setPosition(200, 100);
+	newGame.setPosition(200, 400);
+	cont.setPosition(200, 500);
+	quit.setPosition(200, 600);
+
+	items.push_back(newGame);
+	items.push_back(cont);
+	items.push_back(quit);
+
+	// while(menuOpened){
+	while (window.isOpen()) { 
+		for (auto it = items.begin(); it != items.end(); it++){
+			(*it).setColor(Color::White);
+		}
+
+		int counter = 0;
+		int chosen = -1;
+		for (auto it = items.begin(); it != items.end(); it++){
+			if((*it).getGlobalBounds().contains(Mouse::getPosition(window).x, Mouse::getPosition(window).y)){
+				(*it).setColor(Color::Cyan);
+				chosen = counter;
+			}
+			counter++;
+		}
+
+		if (Mouse::isButtonPressed(Mouse::Left)) {
+			switch(chosen){
+			case -1:
+				break;
+			case 0:
+				cout << endl <<  "//////////////asked for new game, loading game" << endl << endl;
+				return true;
+				break;
+			case 1:
+				break;
+			case 2:
+				cout << endl <<  "//////////////asked for quit, closing window" << endl << endl;
+				window.close();
+				return false;
+				break;
+			}
+		}
+		
+
+		window.clear();
+		window.draw(bg);
+		window.draw(voidVoices);
+		for (auto it = items.begin(); it != items.end(); it++){
+			window.draw(*it);
+		}
+		window.display();
+
+		Event event;
+		while (window.pollEvent(event)) {
+			if (event.type == sf::Event::Closed) {
+				window.close();
+				return false;
+				break;
+			}						
+		}
+	}
 }
 
 void renderMap(sf::RenderWindow &window,View &view, Map &map){
@@ -179,10 +286,10 @@ int generateEnemies(View &view, Map &map, std::list <Enemy*>  &enemies, int prev
 void drawEnemies(RenderWindow &window, View &view, Map &map, std::list <Enemy*>  &enemies, float time){
 	for (auto it = enemies.begin(); it != enemies.end(); it++){
 		(*it)->update(time, map);
-				// delete enemy if it`s far away ?
+		// delete enemy if it`s far away ?
 		Sprite curS = (*it)->getSprite();
 
-				// // checking, if enemy is currently visible 
+		// checking, if enemy is currently visible 
 		int shift = 3;
 
 		int xStart = (view.getCenter().x - view.getSize().x/2)/map.tileSize - shift;
@@ -195,14 +302,3 @@ void drawEnemies(RenderWindow &window, View &view, Map &map, std::list <Enemy*> 
 		}
 	}
 }
-
-// void setView(float x, float y, View view) { 
-// 	float tempX = x; 
-//     float tempY = y;
- 
-// 	if (x < 320) tempX = 320; //убираем из вида левую сторону
-// 	if (y < 240) tempY = 240; //верхнюю сторону
-// 	if (y > 554) tempY = 554; //нижнюю сторону	
- 
-// 	view.setCenter(tempX, tempY); //следим за игроком, передавая его координаты. 
-// }

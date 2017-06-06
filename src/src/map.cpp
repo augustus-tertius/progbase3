@@ -139,12 +139,12 @@ void generateMap(int h, int w, char** map){
         }
     }
 
-    for(int i = 0; i < h; i++){
-        for(int j = 0; j < w; j++){
-            cout << map[i][j];
-        }
-        cout << endl;
-    }
+    // for(int i = 0; i < h; i++){
+    //     for(int j = 0; j < w; j++){
+    //         cout << map[i][j];
+    //     }
+    //     cout << endl;
+    // }
 
     for(int j = 0; j < w; j++){
         map[0][j] = '0';
@@ -160,6 +160,8 @@ void generateMap(int h, int w, char** map){
         delete matrix[i];
     }
     delete matrix;
+
+    cout << "map was generated" << endl;
 }
 
 void diamondSquare(int w, int h, char** map) {
