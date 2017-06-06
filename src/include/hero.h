@@ -54,6 +54,8 @@ class Hero : public GameObj {
         float getY();
         bool getAlive();
         bool getShield();
+        int getCurHealth();
+        int getMaxHealth();
 
         void setAlive(bool a);
 };

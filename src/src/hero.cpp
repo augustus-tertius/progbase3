@@ -70,6 +70,14 @@ bool Hero::getShield(){
     return shield;
 }
 
+int Hero::getCurHealth(){
+    return curHealth;
+}
+
+int Hero::getMaxHealth(){
+    return maxHealth;
+}
+
 void Hero::reset(float X, float Y){
     alive = true;
     curHealth = maxHealth;

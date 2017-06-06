@@ -67,6 +67,8 @@ list
 -
 map.h
 -
+sstream
+-
 
 /home/august/Documents/projects/progbase3/src/src/enemies.cpp
 ../include/enemies.h

@@ -5,6 +5,8 @@
 #include <list>
 #include <map.h>
 
+#include <sstream>
+
 using namespace sf;
 using namespace std; 
 
@@ -13,8 +15,9 @@ void renderMap(sf::RenderWindow &window, View &view ,Map &map);
 void checkCollisionWithEnemies(Hero& hero, std::list <Enemy*>  enemies);
 int generateEnemies(View &view, Map &map, std::list <Enemy*>  &enemies, int prev);
 void drawEnemies(RenderWindow &window, View &view, Map &map, std::list <Enemy*>  &enemies, float time);
-bool menu(sf::RenderWindow &window, string &hero, string &name);
 
+bool menu(sf::RenderWindow &window, string &hero, string &name);
+void interface(sf::RenderWindow &window, View &view, Font &font, Hero &hero);
 
 int main() {
 	RenderWindow window(VideoMode(1300, 1000), "sample rendering & gravity");
@@ -23,7 +26,7 @@ int main() {
     view.reset(FloatRect(0, 0, 1300, 1000));
 
 	string hero, name;
-	// menu(window, hero, name);
+	menu(window, hero, name);
 
 	Map map(120, 500);
 	Hero h(200, 200, 66, 93, "Player", "images/main hero/Green/Zeta/"); //объект класса игрока
@@ -34,19 +37,22 @@ int main() {
 
 	Clock clock;
 
+	Font font; 
+ 	font.loadFromFile("files/FFF_Tusj.ttf");
+	
 	while (window.isOpen()) {
 		// calling for menu
 		// creating menu and hero using info from menu launching
-		bool play = menu(window, hero, name);
+		// bool play = menu(window, hero, name);
 
-		if(false == play) {
-			// window.close();
-			backToMenu = true;
-		} else {
-			backToMenu = false;
-		}
+		// if(false == play) {
+		// 	// window.close();
+		// 	backToMenu = true;
+		// } else {
+		// 	backToMenu = false;
+		// }
 
-		while (!backToMenu) {
+		// while (!backToMenu) {
 			while(h.getAlive()) {
 				float time = clock.getElapsedTime().asMicroseconds();
 			
@@ -66,6 +72,7 @@ int main() {
 				checkCollisionWithEnemies(h, enemies);
 
 				window.draw(h.getSprite());
+				interface(window, view, font, h);
 				window.display();
 
 				if (Keyboard::isKeyPressed(Keyboard::M)){
@@ -74,7 +81,7 @@ int main() {
 						delete (*it);
 					}
 					h.setAlive(false);
-					backToMenu = true;
+					window.close();
 					break;
 				}
 				
@@ -86,20 +93,39 @@ int main() {
 							delete (*it);
 						}
 						h.setAlive(false);
-						backToMenu = true;
+						window.close();
 						break;
 					}						
 				}
 			}
 
-			if(!backToMenu) {
-				h.reset(400, 200);
-			}
-		}	
+			// if(!backToMenu) {
+			// 	h.reset(400, 200);
+			// }
+			h.reset(400, 200);
+		// }	
 	}
 
 
 	return 0;
+}
+
+void interface(sf::RenderWindow &window, View &view, Font &font, Hero &hero){
+	RectangleShape upperBar = RectangleShape(sf::Vector2f(view.getSize().x, 60));
+	upperBar.setFillColor(Color(100, 100, 100));
+	upperBar.setPosition(view.getCenter().x - view.getSize().x/2, view.getCenter().y - view.getSize().y/2);
+
+	window.draw(upperBar);
+
+ 	Text health("health: ", font, 46);
+	std::ostringstream HealthStr, MHStr;    
+	HealthStr << hero.getCurHealth();
+	MHStr << hero.getMaxHealth();
+
+	health.setString("health: " + HealthStr.str() + "/" + MHStr.str());
+
+	health.setPosition(view.getCenter().x + view.getSize().x/2 - 350, view.getCenter().y - view.getSize().y/2);
+	window.draw(health);
 }
 
 bool menu(sf::RenderWindow &window, string &hero, string &name){
