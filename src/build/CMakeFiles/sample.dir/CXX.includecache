@@ -67,8 +67,6 @@ list
 -
 map.h
 -
-sstream
--
 
 /home/august/Documents/projects/progbase3/src/src/enemies.cpp
 ../include/enemies.h
@@ -91,8 +89,12 @@ hero.h
 -
 map.h
 /home/august/Documents/projects/progbase3/src/src/map.h
+sstream
+-
 
 /home/august/Documents/projects/progbase3/src/src/map.cpp
 map.h
 -
+
+/home/august/Documents/projects/progbase3/src/src/storage.cpp
 

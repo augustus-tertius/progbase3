@@ -285,6 +285,33 @@ src/map.cpp.s:
 	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/map.cpp.s
 .PHONY : src/map.cpp.s
 
+src/storage.o: src/storage.cpp.o
+
+.PHONY : src/storage.o
+
+# target to build an object file
+src/storage.cpp.o:
+	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/storage.cpp.o
+.PHONY : src/storage.cpp.o
+
+src/storage.i: src/storage.cpp.i
+
+.PHONY : src/storage.i
+
+# target to preprocess a source file
+src/storage.cpp.i:
+	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/storage.cpp.i
+.PHONY : src/storage.cpp.i
+
+src/storage.s: src/storage.cpp.s
+
+.PHONY : src/storage.s
+
+# target to generate assembly for a file
+src/storage.cpp.s:
+	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/storage.cpp.s
+.PHONY : src/storage.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -312,6 +339,9 @@ help:
 	@echo "... src/map.o"
 	@echo "... src/map.i"
 	@echo "... src/map.s"
+	@echo "... src/storage.o"
+	@echo "... src/storage.i"
+	@echo "... src/storage.s"
 .PHONY : help
 
 

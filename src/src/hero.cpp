@@ -2,6 +2,7 @@
 #include "gameObj.h" 
 #include <hero.h>
 #include "map.h"
+#include <sstream>
 // #include "view.h"
 
 #define DEFAULT_MAX_HEALTH 50
@@ -62,6 +63,14 @@ float Hero::getY(){
     return this->y;
 }
 
+int Hero::getH(){
+    return h;
+}
+
+int Hero::getW(){
+    return w;
+}
+
 bool Hero::getAlive(){
     return alive;
 }
@@ -76,6 +85,15 @@ int Hero::getCurHealth(){
 
 int Hero::getMaxHealth(){
     return maxHealth;
+}
+
+std::string Hero::getHealthStr(){
+    std::ostringstream HealthStr, MHStr;    
+	HealthStr << curHealth;
+	MHStr << maxHealth;
+
+	string res = "health: " + HealthStr.str() + "/" + MHStr.str();
+    return res;
 }
 
 void Hero::reset(float X, float Y){

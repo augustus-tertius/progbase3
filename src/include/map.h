@@ -30,6 +30,7 @@ public:
     Map(int h, int w);
     Map(std::string filePath);
     ~Map();
+    void renderChanges(int xCent, int yCent, int MousePosX, int MousePosY, int tileSize);
     void saveToFile();
     char getMapSymbol(int i, int j);
     int getMapHeight();

@@ -52,10 +52,13 @@ class Hero : public GameObj {
         sf::Sprite getSprite();        
         float getX();
         float getY();
+        int getH();
+        int getW();
         bool getAlive();
         bool getShield();
         int getCurHealth();
         int getMaxHealth();
+        std::string getHealthStr();
 
         void setAlive(bool a);
 };

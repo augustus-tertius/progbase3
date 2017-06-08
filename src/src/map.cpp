@@ -85,7 +85,36 @@ int Map::getMapWidth() {
     return width;
 }
 
+void Map::renderChanges(int xCent, int yCent, int MousePosX, int MousePosY, int tileSize){
+    cout << "entered render func" << endl;
 
+    int shift = 3;
+    int correction = 5;
+    int i = MousePosY/tileSize + correction;
+    int j = MousePosX/tileSize;
+    int cX = xCent/tileSize;
+    int cY = yCent/tileSize;
+
+    cout << "i: " <<  cY - shift << " /" << i << " /" << cY + shift << endl;
+    cout << "j: " << cX - shift << " /" << j << " /" << cX + shift << endl;
+    // cout << "map symbol is '" << map[i][j] << "'" << endl;
+
+    if(i >= cY - shift && i <= cY + shift) {
+        cout << " y is suitable  " << endl;
+        if(j >= cX - shift && j <= cX + shift) {
+            cout << " x is suitable  " << endl;
+            // обработка взаимодействия с картой 
+            cout << "map is to be changed" << endl;
+            if(map[i][j] != '0'){
+                if(map[i][j] != '~'){
+                    map[i][j] = '~';
+                    cout << "now it is '" << map[i][j] << "'" << endl;
+                }
+            }
+        }
+    }
+
+}
 
 
 void generateMap(int h, int w, char** map){
@@ -139,12 +168,12 @@ void generateMap(int h, int w, char** map){
         }
     }
 
-    // for(int i = 0; i < h; i++){
-    //     for(int j = 0; j < w; j++){
-    //         cout << map[i][j];
-    //     }
-    //     cout << endl;
-    // }
+    for(int i = 0; i < h; i++){
+        for(int j = 0; j < w; j++){
+            cout << map[i][j];
+        }
+        cout << endl;
+    }
 
     for(int j = 0; j < w; j++){
         map[0][j] = '0';

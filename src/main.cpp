@@ -5,8 +5,6 @@
 #include <list>
 #include <map.h>
 
-#include <sstream>
-
 using namespace sf;
 using namespace std; 
 
@@ -28,10 +26,10 @@ int main() {
 	string hero, name;
 	menu(window, hero, name);
 
-	Map map(120, 500);
+	Map map(60, 200);
 	Hero h(200, 200, 66, 93, "Player", "images/main hero/Green/Zeta/"); //объект класса игрока
 	std::list <Enemy*>  enemies;
-
+	
 	int generated = 0;
 	bool backToMenu = true;
 
@@ -40,6 +38,9 @@ int main() {
 	Font font; 
  	font.loadFromFile("files/FFF_Tusj.ttf");
 	
+	sf::CircleShape shape(1.f);	
+	shape.setFillColor(sf::Color::Red);
+
 	while (window.isOpen()) {
 		// calling for menu
 		// creating menu and hero using info from menu launching
@@ -63,16 +64,29 @@ int main() {
 
 				view.setCenter(h.getX(), h.getY());
 				window.setView(view);
+
+				int centX = view.getCenter().x + h.getW()/2;
+				int centY = view.getCenter().y;
+
+				int msX = view.getCenter().x - view.getSize().x/2 + Mouse::getPosition(window).x;
+				int msY = view.getCenter().y - view.getSize().y/2 + Mouse::getPosition(window).y;
+
+				// shape.setPosition(centX, centY);
+				if(Mouse::isButtonPressed(Mouse::Left)) {
+					cout << "is pressed"  << endl;
+					map.renderChanges(centX, centY, msX, msY, map.tileSize);
+				}
 						
 				window.clear();
 				renderMap(window, view, map);
 
-				generated = generateEnemies(view, map, enemies, generated);
+				// generated = generateEnemies(view, map, enemies, generated);
 				drawEnemies(window, view, map, enemies, time);
 				checkCollisionWithEnemies(h, enemies);
 
 				window.draw(h.getSprite());
 				interface(window, view, font, h);
+				window.draw(shape);
 				window.display();
 
 				if (Keyboard::isKeyPressed(Keyboard::M)){
@@ -118,14 +132,11 @@ void interface(sf::RenderWindow &window, View &view, Font &font, Hero &hero){
 	window.draw(upperBar);
 
  	Text health("health: ", font, 46);
-	std::ostringstream HealthStr, MHStr;    
-	HealthStr << hero.getCurHealth();
-	MHStr << hero.getMaxHealth();
 
-	health.setString("health: " + HealthStr.str() + "/" + MHStr.str());
+	health.setString(hero.getHealthStr());
 
 	health.setPosition(view.getCenter().x + view.getSize().x/2 - 350, view.getCenter().y - view.getSize().y/2);
-	window.draw(health);
+	window.draw(health);	
 }
 
 bool menu(sf::RenderWindow &window, string &hero, string &name){

@@ -30,3 +30,5 @@ CMakeFiles/sample.dir/src/hero.cpp.o: ../src/hero.cpp
 CMakeFiles/sample.dir/src/map.cpp.o: ../include/map.h
 CMakeFiles/sample.dir/src/map.cpp.o: ../src/map.cpp
 
+CMakeFiles/sample.dir/src/storage.cpp.o: ../src/storage.cpp
+
