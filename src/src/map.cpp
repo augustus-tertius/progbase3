@@ -114,7 +114,7 @@ void Map::drawMiniMap(sf::RenderWindow &window, sf::View &view){
     int size = view.getSize().x - 1030;
     int outlThick = 5;
 
-    sf::RectangleShape mm = sf::RectangleShape(sf::Vector2f(size, size));
+    sf::RectangleShape mm = sf::RectangleShape(sf::Vector2f(size + 5, size + 5));
 	mm.setFillColor(sf::Color(143, 188, 143));
     mm.setOutlineColor(sf::Color(47, 79, 79));
     mm.setOutlineThickness(outlThick);
@@ -122,18 +122,19 @@ void Map::drawMiniMap(sf::RenderWindow &window, sf::View &view){
     window.draw(mm);
 
     Sprite s_map;
-    int miniMapTs = 7;
+    int miniMapTs = 5;
     
-    // int mmX = startX + outlThick;
-    int mmY = view.getCenter().y + view.getSize().y/2 - size - 10 + outlThick;
-    int tilesShown = 40;
+    // int mmX = startX + outlThick - 10;
+    int mmY = view.getCenter().y + view.getSize().y/2 - size;
+    int tilesShown = 54;
     int mmHi = view.getSize().y * tilesShown / view.getSize().x;
 
-    cout  << "new update" << endl;
+    // cout  << "new update" << endl;
+    // cout  << mmX << " " << mmY << endl;
 
-    for(int i = view.getCenter().x/tileSize - tilesShown/2; i < view.getCenter().x/tileSize + tilesShown/2; i++){
-        int mmX = startX + outlThick;
-        for(int j = view.getCenter().y/tileSize - tilesShown/2; j < view.getCenter().y/tileSize + tilesShown/2; j++){
+    for(int i = view.getCenter().y/tileSize - tilesShown/2; i < view.getCenter().y/tileSize + tilesShown/2; i++){
+        int mmX = startX;
+        for(int j = view.getCenter().x/tileSize - tilesShown/2; j < view.getCenter().x/tileSize + tilesShown/2; j++){
             char curCh = '~';
             if(i >= 0 && j >= 0 && i < height && j < width) {
                 curCh = map[i][j];
@@ -159,7 +160,7 @@ void Map::drawMiniMap(sf::RenderWindow &window, sf::View &view){
 							float scale = (float)miniMapTs / (float)s_map.getTextureRect().width;
                             s_map.setScale(scale, scale);
 
-                            cout  << mmX << " " << mmY << endl;
+                            // cout  << mmX << " " << mmY << endl;
 							s_map.setPosition(mmX, mmY);
 							window.draw(s_map);
 						}
