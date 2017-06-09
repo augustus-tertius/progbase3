@@ -32,7 +32,7 @@ int main() {
 	int sh = 30;
 	Hero h(map.tileSize*map.getMapWidth()/2 - sh, 
 		map.getSpawnY(map.tileSize*map.getMapWidth()/2 - sh), 
-		66, 93, "Player", "images/main hero/Green/Zeta/"); //объект класса игрока
+		66, 93, "Player", "images/main hero/Yellow/Zeta/"); //объект класса игрока
 
 	std::list <Enemy*>  enemies;
 	
@@ -44,6 +44,10 @@ int main() {
 	Font font; 
  	font.loadFromFile("files/GoodDog.otf");
 
+	sf::Texture bgT;
+    bgT.loadFromFile("images/bg3.jpg");
+    Sprite bg = Sprite(bgT);
+	bg.scale(view.getSize().x / (float)bg.getTextureRect().width, view.getSize().y / (float)bg.getTextureRect().height);
 
 	// Music music;
 	// music.openFromFile("audio/Expansion.wav");
@@ -65,6 +69,9 @@ int main() {
 				control(window, view, h, map);
 						
 				window.clear();
+				bg.setPosition(view.getCenter().x - view.getSize().x/2, view.getCenter().y - view.getSize().y/2);
+				window.draw(bg);
+
 				renderMap(window, view, map);
 
 				generated = generateEnemies(view, map, enemies, generated);
@@ -126,10 +133,10 @@ void control(sf::RenderWindow &window, View &view, Hero &h, Map &map){
 			if(d != '-'){
 				h.heroL.add(d);
 			}
-		} else if(h.heroL.getActiveCell().getIsTile()){
+		} else if(h.heroL.getActiveCell().getIsTile() && !h.heroL.getActiveCell().getIsEmpty()){
 			char d = map.renderChanges(centX, centY, pos.x, pos.y, map.tileSize, h.heroL.charOfActive());
 			if(d == '~'){
-				h.heroL.getActiveCell().decrease(1);
+				h.heroL.decrActive(1);
 			}
 		}
 	}
@@ -261,26 +268,31 @@ void renderMap(sf::RenderWindow &window,View &view, Map &map){
 
 			for (int i = yStart; i < yEnd; i++) {
 				for (int j = xStart; j < xEnd; j++) {
-					if (map.getMapSymbol(i, j) != '~') {
-						if (map.getMapSymbol(i, j) == 'm'){
-							s_map.setTexture(map.tiles.snowTex);
-						} else if(map.getMapSymbol(i, j) == 's'){
-							s_map.setTexture(map.tiles.stoneTex);
-						} else if(map.getMapSymbol(i, j) == 'c') {
-							s_map.setTexture(map.tiles.cakeTex);
-						} else if(map.getMapSymbol(i, j) == 'z') {
-							s_map.setTexture(map.tiles.sandTex);
-						} else if(map.getMapSymbol(i, j) != '0'){
-							s_map.setTexture(map.tiles.groundTex);
+					char curCh = (map.getMapSymbol(i, j));
+					if (curCh != '~') {
+						if (curCh == 'm'){
+							s_map.setTexture(map.tiles.mTex);
+						} else if(curCh == 's'){
+							s_map.setTexture(map.tiles.sTex);
+						} else if(curCh == 'z'){
+							s_map.setTexture(map.tiles.zTex);
+						} else if(curCh == 'i'){
+							s_map.setTexture(map.tiles.iTex);
+						} else if(curCh == 'u'){
+							s_map.setTexture(map.tiles.uTex);
+						} else if(curCh == 'e'){
+							s_map.setTexture(map.tiles.eTex);
+						} else if(curCh == 'g'){
+							s_map.setTexture(map.tiles.gTex);
 						} 
-						if(map.getMapSymbol(i, j) != '0'){
+						if(curCh != '0'){
 							float scale = (float)map.tileSize / (float)s_map.getTextureRect().width;
 							s_map.setScale(scale, scale);
 
 							s_map.setPosition(j * map.tileSize, i * map.tileSize);
 							window.draw(s_map);
 						}
-					} 
+					}
 				}
 			}
 				
@@ -351,6 +363,7 @@ void drawEnemies(RenderWindow &window, View &view, Map &map, std::list <Enemy*> 
 		(*it)->update(time, map);
 		Sprite curS = (*it)->getSprite();
 
+		// delete enemy if it`s far away
 		if(view.getCenter().x - view.getSize().x*3 > curS.getPosition().x ) {
 			enemies.remove(*it);
 			delete (*it);

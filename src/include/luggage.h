@@ -49,6 +49,7 @@ public:
     cell add(int pos, char ch);
     void pickTex(int pos);
     char charOfActive();
+    void decrActive(int d);
 };
 
 #endif

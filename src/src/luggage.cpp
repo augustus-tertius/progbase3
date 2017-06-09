@@ -32,6 +32,7 @@ void cell::decrease(int q){
         quan = 0;
         isEmpty = true;
     }
+    cout << "now quan is  " << quan << endl;
 }
 
 void cell::setCode(char ch){
@@ -215,19 +216,28 @@ void luggage::pickTex(int pos){
 
     switch(ch){
         case 'm':
-        cells[pos].sprite = Sprite(mT.snowTex);
+        cells[pos].sprite = Sprite(mT.mTex);
         return;
         case 's':
-        cells[pos].sprite = Sprite(mT.stoneTex);
+        cells[pos].sprite = Sprite(mT.sTex);
         return;
         case 'z':
-        cells[pos].sprite = Sprite(mT.cakeTex);
+        cells[pos].sprite = Sprite(mT.zTex);
+        return;
+        case 'i':
+        cells[pos].sprite = Sprite(mT.iTex);
+        return;
+        case 'u':
+        cells[pos].sprite = Sprite(mT.uTex);
+        return;
+        case 'e':
+        cells[pos].sprite = Sprite(mT.eTex);
+        return;
+        case 'g':
+        cells[pos].sprite = Sprite(mT.gTex);
         return;
         case ',':
          cells[pos].sprite = Sprite(mT.shovelTex);
-        default:
-        cells[pos].sprite = Sprite(mT.groundTex);
-        return;
     }  
 }
 
@@ -235,4 +245,8 @@ cell luggage::add(int pos, char ch){
     cell old = cells[pos];
     cells[pos] = cell(ch);
     return old;
+}
+
+void luggage::decrActive(int d){
+    cells[active].decrease(d);
 }

@@ -25,26 +25,26 @@ using namespace sf;
 
 mapTiles::mapTiles(){
     sf::Image cur;
-    cur.loadFromFile("images/tiles/grassCenter.png");
-    groundTex.loadFromImage(cur);
+    cur.loadFromFile("images/tiles/z.jpg");
+    zTex.loadFromImage(cur);
 
-    cur.loadFromFile("images/tiles/stoneCenter.png");
-    stoneTex.loadFromImage(cur);
+    cur.loadFromFile("images/tiles/s.jpg");
+    sTex.loadFromImage(cur);
 
-    cur.loadFromFile("images/tiles/snowCenter.png");
-    snowTex.loadFromImage(cur);
+    cur.loadFromFile("images/tiles/i.jpg");
+    iTex.loadFromImage(cur);
 
-    cur.loadFromFile("images/tiles/chocoCenter.png");
-    chocoTex.loadFromImage(cur);
+    cur.loadFromFile("images/tiles/m.jpg");
+    mTex.loadFromImage(cur);
 
-    cur.loadFromFile("images/tiles/sandCenter.png");
-    sandTex.loadFromImage(cur);
+    cur.loadFromFile("images/tiles/u.jpg");
+    uTex.loadFromImage(cur);
 
-    cur.loadFromFile("images/tiles/cakeCenter.png");
-    cakeTex.loadFromImage(cur);
+    cur.loadFromFile("images/tiles/e.jpg");
+    eTex.loadFromImage(cur);
 
-    cur.loadFromFile("images/tiles/shovel.png");
-    shovelTex.loadFromImage(cur);
+    cur.loadFromFile("images/tiles/g.jpg");
+    gTex.loadFromImage(cur);
 }
 
 //  itemTex::itemTex() {
@@ -190,26 +190,27 @@ void Map::drawMiniMap(sf::RenderWindow &window, sf::View &view){
                 // cout << curCh << endl;
             } else {
                 // cout << "index out of bounds " << i << " " << j << endl;
-            }
-
-            
+            }            
             if (curCh != '~') {
 						if (curCh == 'm'){
-							s_map.setTexture(tiles.snowTex);
+							s_map.setTexture(tiles.mTex);
 						} else if(curCh == 's'){
-							s_map.setTexture(tiles.stoneTex);
-						} else if(curCh == 'c') {
-							s_map.setTexture(tiles.cakeTex);
-						} else if(curCh == 'z') {
-							s_map.setTexture(tiles.sandTex);
-						} else if(curCh != '0'){
-							s_map.setTexture(tiles.groundTex);
+							s_map.setTexture(tiles.sTex);
+						} else if(curCh == 'z'){
+							s_map.setTexture(tiles.zTex);
+						} else if(curCh == 'i'){
+							s_map.setTexture(tiles.iTex);
+						} else if(curCh == 'u'){
+							s_map.setTexture(tiles.uTex);
+						} else if(curCh == 'e'){
+							s_map.setTexture(tiles.eTex);
+						} else if(curCh == 'g'){
+							s_map.setTexture(tiles.gTex);
 						} 
 						if(curCh != '0'){
 							float scale = (float)miniMapTs / (float)s_map.getTextureRect().width;
                             s_map.setScale(scale, scale);
 
-                            // cout  << mmX << " " << mmY << endl;
 							s_map.setPosition(mmX, mmY);
 							window.draw(s_map);
 						}

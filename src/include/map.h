@@ -6,17 +6,17 @@
 
 class mapTiles{
 public:
-    sf::Texture groundTex;
-    sf::Texture stoneTex;
-    sf::Texture snowTex;
-    sf::Texture chocoTex;
-    sf::Texture sandTex;
-    sf::Texture cakeTex;
+    sf::Texture zTex;
+    sf::Texture sTex;
+    sf::Texture iTex;
+    sf::Texture mTex;
+    sf::Texture uTex;
+    sf::Texture eTex;
+    sf::Texture gTex;
 
     sf::Texture shovelTex;
 
     mapTiles();
-    // sf::Texture getCharSprite(char ch);
 };
 
 // class itemTex {
