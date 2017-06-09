@@ -17,6 +17,7 @@ void drawEnemies(RenderWindow &window, View &view, Map &map, std::list <Enemy*> 
 
 bool menu(sf::RenderWindow &window, string &hero, string &name);
 void interface(sf::RenderWindow &window, View &view, Font &font, Hero &hero);
+void control(sf::RenderWindow &window, View &view, Hero &hero, Map &map);
 
 int main() {
 	RenderWindow window(VideoMode(1300, 1000), "sample rendering & gravity");
@@ -72,20 +73,7 @@ int main() {
 				view.setCenter(h.getX(), h.getY());
 				window.setView(view);
 
-				// shape.setPosition(centX, centY);
-				if(Mouse::isButtonPressed(Mouse::Left)) {
-					int centX = view.getCenter().x + h.getW()/2;
-					int centY = view.getCenter().y;
-
-					int msX = view.getCenter().x - view.getSize().x/2 + Mouse::getPosition(window).x;
-					int msY = view.getCenter().y - view.getSize().y/2 + Mouse::getPosition(window).y;
-
-					char d = map.renderChanges(centX, centY, msX, msY, map.tileSize);
-					if(d != '-'){
-						h.heroL.add(d);
-					}
-				}
-				// cout << "digging upd" << endl;
+				control(window, view, h, map);
 						
 				window.clear();
 				renderMap(window, view, map);
@@ -138,6 +126,28 @@ int main() {
 
 
 	return 0;
+}
+
+void control(sf::RenderWindow &window, View &view, Hero &h, Map &map){
+	if(Mouse::isButtonPressed(Mouse::Left)) {
+		int centX = view.getCenter().x + h.getW()/2;
+		int centY = view.getCenter().y + h.getH()/2;
+
+		Vector2i pixelPos = Mouse::getPosition(window);
+		Vector2f pos = window.mapPixelToCoords(pixelPos);
+
+		if(h.heroL.charOfActive() == ',') {
+			char d = map.renderChanges(centX, centY, pos.x, pos.y, map.tileSize, '~');
+			if(d != '-'){
+				h.heroL.add(d);
+			}
+		} else if(h.heroL.getActiveCell().getIsTile()){
+			char d = map.renderChanges(centX, centY, pos.x, pos.y, map.tileSize, h.heroL.charOfActive());
+			if(d == '~'){
+				h.heroL.getActiveCell().decrease(1);
+			}
+		}
+	}
 }
 
 void interface(sf::RenderWindow &window, View &view, Font &font, Hero &hero){

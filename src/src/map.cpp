@@ -42,7 +42,14 @@ mapTiles::mapTiles(){
 
     cur.loadFromFile("images/tiles/cakeCenter.png");
     cakeTex.loadFromImage(cur);
+
+    cur.loadFromFile("images/tiles/shovel.png");
+    shovelTex.loadFromImage(cur);
 }
+
+//  itemTex::itemTex() {
+//     shovelTex.loadFromFile("images/items/shov.png");
+//  }
 
 // sf::Texture mapTiles::getCharSprite(char ch){
 //     switch(ch){
@@ -104,25 +111,35 @@ int Map::getMapWidth() {
     return width;
 }
 
-char Map::renderChanges(int xCent, int yCent, int MousePosX, int MousePosY, int tileSize){
-
+char Map::renderChanges(int xCent, int yCent, int MousePosX, int MousePosY, int tileSize, char insert){
     int shift = 3;
-    int correction = 5;
-    int i = MousePosY/tileSize + correction;
+
+    int i = MousePosY/tileSize;
     int j = MousePosX/tileSize;
+
     int cX = xCent/tileSize;
     int cY = yCent/tileSize;
 
     if(i >= cY - shift && i <= cY + shift) {
         if(j >= cX - shift && j <= cX + shift) {
             // обработка взаимодействия с картой 
-            if(map[i][j] != '0'){
-                if(map[i][j] != '~'){
-                    char old = map[i][j];
-                    map[i][j] = '~';
-                    return old;
+            if(insert == '~') {
+                if(map[i][j] != '0'){
+                    if(map[i][j] != '~'){
+                        char old = map[i][j];
+                        map[i][j] = '~';
+                        return old;
+                    }
+                }
+            } else {
+                if(map[i][j] != '0'){
+                    if(map[i][j] == '~'){
+                        map[i][j] = insert;
+                        return '~';
+                    }
                 }
             }
+        
         }
     }
 

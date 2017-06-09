@@ -70,6 +70,23 @@ sf::Sprite cell::getSprite(){
     return sprite;
 }
 
+void cell::setIsTool(bool t){
+    isTool = t;
+}
+
+// items::items(){
+//     // creating shovel
+//     shovel = cell(',');
+//     Texture st;
+//     st.loadFromFile("shov.png");
+//     // float scale = 54 / (float)curSprite.getTextureRect().width;
+//     // st.setScale(scale, scale);
+//     shovel.setSprite(st);
+//     shovel.setIsTool(true);
+
+//     // todo creating laser
+// }
+
 luggage::luggage(){
     active = 0;
     capacity = 0;
@@ -81,12 +98,18 @@ luggage::luggage(int s){
     capacity = s;
     size = 0;
     cells = new cell[s];
+    // itmT = itemTex();
+
     for(int i = 0; i < s; i++){
         cells[i] = cell();
     }
 
-    if(size >= 3){
-
+    if(capacity >= 3){
+        cells[0] = cell(',');
+        cells[0].increase(1);
+        cells[0].sprite = Sprite(mT.shovelTex);
+        cells[0].setIsTool(true);
+        size++;
     }
 
     mT = mapTiles();
@@ -98,6 +121,10 @@ luggage::~luggage(){
     // if(capacity > 0) {
     //     delete [] cells;
     // }
+}
+
+char luggage::charOfActive(){
+    return cells[active].getCode();
 }
 
 void luggage::draw(sf::RenderWindow &window, sf::View &view, sf::Font &font){
@@ -150,6 +177,10 @@ void luggage::draw(sf::RenderWindow &window, sf::View &view, sf::Font &font){
     }
 }
 
+cell luggage::getActiveCell(){
+    return cells[active];
+}
+
 bool luggage::add(char ch){
     if(size < capacity){
         for(int i = 0; i < capacity; i++) {
@@ -192,6 +223,8 @@ void luggage::pickTex(int pos){
         case 'z':
         cells[pos].sprite = Sprite(mT.cakeTex);
         return;
+        case ',':
+         cells[pos].sprite = Sprite(mT.shovelTex);
         default:
         cells[pos].sprite = Sprite(mT.groundTex);
         return;

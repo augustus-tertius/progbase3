@@ -8,6 +8,7 @@ class cell {
     bool isEmpty;
     bool isPowerUp;
     bool isTile;
+    bool isTool;
     int quan;
     char code;
 
@@ -23,6 +24,7 @@ public:
     bool getIsEmpty();
     bool getIsTile();
     bool getIsPowerUp();
+    void setIsTool(bool t);
     int getQuan();
     void setSprite(sf::Texture t);
     void setSpritePos(float x, float y);
@@ -36,14 +38,17 @@ public:
     int active;
     cell* cells;
     mapTiles mT;
+    // itemTex itmT;
 
     luggage();
     luggage(int s);
     ~luggage();
     void draw(sf::RenderWindow &window, sf::View &view, sf::Font &font);
+    cell getActiveCell();
     bool add(char ch);
     cell add(int pos, char ch);
     void pickTex(int pos);
+    char charOfActive();
 };
 
 #endif

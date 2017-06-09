@@ -13,9 +13,18 @@ public:
     sf::Texture sandTex;
     sf::Texture cakeTex;
 
+    sf::Texture shovelTex;
+
     mapTiles();
     // sf::Texture getCharSprite(char ch);
 };
+
+// class itemTex {
+// public:
+//     sf::Texture shovelTex;
+
+//     itemTex();
+// };
 
 class Map {
     std::string filePath;
@@ -31,7 +40,7 @@ public:
     Map(int h, int w);
     Map(std::string filePath);
     ~Map();
-    char renderChanges(int xCent, int yCent, int MousePosX, int MousePosY, int tileSize);
+    char renderChanges(int xCent, int yCent, int MousePosX, int MousePosY, int tileSize, char insert);
     void saveToFile();
     void drawMiniMap(sf::RenderWindow &window, sf::View &view);
     char getMapSymbol(int i, int j);
