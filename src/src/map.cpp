@@ -111,6 +111,19 @@ int Map::getMapWidth() {
     return width;
 }
 
+int Map::getSpawnY(int x){
+    for(int i = height - 1; i > 4; i--) {
+        if(map[i][x] == '~' && map[i][x - 1] == '~' && map[i][x + 1] == '~') {
+            if(map[i - 1][x] == '~' && map[i - 1][x - 1] == '~' && map[i - 1][x + 1] == '~') {
+                if(map[i - 2][x] == '~' && map[i - 2][x - 1] == '~' && map[i - 2][x + 1] == '~') {
+                    if(i - 3 > 2)
+                    return i;
+                }
+            }
+        }
+    }
+}
+
 char Map::renderChanges(int xCent, int yCent, int MousePosX, int MousePosY, int tileSize, char insert){
     int shift = 3;
 

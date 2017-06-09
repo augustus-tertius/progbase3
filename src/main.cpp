@@ -29,7 +29,11 @@ int main() {
 	menu(window, hero, name);
 
 	Map map(120, 500);
-	Hero h(200, 200, 66, 93, "Player", "images/main hero/Green/Zeta/"); //объект класса игрока
+	int sh = 30;
+	Hero h(map.tileSize*map.getMapWidth()/2 - sh, 
+		map.getSpawnY(map.tileSize*map.getMapWidth()/2 - sh), 
+		66, 93, "Player", "images/main hero/Green/Zeta/"); //объект класса игрока
+
 	std::list <Enemy*>  enemies;
 	
 	int generated = 0;
@@ -39,9 +43,7 @@ int main() {
 
 	Font font; 
  	font.loadFromFile("files/GoodDog.otf");
-	
-	sf::CircleShape shape(1.f);	
-	shape.setFillColor(sf::Color::Red);
+
 
 	// Music music;
 	// music.openFromFile("audio/Expansion.wav");
@@ -49,18 +51,6 @@ int main() {
 	// music.setLoop(true);
 
 	while (window.isOpen()) {
-		// calling for menu
-		// creating menu and hero using info from menu launching
-		// bool play = menu(window, hero, name);
-
-		// if(false == play) {
-		// 	// window.close();
-		// 	backToMenu = true;
-		// } else {
-		// 	backToMenu = false;
-		// }
-
-		// while (!backToMenu) {
 			while(h.getAlive()) {
 				float time = clock.getElapsedTime().asMicroseconds();
 			
@@ -68,7 +58,6 @@ int main() {
 				time = time / 800;
 
 				h.update(time, map);
-				// cout << "hero upd" << endl;
 
 				view.setCenter(h.getX(), h.getY());
 				window.setView(view);
@@ -77,20 +66,16 @@ int main() {
 						
 				window.clear();
 				renderMap(window, view, map);
-				// cout << "map rend" << endl;
 
-				// generated = generateEnemies(view, map, enemies, generated);
+				generated = generateEnemies(view, map, enemies, generated);
 				drawEnemies(window, view, map, enemies, time);
 				checkCollisionWithEnemies(h, enemies);
 
 				window.draw(h.getSprite());
 				interface(window, view, font, h);
-				// cout << "interface" << endl;
 				h.heroL.draw(window, view, font);
-				// cout << "hero lug drawn" << endl;
 				map.drawMiniMap(window, view);
-				// cout << "minimap dr" << endl;
-				window.draw(shape);
+
 				window.display();
 
 				if (Keyboard::isKeyPressed(Keyboard::M)){
@@ -317,16 +302,31 @@ void checkCollisionWithEnemies(Hero &hero, std::list <Enemy*>  enemies) {
 
 int generateEnemies(View &view, Map &map, std::list <Enemy*>  &enemies, int prev){
 	srand(time(NULL));
-	int probability = rand()%500;
+	int probability = rand()%5000;
 
 	if(probability != prev){
-		if(probability >= 5 && enemies.size() < 10){
+		if(probability >= 10 && enemies.size() < 6){
 			// then gererate random enemy
 
 			int x = rand() % map.getMapWidth();
+			// int y = map.getSpawnY(x);
 			int y = rand() % map.getMapHeight();
+			
+			bool free = true;
 
-			if(map.getMapSymbol(y, x) == '~'){
+			for(int i = y - 5; i <= y + 5; i++){
+				for(int j = x - 5; j <= x + 5; j++){
+					if(map.getMapSymbol(i, j) != '~'){
+						cout << "bad coords" << endl;
+						free = false;
+						if(map.getMapSymbol(i, j) == '-') {
+							return probability;
+						}
+					}
+				}
+			}
+
+			if(free){
 				int shift = 3;
 
 				int xStart = (view.getCenter().x - view.getSize().x/2)/map.tileSize - shift;
@@ -349,19 +349,26 @@ int generateEnemies(View &view, Map &map, std::list <Enemy*>  &enemies, int prev
 void drawEnemies(RenderWindow &window, View &view, Map &map, std::list <Enemy*>  &enemies, float time){
 	for (auto it = enemies.begin(); it != enemies.end(); it++){
 		(*it)->update(time, map);
-		// delete enemy if it`s far away ?
 		Sprite curS = (*it)->getSprite();
 
-		// checking, if enemy is currently visible 
-		int shift = 3;
+		if(view.getCenter().x - view.getSize().x*3 > curS.getPosition().x ) {
+			enemies.remove(*it);
+			delete (*it);
+		} else if(view.getCenter().x + view.getSize().x*3 < curS.getPosition().x){ 
+			enemies.remove(*it);
+			delete (*it);
+		} else {
+			// checking, if enemy is currently visible 
+			int shift = 3;
 
-		int xStart = (view.getCenter().x - view.getSize().x/2)/map.tileSize - shift;
-		int xEnd = (view.getCenter().x + view.getSize().x/2)/map.tileSize + shift; 
-		int yStart = (view.getCenter().y - view.getSize().y/2)/map.tileSize - shift;
-		int yEnd = (view.getCenter().y + view.getSize().y/2)/map.tileSize + shift;
+			int xStart = (view.getCenter().x - view.getSize().x/2)/map.tileSize - shift;
+			int xEnd = (view.getCenter().x + view.getSize().x/2)/map.tileSize + shift; 
+			int yStart = (view.getCenter().y - view.getSize().y/2)/map.tileSize - shift;
+			int yEnd = (view.getCenter().y + view.getSize().y/2)/map.tileSize + shift;
 
-		if(curS.getPosition().x/map.tileSize > xStart && curS.getPosition().x/map.tileSize  < xEnd && curS.getPosition().y/map.tileSize  > yStart && curS.getPosition().y/map.tileSize  < yEnd){
-			window.draw(curS); 
+			if(curS.getPosition().x/map.tileSize > xStart && curS.getPosition().x/map.tileSize  < xEnd && curS.getPosition().y/map.tileSize  > yStart && curS.getPosition().y/map.tileSize  < yEnd){
+				window.draw(curS); 
+			}
 		}
 	}
 }

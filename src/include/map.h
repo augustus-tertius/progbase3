@@ -43,6 +43,7 @@ public:
     char renderChanges(int xCent, int yCent, int MousePosX, int MousePosY, int tileSize, char insert);
     void saveToFile();
     void drawMiniMap(sf::RenderWindow &window, sf::View &view);
+    int getSpawnY(int x);
     char getMapSymbol(int i, int j);
     int getMapHeight();
     int getMapWidth();
