@@ -19,6 +19,8 @@ heroTextures::heroTextures(std::string filePath){
         this->walk_1.loadFromFile(filePath + "walk_1.png");
         this->walk_2.loadFromFile(filePath + "walk_2.png");
         this->jump.loadFromFile(filePath + "jump.png");
+
+        jumpSound.loadFromFile("audio/jump.wav");
 }
 
 Hero::Hero(float X, float Y, int W, int H, std::string Name, std::string filePath) :GameObj() {
@@ -42,6 +44,8 @@ Hero::Hero(float X, float Y, int W, int H, std::string Name, std::string filePat
     this->texture = ht.stand;
     healTimer = 0;
     shield = false;
+
+    heroL = luggage(10);
 }
 
 void Hero::setAlive(bool a){
@@ -130,6 +134,10 @@ void Hero::control (float timePassed) {
         
         if(Keyboard::isKeyPressed(Keyboard::Space)) {
             if(onGround) {
+                sf::Sound sound;
+                sound.setBuffer(ht.jumpSound);
+                sound.play();
+
                 this->state = jump; 
                 this->dy = -0.6; 
                 this->onGround = false;   

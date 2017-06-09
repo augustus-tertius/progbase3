@@ -6,6 +6,7 @@ CMakeFiles/sample.dir/main.cpp.o
  ../include/enemy.h
  ../include/gameObj.h
  ../include/hero.h
+ ../include/luggage.h
  ../include/map.h
  /home/august/Documents/projects/progbase3/src/main.cpp
 CMakeFiles/sample.dir/src/enemies.cpp.o
@@ -25,8 +26,12 @@ CMakeFiles/sample.dir/src/gameObj.cpp.o
 CMakeFiles/sample.dir/src/hero.cpp.o
  ../include/gameObj.h
  ../include/hero.h
+ ../include/luggage.h
  ../include/map.h
  /home/august/Documents/projects/progbase3/src/src/hero.cpp
+CMakeFiles/sample.dir/src/luggage.cpp.o
+ ../include/luggage.h
+ /home/august/Documents/projects/progbase3/src/src/luggage.cpp
 CMakeFiles/sample.dir/src/map.cpp.o
  ../include/map.h
  /home/august/Documents/projects/progbase3/src/src/map.cpp

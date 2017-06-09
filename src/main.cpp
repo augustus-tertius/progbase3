@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <hero.h>
 // #include <enemy.h>
 #include <enemies.h>
@@ -41,6 +42,11 @@ int main() {
 	sf::CircleShape shape(1.f);	
 	shape.setFillColor(sf::Color::Red);
 
+	// Music music;
+	// music.openFromFile("audio/Expansion.wav");
+	// music.play();
+	// music.setLoop(true);
+
 	while (window.isOpen()) {
 		// calling for menu
 		// creating menu and hero using info from menu launching
@@ -65,15 +71,14 @@ int main() {
 				view.setCenter(h.getX(), h.getY());
 				window.setView(view);
 
-				int centX = view.getCenter().x + h.getW()/2;
-				int centY = view.getCenter().y;
-
-				int msX = view.getCenter().x - view.getSize().x/2 + Mouse::getPosition(window).x;
-				int msY = view.getCenter().y - view.getSize().y/2 + Mouse::getPosition(window).y;
-
 				// shape.setPosition(centX, centY);
 				if(Mouse::isButtonPressed(Mouse::Left)) {
-					cout << "is pressed"  << endl;
+					int centX = view.getCenter().x + h.getW()/2;
+					int centY = view.getCenter().y;
+
+					int msX = view.getCenter().x - view.getSize().x/2 + Mouse::getPosition(window).x;
+					int msY = view.getCenter().y - view.getSize().y/2 + Mouse::getPosition(window).y;
+
 					map.renderChanges(centX, centY, msX, msY, map.tileSize);
 				}
 						
@@ -86,6 +91,7 @@ int main() {
 
 				window.draw(h.getSprite());
 				interface(window, view, font, h);
+				h.heroL.draw(window, view);
 				window.draw(shape);
 				window.display();
 
@@ -126,7 +132,7 @@ int main() {
 
 void interface(sf::RenderWindow &window, View &view, Font &font, Hero &hero){
 	RectangleShape upperBar = RectangleShape(sf::Vector2f(view.getSize().x, 60));
-	upperBar.setFillColor(Color(100, 100, 100));
+	upperBar.setFillColor(Color(47, 79, 79));
 	upperBar.setPosition(view.getCenter().x - view.getSize().x/2, view.getCenter().y - view.getSize().y/2);
 
 	window.draw(upperBar);
@@ -178,7 +184,7 @@ bool menu(sf::RenderWindow &window, string &hero, string &name){
 		int chosen = -1;
 		for (auto it = items.begin(); it != items.end(); it++){
 			if((*it).getGlobalBounds().contains(Mouse::getPosition(window).x, Mouse::getPosition(window).y)){
-				(*it).setColor(Color::Cyan);
+				(*it).setColor(Color(60, 179, 113));
 				chosen = counter;
 			}
 			counter++;

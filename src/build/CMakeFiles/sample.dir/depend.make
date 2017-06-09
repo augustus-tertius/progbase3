@@ -5,6 +5,7 @@ CMakeFiles/sample.dir/main.cpp.o: ../include/enemies.h
 CMakeFiles/sample.dir/main.cpp.o: ../include/enemy.h
 CMakeFiles/sample.dir/main.cpp.o: ../include/gameObj.h
 CMakeFiles/sample.dir/main.cpp.o: ../include/hero.h
+CMakeFiles/sample.dir/main.cpp.o: ../include/luggage.h
 CMakeFiles/sample.dir/main.cpp.o: ../include/map.h
 CMakeFiles/sample.dir/main.cpp.o: ../main.cpp
 
@@ -24,8 +25,12 @@ CMakeFiles/sample.dir/src/gameObj.cpp.o: ../src/gameObj.cpp
 
 CMakeFiles/sample.dir/src/hero.cpp.o: ../include/gameObj.h
 CMakeFiles/sample.dir/src/hero.cpp.o: ../include/hero.h
+CMakeFiles/sample.dir/src/hero.cpp.o: ../include/luggage.h
 CMakeFiles/sample.dir/src/hero.cpp.o: ../include/map.h
 CMakeFiles/sample.dir/src/hero.cpp.o: ../src/hero.cpp
+
+CMakeFiles/sample.dir/src/luggage.cpp.o: ../include/luggage.h
+CMakeFiles/sample.dir/src/luggage.cpp.o: ../src/luggage.cpp
 
 CMakeFiles/sample.dir/src/map.cpp.o: ../include/map.h
 CMakeFiles/sample.dir/src/map.cpp.o: ../src/map.cpp

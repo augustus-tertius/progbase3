@@ -258,6 +258,33 @@ src/hero.cpp.s:
 	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/hero.cpp.s
 .PHONY : src/hero.cpp.s
 
+src/luggage.o: src/luggage.cpp.o
+
+.PHONY : src/luggage.o
+
+# target to build an object file
+src/luggage.cpp.o:
+	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/luggage.cpp.o
+.PHONY : src/luggage.cpp.o
+
+src/luggage.i: src/luggage.cpp.i
+
+.PHONY : src/luggage.i
+
+# target to preprocess a source file
+src/luggage.cpp.i:
+	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/luggage.cpp.i
+.PHONY : src/luggage.cpp.i
+
+src/luggage.s: src/luggage.cpp.s
+
+.PHONY : src/luggage.s
+
+# target to generate assembly for a file
+src/luggage.cpp.s:
+	$(MAKE) -f CMakeFiles/sample.dir/build.make CMakeFiles/sample.dir/src/luggage.cpp.s
+.PHONY : src/luggage.cpp.s
+
 src/map.o: src/map.cpp.o
 
 .PHONY : src/map.o
@@ -336,6 +363,9 @@ help:
 	@echo "... src/hero.o"
 	@echo "... src/hero.i"
 	@echo "... src/hero.s"
+	@echo "... src/luggage.o"
+	@echo "... src/luggage.i"
+	@echo "... src/luggage.s"
 	@echo "... src/map.o"
 	@echo "... src/map.i"
 	@echo "... src/map.s"

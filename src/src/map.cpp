@@ -86,7 +86,6 @@ int Map::getMapWidth() {
 }
 
 void Map::renderChanges(int xCent, int yCent, int MousePosX, int MousePosY, int tileSize){
-    cout << "entered render func" << endl;
 
     int shift = 3;
     int correction = 5;
@@ -95,20 +94,12 @@ void Map::renderChanges(int xCent, int yCent, int MousePosX, int MousePosY, int 
     int cX = xCent/tileSize;
     int cY = yCent/tileSize;
 
-    cout << "i: " <<  cY - shift << " /" << i << " /" << cY + shift << endl;
-    cout << "j: " << cX - shift << " /" << j << " /" << cX + shift << endl;
-    // cout << "map symbol is '" << map[i][j] << "'" << endl;
-
     if(i >= cY - shift && i <= cY + shift) {
-        cout << " y is suitable  " << endl;
         if(j >= cX - shift && j <= cX + shift) {
-            cout << " x is suitable  " << endl;
             // обработка взаимодействия с картой 
-            cout << "map is to be changed" << endl;
             if(map[i][j] != '0'){
                 if(map[i][j] != '~'){
                     map[i][j] = '~';
-                    cout << "now it is '" << map[i][j] << "'" << endl;
                 }
             }
         }
@@ -116,6 +107,9 @@ void Map::renderChanges(int xCent, int yCent, int MousePosX, int MousePosY, int 
 
 }
 
+void Map::drawMiniMap(sf::RenderWindow &window, sf::View &view){
+
+}
 
 void generateMap(int h, int w, char** map){
 

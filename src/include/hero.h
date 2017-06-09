@@ -4,7 +4,9 @@
 #include <iostream>
 #include "gameObj.h"
 #include "map.h"
+#include "luggage.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 
 class heroTextures {
@@ -13,6 +15,7 @@ public:
     sf::Texture walk_1;
     sf::Texture walk_2;
     sf::Texture jump;
+    sf::SoundBuffer jumpSound;
 
     heroTextures();
     heroTextures(std::string filePath);
@@ -34,6 +37,8 @@ class Hero : public GameObj {
 
     public:
         // Hero(); mb add one later ?
+        luggage heroL;
+
         Hero(float X, float Y, int W, int H, std::string Name, std::string filePath);
         void control (float timePassed);
         void update(float timePassed, Map &map);
