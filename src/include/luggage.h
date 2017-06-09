@@ -10,9 +10,10 @@ class cell {
     bool isTile;
     int quan;
     char code;
-    sf::Sprite sprite;
 
 public:
+    sf::Sprite sprite;
+
     cell();
     cell(char ch);
     void increase(int q);
@@ -20,7 +21,12 @@ public:
     void setCode(char ch);
     char getCode();
     bool getIsEmpty();
-
+    bool getIsTile();
+    bool getIsPowerUp();
+    int getQuan();
+    void setSprite(sf::Texture t);
+    void setSpritePos(float x, float y);
+    sf::Sprite getSprite();
 };
 
 class luggage {
@@ -34,9 +40,10 @@ public:
     luggage();
     luggage(int s);
     ~luggage();
-    void draw(sf::RenderWindow &window, sf::View &view);
+    void draw(sf::RenderWindow &window, sf::View &view, sf::Font &font);
     bool add(char ch);
     cell add(int pos, char ch);
+    void pickTex(int pos);
 };
 
 #endif

@@ -48,6 +48,10 @@ Hero::Hero(float X, float Y, int W, int H, std::string Name, std::string filePat
     heroL = luggage(10);
 }
 
+Hero::~Hero(){
+    cout << "hero destructor" << endl;
+}
+
 void Hero::setAlive(bool a){
     if(!a){
         curHealth = 0;

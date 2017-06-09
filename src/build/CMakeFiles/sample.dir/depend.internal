@@ -31,6 +31,7 @@ CMakeFiles/sample.dir/src/hero.cpp.o
  /home/august/Documents/projects/progbase3/src/src/hero.cpp
 CMakeFiles/sample.dir/src/luggage.cpp.o
  ../include/luggage.h
+ ../include/map.h
  /home/august/Documents/projects/progbase3/src/src/luggage.cpp
 CMakeFiles/sample.dir/src/map.cpp.o
  ../include/map.h

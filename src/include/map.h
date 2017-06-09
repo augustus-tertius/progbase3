@@ -14,6 +14,7 @@ public:
     sf::Texture cakeTex;
 
     mapTiles();
+    // sf::Texture getCharSprite(char ch);
 };
 
 class Map {

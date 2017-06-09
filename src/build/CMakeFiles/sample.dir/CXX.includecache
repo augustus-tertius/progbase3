@@ -37,6 +37,8 @@ SFML/Audio.hpp
 ../include/luggage.h
 SFML/Graphics.hpp
 -
+map.h
+../include/map.h
 
 ../include/map.h
 iostream

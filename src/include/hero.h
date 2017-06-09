@@ -40,6 +40,7 @@ class Hero : public GameObj {
         luggage heroL;
 
         Hero(float X, float Y, int W, int H, std::string Name, std::string filePath);
+        ~Hero();
         void control (float timePassed);
         void update(float timePassed, Map &map);
 
@@ -49,7 +50,7 @@ class Hero : public GameObj {
         void animation(float timePassed);
         void checkCollisionWithMap(float Dx, float Dy, Map &map);
         void checkCollisionWithMap();
-        void checkCollisionWithEnemies();
+        void checkCollisionWithEnemies(); 
 
         void reset(float X, float Y);
         void setShield(float duration);

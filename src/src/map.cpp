@@ -44,6 +44,23 @@ mapTiles::mapTiles(){
     cakeTex.loadFromImage(cur);
 }
 
+// sf::Texture mapTiles::getCharSprite(char ch){
+//     switch(ch){
+//         case 'm':
+//         cout << "returnig snow" << endl;
+//         return snowTex;
+//         case 's':
+//         cout << "returnig stone" << endl;
+//         return stoneTex;
+//         case 'z':
+//         cout << "returnig cake" << endl;
+//         return cakeTex;
+//         default:
+//         cout << "returnig ground" << endl;
+//         return groundTex;
+//     }
+// }
+
 
 Map::Map(int h, int w){
     map = new char* [h];
@@ -121,7 +138,7 @@ void Map::drawMiniMap(sf::RenderWindow &window, sf::View &view){
 	mm.setFillColor(sf::Color(143, 188, 143));
     mm.setOutlineColor(sf::Color(47, 79, 79));
     mm.setOutlineThickness(outlThick);
-	mm.setPosition(startX, view.getCenter().y + view.getSize().y/2 - size - 10);
+	mm.setPosition(startX, view.getCenter().y + view.getSize().y/2 - size - 5);
     window.draw(mm);
 
     Sprite s_map;

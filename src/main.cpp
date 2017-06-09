@@ -11,7 +11,7 @@ using namespace std;
 
 
 void renderMap(sf::RenderWindow &window, View &view ,Map &map);
-void checkCollisionWithEnemies(Hero& hero, std::list <Enemy*>  enemies);
+void checkCollisionWithEnemies(Hero &hero, std::list <Enemy*>  enemies);
 int generateEnemies(View &view, Map &map, std::list <Enemy*>  &enemies, int prev);
 void drawEnemies(RenderWindow &window, View &view, Map &map, std::list <Enemy*>  &enemies, float time);
 
@@ -37,7 +37,7 @@ int main() {
 	Clock clock;
 
 	Font font; 
- 	font.loadFromFile("files/FFF_Tusj.ttf");
+ 	font.loadFromFile("files/GoodDog.otf");
 	
 	sf::CircleShape shape(1.f);	
 	shape.setFillColor(sf::Color::Red);
@@ -67,6 +67,7 @@ int main() {
 				time = time / 800;
 
 				h.update(time, map);
+				// cout << "hero upd" << endl;
 
 				view.setCenter(h.getX(), h.getY());
 				window.setView(view);
@@ -81,12 +82,14 @@ int main() {
 
 					char d = map.renderChanges(centX, centY, msX, msY, map.tileSize);
 					if(d != '-'){
-						h.luggage.add(d);
+						h.heroL.add(d);
 					}
 				}
+				// cout << "digging upd" << endl;
 						
 				window.clear();
 				renderMap(window, view, map);
+				// cout << "map rend" << endl;
 
 				// generated = generateEnemies(view, map, enemies, generated);
 				drawEnemies(window, view, map, enemies, time);
@@ -94,8 +97,11 @@ int main() {
 
 				window.draw(h.getSprite());
 				interface(window, view, font, h);
-				h.heroL.draw(window, view);
+				// cout << "interface" << endl;
+				h.heroL.draw(window, view, font);
+				// cout << "hero lug drawn" << endl;
 				map.drawMiniMap(window, view);
+				// cout << "minimap dr" << endl;
 				window.draw(shape);
 				window.display();
 
@@ -141,7 +147,7 @@ void interface(sf::RenderWindow &window, View &view, Font &font, Hero &hero){
 
 	window.draw(upperBar);
 
- 	Text health("health: ", font, 46);
+ 	Text health("health: ", font, 50);
 
 	health.setString(hero.getHealthStr());
 
@@ -285,7 +291,7 @@ void renderMap(sf::RenderWindow &window,View &view, Map &map){
 				
 }
 
-void checkCollisionWithEnemies(Hero& hero, std::list <Enemy*>  enemies) {
+void checkCollisionWithEnemies(Hero &hero, std::list <Enemy*>  enemies) {
 	FloatRect heroR = hero.getSprite().getGlobalBounds();
 
 	for (auto it = enemies.begin(); it != enemies.end(); it++){

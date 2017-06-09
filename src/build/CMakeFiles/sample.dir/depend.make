@@ -30,6 +30,7 @@ CMakeFiles/sample.dir/src/hero.cpp.o: ../include/map.h
 CMakeFiles/sample.dir/src/hero.cpp.o: ../src/hero.cpp
 
 CMakeFiles/sample.dir/src/luggage.cpp.o: ../include/luggage.h
+CMakeFiles/sample.dir/src/luggage.cpp.o: ../include/map.h
 CMakeFiles/sample.dir/src/luggage.cpp.o: ../src/luggage.cpp
 
 CMakeFiles/sample.dir/src/map.cpp.o: ../include/map.h

@@ -5,10 +5,12 @@ using namespace sf;
 using namespace std;
 
 cell::cell(){
+    quan = 0;
     isEmpty = true;
 }
 
 cell::cell(char ch){
+    quan = 0;
     if(ch > 0 && ch <= 9) {
         isPowerUp = true;
         isEmpty = false;
@@ -44,6 +46,30 @@ bool cell::getIsEmpty(){
     return isEmpty;
 }
 
+bool cell::getIsTile(){
+    return isTile;
+}
+
+bool cell::getIsPowerUp(){
+    return isPowerUp;
+}
+
+int  cell::getQuan(){
+    return quan;
+}
+
+void cell::setSprite(sf::Texture t){
+    sprite = Sprite(t);
+}
+
+void cell::setSpritePos(float x, float y) {
+    sprite.setPosition(x, y);
+}
+
+sf::Sprite cell::getSprite(){
+    return sprite;
+}
+
 luggage::luggage(){
     active = 0;
     capacity = 0;
@@ -55,13 +81,26 @@ luggage::luggage(int s){
     capacity = s;
     size = 0;
     cells = new cell[s];
+    for(int i = 0; i < s; i++){
+        cells[i] = cell();
+    }
+
+    if(size >= 3){
+
+    }
+
+    mT = mapTiles();
 }
 
 luggage::~luggage(){
-    delete cells;
+    // if freeing memory crashes for some reason ???
+
+    // if(capacity > 0) {
+    //     delete [] cells;
+    // }
 }
 
-void luggage::draw(sf::RenderWindow &window, sf::View &view){
+void luggage::draw(sf::RenderWindow &window, sf::View &view, sf::Font &font){
     int barHi = 110;
     sf::RectangleShape lugBG = sf::RectangleShape(sf::Vector2f(1010, barHi));
 	lugBG.setFillColor(sf::Color(47, 79, 79));
@@ -79,7 +118,6 @@ void luggage::draw(sf::RenderWindow &window, sf::View &view){
         if(Mouse::isButtonPressed(Mouse::Left)){
             Vector2i pixelPos = Mouse::getPosition(window);
 		    Vector2f pos = window.mapPixelToCoords(pixelPos);
-            cout << pos.x << " " << pos.y << endl;
             if(curC.getGlobalBounds().contains(pos.x, pos.y)){
                 active = i;
 		    }
@@ -92,10 +130,20 @@ void luggage::draw(sf::RenderWindow &window, sf::View &view){
         window.draw(curC);
         curC.setFillColor(sf::Color(143, 188, 143));
 
-        if(!cells[i].isEmpty) {
-            int spSize = 70;
-            cells[i].sprite.setPosition(curX + (90 - spSize)/2, curY + (90 - spSize)/2);
-            window.draw(cells[i].sprite);
+        if(!cells[i].getIsEmpty()) {
+            int spSize = 54;
+            cells[i].setSpritePos(curX + (90 - spSize)/2, curY + (90 - spSize)/2);
+            Sprite curSprite = cells[i].getSprite();
+            float scale = (float)spSize / (float)curSprite.getTextureRect().width;
+            curSprite.setScale(scale, scale);
+            window.draw(curSprite);
+
+            string qStr = to_string(cells[i].getQuan());
+            Text q("", font, 24);
+	        q.setString(qStr);
+            q.setColor(Color::Black);
+	        q.setPosition(curX + 5, curY + 70);
+	        window.draw(q);
         }
 
         curX += 100;
@@ -105,9 +153,8 @@ void luggage::draw(sf::RenderWindow &window, sf::View &view){
 bool luggage::add(char ch){
     if(size < capacity){
         for(int i = 0; i < capacity; i++) {
-            if(cells[i].getCode() == ch) {
+            if(cells[i].getCode() == ch && (!cells[i].getIsEmpty())) {
                 cells[i].increase(1);
-                size++;
                 return true;
             }
         }
@@ -115,6 +162,11 @@ bool luggage::add(char ch){
         for(int i = 0; i < capacity; i++) {
            if(cells[i].getIsEmpty()){
                cells[i] = cell(ch);
+               cells[i].increase(1);
+               pickTex(i);
+            //    cells[i].setSprite(mT.getCharSprite(ch));
+                // cells[i].sprite = Sprite(mT.getCharSprite(ch));
+            
                size++;
                return true;
            }
@@ -123,6 +175,27 @@ bool luggage::add(char ch){
         return false;
     }
 
+}
+
+void luggage::pickTex(int pos){
+    if(pos >= capacity) return;
+
+    char ch = cells[pos].getCode();
+
+    switch(ch){
+        case 'm':
+        cells[pos].sprite = Sprite(mT.snowTex);
+        return;
+        case 's':
+        cells[pos].sprite = Sprite(mT.stoneTex);
+        return;
+        case 'z':
+        cells[pos].sprite = Sprite(mT.cakeTex);
+        return;
+        default:
+        cells[pos].sprite = Sprite(mT.groundTex);
+        return;
+    }  
 }
 
 cell luggage::add(int pos, char ch){
