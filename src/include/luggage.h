@@ -2,6 +2,7 @@
 #define LUGGAGE
 
 #include <SFML/Graphics.hpp>
+#include "map.h"
 
 class cell {
     bool isEmpty;
@@ -9,6 +10,7 @@ class cell {
     bool isTile;
     int quan;
     char code;
+    sf::Sprite sprite;
 
 public:
     cell();
@@ -27,6 +29,7 @@ public:
     int capacity;
     int active;
     cell* cells;
+    mapTiles mT;
 
     luggage();
     luggage(int s);

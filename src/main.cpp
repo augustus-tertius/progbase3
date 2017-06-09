@@ -79,7 +79,10 @@ int main() {
 					int msX = view.getCenter().x - view.getSize().x/2 + Mouse::getPosition(window).x;
 					int msY = view.getCenter().y - view.getSize().y/2 + Mouse::getPosition(window).y;
 
-					map.renderChanges(centX, centY, msX, msY, map.tileSize);
+					char d = map.renderChanges(centX, centY, msX, msY, map.tileSize);
+					if(d != '-'){
+						h.luggage.add(d);
+					}
 				}
 						
 				window.clear();

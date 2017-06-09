@@ -87,7 +87,7 @@ int Map::getMapWidth() {
     return width;
 }
 
-void Map::renderChanges(int xCent, int yCent, int MousePosX, int MousePosY, int tileSize){
+char Map::renderChanges(int xCent, int yCent, int MousePosX, int MousePosY, int tileSize){
 
     int shift = 3;
     int correction = 5;
@@ -101,12 +101,15 @@ void Map::renderChanges(int xCent, int yCent, int MousePosX, int MousePosY, int 
             // обработка взаимодействия с картой 
             if(map[i][j] != '0'){
                 if(map[i][j] != '~'){
+                    char old = map[i][j];
                     map[i][j] = '~';
+                    return old;
                 }
             }
         }
     }
 
+    return '-';
 }
 
 void Map::drawMiniMap(sf::RenderWindow &window, sf::View &view){
@@ -125,9 +128,8 @@ void Map::drawMiniMap(sf::RenderWindow &window, sf::View &view){
     int miniMapTs = 5;
     
     // int mmX = startX + outlThick - 10;
-    int mmY = view.getCenter().y + view.getSize().y/2 - size;
+    int mmY = view.getCenter().y + view.getSize().y/2 - size - outlThick;
     int tilesShown = 54;
-    int mmHi = view.getSize().y * tilesShown / view.getSize().x;
 
     // cout  << "new update" << endl;
     // cout  << mmX << " " << mmY << endl;
