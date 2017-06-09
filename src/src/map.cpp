@@ -21,6 +21,8 @@ void gridOfRandomVectors(Vector** grid, int w, int h);
 float Noise(float fx, float fy, Vector** grid);
 void generateNoize(float** matrix, int w, int h);
 
+using namespace sf;
+
 mapTiles::mapTiles(){
     sf::Image cur;
     cur.loadFromFile("images/tiles/grassCenter.png");
@@ -108,7 +110,65 @@ void Map::renderChanges(int xCent, int yCent, int MousePosX, int MousePosY, int 
 }
 
 void Map::drawMiniMap(sf::RenderWindow &window, sf::View &view){
+    int startX = view.getCenter().x - view.getSize().x/2 + 1020;
+    int size = view.getSize().x - 1030;
+    int outlThick = 5;
 
+    sf::RectangleShape mm = sf::RectangleShape(sf::Vector2f(size, size));
+	mm.setFillColor(sf::Color(143, 188, 143));
+    mm.setOutlineColor(sf::Color(47, 79, 79));
+    mm.setOutlineThickness(outlThick);
+	mm.setPosition(startX, view.getCenter().y + view.getSize().y/2 - size - 10);
+    window.draw(mm);
+
+    Sprite s_map;
+    int miniMapTs = 7;
+    
+    // int mmX = startX + outlThick;
+    int mmY = view.getCenter().y + view.getSize().y/2 - size - 10 + outlThick;
+    int tilesShown = 40;
+    int mmHi = view.getSize().y * tilesShown / view.getSize().x;
+
+    cout  << "new update" << endl;
+
+    for(int i = view.getCenter().x/tileSize - tilesShown/2; i < view.getCenter().x/tileSize + tilesShown/2; i++){
+        int mmX = startX + outlThick;
+        for(int j = view.getCenter().y/tileSize - tilesShown/2; j < view.getCenter().y/tileSize + tilesShown/2; j++){
+            char curCh = '~';
+            if(i >= 0 && j >= 0 && i < height && j < width) {
+                curCh = map[i][j];
+                // cout << curCh << endl;
+            } else {
+                // cout << "index out of bounds " << i << " " << j << endl;
+            }
+
+            
+            if (curCh != '~') {
+						if (curCh == 'm'){
+							s_map.setTexture(tiles.snowTex);
+						} else if(curCh == 's'){
+							s_map.setTexture(tiles.stoneTex);
+						} else if(curCh == 'c') {
+							s_map.setTexture(tiles.cakeTex);
+						} else if(curCh == 'z') {
+							s_map.setTexture(tiles.sandTex);
+						} else if(curCh != '0'){
+							s_map.setTexture(tiles.groundTex);
+						} 
+						if(curCh != '0'){
+							float scale = (float)miniMapTs / (float)s_map.getTextureRect().width;
+                            s_map.setScale(scale, scale);
+
+                            cout  << mmX << " " << mmY << endl;
+							s_map.setPosition(mmX, mmY);
+							window.draw(s_map);
+						}
+					}
+
+                    mmX += miniMapTs;
+        }
+        mmY += miniMapTs;
+    }
 }
 
 void generateMap(int h, int w, char** map){

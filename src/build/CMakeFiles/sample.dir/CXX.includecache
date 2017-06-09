@@ -105,6 +105,8 @@ sstream
 /home/august/Documents/projects/progbase3/src/src/luggage.cpp
 luggage.h
 -
+iostream
+-
 
 /home/august/Documents/projects/progbase3/src/src/map.cpp
 map.h

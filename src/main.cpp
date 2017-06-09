@@ -27,7 +27,7 @@ int main() {
 	string hero, name;
 	menu(window, hero, name);
 
-	Map map(60, 200);
+	Map map(120, 500);
 	Hero h(200, 200, 66, 93, "Player", "images/main hero/Green/Zeta/"); //объект класса игрока
 	std::list <Enemy*>  enemies;
 	
@@ -92,6 +92,7 @@ int main() {
 				window.draw(h.getSprite());
 				interface(window, view, font, h);
 				h.heroL.draw(window, view);
+				map.drawMiniMap(window, view);
 				window.draw(shape);
 				window.display();
 

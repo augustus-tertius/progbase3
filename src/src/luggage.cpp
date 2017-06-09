@@ -1,4 +1,5 @@
 #include <luggage.h>
+#include <iostream>
 
 cell::cell(){
     isEmpty = true;
@@ -65,7 +66,7 @@ void luggage::draw(sf::RenderWindow &window, sf::View &view){
     int curX = view.getCenter().x - view.getSize().x/2 + 10;
     int curY = view.getCenter().y + view.getSize().y/2 - barHi;
     sf::RectangleShape curC = sf::RectangleShape(sf::Vector2f(90, 90));
-    curC.setFillColor(sf::Color(46, 139, 87));
+    curC.setFillColor(sf::Color(143, 188, 143));
 
     for(int i = 0; i < this->capacity; i++){
         curC.setPosition(curX, curY);
