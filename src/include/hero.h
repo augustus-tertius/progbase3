@@ -26,6 +26,7 @@ class Hero : public GameObj {
     sf::Image image;
     sf::Texture texture;
     sf::Sprite sprite;
+    sf::Sprite shieldSp;
 
     enum {walk, jump, stand} state;
     float curFrame;
@@ -55,7 +56,8 @@ class Hero : public GameObj {
         void reset(float X, float Y);
         void setShield(float duration);
 
-        sf::Sprite getSprite();        
+        sf::Sprite getSprite();   
+        sf::Sprite getShieldSprite();     
         float getX();
         float getY();
         int getH();

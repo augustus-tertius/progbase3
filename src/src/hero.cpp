@@ -40,6 +40,10 @@ Hero::Hero(float X, float Y, int W, int H, std::string Name, std::string filePat
     this->filePath = filePath;
     ht = heroTextures(filePath);
 
+    Texture shT;
+    shT.loadFromFile("images/items/shield.png");
+    shieldSp = Sprite(shT);
+
     // this->texture.loadFromFile(this->filePath + "stand.png");
     this->texture = ht.stand;
     healTimer = 0;
@@ -61,6 +65,10 @@ void Hero::setAlive(bool a){
 
 sf::Sprite Hero::getSprite(){
     return this->sprite;
+}
+
+sf::Sprite Hero::getShieldSprite(){
+    return this->shieldSp;
 }
 
 float Hero::getX(){
@@ -155,7 +163,7 @@ void Hero::control (float timePassed) {
 
 void Hero::updateHealth(float timePassed){
     healTimer += timePassed;
-    if(healTimer > 1000){
+    if(healTimer > 3000){
         healTimer = 0;
         if(curHealth < maxHealth){
             curHealth++;

@@ -30,8 +30,11 @@ int main() {
 
 	Map map(120, 500);
 	int sh = 30;
-	Hero h(map.tileSize*map.getMapWidth()/2 - sh, 
-		map.getSpawnY(map.tileSize*map.getMapWidth()/2 - sh), 
+
+	int respX = map.tileSize*map.getMapWidth()/2 - sh;
+	int respY = map.getSpawnY(map.tileSize*map.getMapWidth()/2 - sh);
+
+	Hero h(respX, respY, 
 		66, 93, "Player", "images/main hero/Yellow/Zeta/"); //объект класса игрока
 
 	std::list <Enemy*>  enemies;
@@ -79,6 +82,11 @@ int main() {
 				checkCollisionWithEnemies(h, enemies);
 
 				window.draw(h.getSprite());
+				if(h.getShield()){
+					h.getShieldSprite().setPosition(h.getX(), h.getY());
+					window.draw(h.getShieldSprite());
+				}
+
 				interface(window, view, font, h);
 				h.heroL.draw(window, view, font);
 				map.drawMiniMap(window, view);
@@ -109,11 +117,7 @@ int main() {
 				}
 			}
 
-			// if(!backToMenu) {
-			// 	h.reset(400, 200);
-			// }
-			h.reset(400, 200);
-		// }	
+			h.reset(respX, respY);	
 	}
 
 
