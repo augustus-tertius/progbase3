@@ -106,9 +106,12 @@ luggage::luggage(int s){
     }
 
     if(capacity >= 3){
-        cells[0] = cell(',');
-        cells[0].increase(1);
-        cells[0].sprite = Sprite(mT.shovelTex);
+        // cells[0] = cell(',');
+        // cells[0].increase(1);
+        // cells[0].sprite = Sprite(mT.shovelTex);
+        // cells[0].setIsTool(true);
+        // size++;
+        add(',');
         cells[0].setIsTool(true);
         size++;
     }
@@ -152,7 +155,7 @@ void luggage::draw(sf::RenderWindow &window, sf::View &view, sf::Font &font){
         }
 
         if(active == i){
-             curC.setFillColor(sf::Color(102, 205, 170));
+             curC.setFillColor(sf::Color(255, 160, 122));
         }
 
         window.draw(curC);
@@ -170,8 +173,15 @@ void luggage::draw(sf::RenderWindow &window, sf::View &view, sf::Font &font){
             Text q("", font, 24);
 	        q.setString(qStr);
             q.setColor(Color::Black);
-	        q.setPosition(curX + 5, curY + 70);
+	        q.setPosition(curX + 3, curY + 70);
 	        window.draw(q);
+        }
+
+        if(i == 0) {
+             Text q("shovel", font, 43);
+             q.setPosition(curX + 5, curY + 20);
+             q.setColor(Color::Black);
+             window.draw(q);
         }
 
         curX += 100;
@@ -237,7 +247,7 @@ void luggage::pickTex(int pos){
         cells[pos].sprite = Sprite(mT.gTex);
         return;
         case ',':
-         cells[pos].sprite = Sprite(mT.shovelTex);
+        cells[pos].sprite = Sprite(mT.shovelTex);
     }  
 }
 

@@ -3,7 +3,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/sample.dir/src/enemy.cpp.o"
   "CMakeFiles/sample.dir/src/gameObj.cpp.o"
   "CMakeFiles/sample.dir/src/hero.cpp.o"
-  "CMakeFiles/sample.dir/src/storage.cpp.o"
   "CMakeFiles/sample.dir/src/luggage.cpp.o"
   "CMakeFiles/sample.dir/src/enemies.cpp.o"
   "CMakeFiles/sample.dir/src/map.cpp.o"

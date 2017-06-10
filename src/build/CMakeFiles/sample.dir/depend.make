@@ -36,5 +36,3 @@ CMakeFiles/sample.dir/src/luggage.cpp.o: ../src/luggage.cpp
 CMakeFiles/sample.dir/src/map.cpp.o: ../include/map.h
 CMakeFiles/sample.dir/src/map.cpp.o: ../src/map.cpp
 
-CMakeFiles/sample.dir/src/storage.cpp.o: ../src/storage.cpp
-

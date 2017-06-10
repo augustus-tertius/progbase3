@@ -11,7 +11,6 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/august/Documents/projects/progbase3/src/src/hero.cpp" "/home/august/Documents/projects/progbase3/src/build/CMakeFiles/sample.dir/src/hero.cpp.o"
   "/home/august/Documents/projects/progbase3/src/src/luggage.cpp" "/home/august/Documents/projects/progbase3/src/build/CMakeFiles/sample.dir/src/luggage.cpp.o"
   "/home/august/Documents/projects/progbase3/src/src/map.cpp" "/home/august/Documents/projects/progbase3/src/build/CMakeFiles/sample.dir/src/map.cpp.o"
-  "/home/august/Documents/projects/progbase3/src/src/storage.cpp" "/home/august/Documents/projects/progbase3/src/build/CMakeFiles/sample.dir/src/storage.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

@@ -3,6 +3,7 @@
 #include <hero.h>
 // #include <enemy.h>
 #include <enemies.h>
+// #include <laser.h>
 #include <list>
 #include <map.h>
 
@@ -14,8 +15,9 @@ void renderMap(sf::RenderWindow &window, View &view ,Map &map);
 void checkCollisionWithEnemies(Hero &hero, std::list <Enemy*>  enemies);
 int generateEnemies(View &view, Map &map, std::list <Enemy*>  &enemies, int prev);
 void drawEnemies(RenderWindow &window, View &view, Map &map, std::list <Enemy*>  &enemies, float time);
+// void drawLasers(RenderWindow &window, View &view, Map &map, std::list <Enemy*>  &enemies,std::list <laser*> lasers, float time);
 
-bool menu(sf::RenderWindow &window, string &hero, string &name);
+bool menu(sf::RenderWindow &window);
 void interface(sf::RenderWindow &window, View &view, Font &font, Hero &hero);
 void control(sf::RenderWindow &window, View &view, Hero &hero, Map &map);
 
@@ -26,7 +28,7 @@ int main() {
     view.reset(FloatRect(0, 0, 1300, 1000));
 
 	string hero, name;
-	menu(window, hero, name);
+	menu(window);
 
 	Map map(120, 500);
 	int sh = 30;
@@ -38,6 +40,7 @@ int main() {
 		66, 93, "Player", "images/main hero/Yellow/Zeta/"); //объект класса игрока
 
 	std::list <Enemy*>  enemies;
+	// std::list <laser*> lasers;
 	
 	int generated = 0;
 	bool backToMenu = true;
@@ -125,25 +128,47 @@ int main() {
 }
 
 void control(sf::RenderWindow &window, View &view, Hero &h, Map &map){
-	if(Mouse::isButtonPressed(Mouse::Left)) {
-		int centX = view.getCenter().x + h.getW()/2;
-		int centY = view.getCenter().y + h.getH()/2;
+	Event event;
+	while (window.pollEvent(event)){
+		if(Mouse::isButtonPressed(Mouse::Left)) {
+			int centX = view.getCenter().x + h.getW()/2;
+			int centY = view.getCenter().y + h.getH()/2;
 
-		Vector2i pixelPos = Mouse::getPosition(window);
-		Vector2f pos = window.mapPixelToCoords(pixelPos);
+			Vector2i pixelPos = Mouse::getPosition(window);
+			Vector2f pos = window.mapPixelToCoords(pixelPos);
 
-		if(h.heroL.charOfActive() == ',') {
-			char d = map.renderChanges(centX, centY, pos.x, pos.y, map.tileSize, '~');
-			if(d != '-'){
-				h.heroL.add(d);
-			}
-		} else if(h.heroL.getActiveCell().getIsTile() && !h.heroL.getActiveCell().getIsEmpty()){
-			char d = map.renderChanges(centX, centY, pos.x, pos.y, map.tileSize, h.heroL.charOfActive());
-			if(d == '~'){
-				h.heroL.decrActive(1);
+			if(h.heroL.charOfActive() == ',') {
+				char d = map.renderChanges(centX, centY, pos.x, pos.y, map.tileSize, '~');
+				if(d != '-'){
+					h.heroL.add(d);
+				}
+			} else if(h.heroL.getActiveCell().getIsTile() && !h.heroL.getActiveCell().getIsEmpty()){
+				char d = map.renderChanges(centX, centY, pos.x, pos.y, map.tileSize, h.heroL.charOfActive());
+				if(d == '~'){
+					h.heroL.decrActive(1);
+				}	
 			}
 		}
 	}
+	// if(Mouse::isButtonPressed(Mouse::Left)) {
+	// 	int centX = view.getCenter().x + h.getW()/2;
+	// 	int centY = view.getCenter().y + h.getH()/2;
+
+	// 	Vector2i pixelPos = Mouse::getPosition(window);
+	// 	Vector2f pos = window.mapPixelToCoords(pixelPos);
+
+	// 	if(h.heroL.charOfActive() == ',') {
+	// 		char d = map.renderChanges(centX, centY, pos.x, pos.y, map.tileSize, '~');
+	// 		if(d != '-'){
+	// 			h.heroL.add(d);
+	// 		}
+	// 	} else if(h.heroL.getActiveCell().getIsTile() && !h.heroL.getActiveCell().getIsEmpty()){
+	// 		char d = map.renderChanges(centX, centY, pos.x, pos.y, map.tileSize, h.heroL.charOfActive());
+	// 		if(d == '~'){
+	// 			h.heroL.decrActive(1);
+	// 		}
+	// 	}
+	// }
 }
 
 void interface(sf::RenderWindow &window, View &view, Font &font, Hero &hero){
@@ -161,7 +186,7 @@ void interface(sf::RenderWindow &window, View &view, Font &font, Hero &hero){
 	window.draw(health);	
 }
 
-bool menu(sf::RenderWindow &window, string &hero, string &name){
+bool menu(sf::RenderWindow &window){
 	bool menuOpened = true;
 	string path = "images/menu/";
 
@@ -169,7 +194,6 @@ bool menu(sf::RenderWindow &window, string &hero, string &name){
 	Texture bgT, voidVoicesT, newGameT, contT, quitT;
 	bgT.loadFromFile(path + "bg.jpg");
 	voidVoicesT.loadFromFile(path + "voidVoices.png");
-	contT.loadFromFile(path + "continue.png");
 	newGameT.loadFromFile(path + "newGame.png");
 	quitT.loadFromFile(path + "endGame.png");
 
@@ -178,16 +202,13 @@ bool menu(sf::RenderWindow &window, string &hero, string &name){
 	Sprite bg(bgT);
 	Sprite voidVoices(voidVoicesT);
 	Sprite newGame(newGameT);
-	Sprite cont(contT);
 	Sprite quit(quitT);
 
 	voidVoices.setPosition(200, 100);
 	newGame.setPosition(200, 400);
-	cont.setPosition(200, 500);
-	quit.setPosition(200, 600);
+	quit.setPosition(200, 530);
 
 	items.push_back(newGame);
-	items.push_back(cont);
 	items.push_back(quit);
 
 	// while(menuOpened){
@@ -215,8 +236,6 @@ bool menu(sf::RenderWindow &window, string &hero, string &name){
 				return true;
 				break;
 			case 1:
-				break;
-			case 2:
 				cout << endl <<  "//////////////asked for quit, closing window" << endl << endl;
 				window.close();
 				return false;
@@ -333,7 +352,6 @@ int generateEnemies(View &view, Map &map, std::list <Enemy*>  &enemies, int prev
 			for(int i = y - 5; i <= y + 5; i++){
 				for(int j = x - 5; j <= x + 5; j++){
 					if(map.getMapSymbol(i, j) != '~'){
-						cout << "bad coords" << endl;
 						free = false;
 						if(map.getMapSymbol(i, j) == '-') {
 							return probability;
@@ -389,3 +407,12 @@ void drawEnemies(RenderWindow &window, View &view, Map &map, std::list <Enemy*> 
 		}
 	}
 }
+
+// void drawLasers(RenderWindow &window, View &view, Map &map, std::list <Enemy*>  &enemies,std::list <laser*> lasers, float time){
+// 	for (auto it = lasers.begin(); it != lasers.end(); it++){
+// 		(*it)->update(time);
+// 		Sprite curS = (*it)->getSprite();
+
+// 		window.draw(curS); 
+// 	}
+// }
